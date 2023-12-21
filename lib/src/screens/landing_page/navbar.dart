@@ -6,35 +6,35 @@ class NavBar extends StatelessWidget {
   // TODO: create better navbar that better suits mobile.
   @override
   Widget build(BuildContext context) => ColoredBox(
-    color: Theme.of(context).colorScheme.primary,
-    child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 64),
-        child: LayoutBuilder(
-          builder: (context, constraints) => Row(
-              children: [
-                // We put the image inside a SizedBox so the content won't be
-                // pushed aside when the image loads.
-                const SizedBox(
-                  width: 34,
-                  height: 34,
-                  child: Image(image: AssetImage('assets/logo34-white.png')),
-                ),
-                const SizedBox(width: 8),
-                const Text('RELER', style: _logoTextStyle),
-                _spacing,
+      color: Theme.of(context).colorScheme.primary,
+      child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 64),
+          child: LayoutBuilder(
+            builder: (context, constraints) => Row(
+                children: [
+                  // We put the image inside a SizedBox so the content won't
+                  // be pushed aside when the image loads.
+                  const SizedBox(
+                    width: 34,
+                    height: 34,
+                    child: Image(image: AssetImage('assets/logo34-white.png')),
+                  ),
+                  const SizedBox(width: 8),
+                  const Text('RELER', style: _logoTextStyle),
+                  _spacing,
 
-                if (constraints.maxWidth > 1100)
-                  _sectionLinkButtons,
+                  if (constraints.maxWidth > 1100)
+                    _sectionLinkButtons,
 
-                if (constraints.maxWidth > 370)
-                  const Expanded(child: SizedBox()),
+                  if (constraints.maxWidth > 370)
+                    const Expanded(child: SizedBox()),
 
-                if (constraints.maxWidth > 370)
-                  _loginAndRegisterButtons,
-              ]
-          ),
-        )
-    ),
+                  if (constraints.maxWidth > 370)
+                    _loginAndRegisterButtons,
+                ]
+            ),
+          )
+      )
   );
 
   Widget get _sectionLinkButtons => Row(
@@ -101,11 +101,7 @@ class NavBar extends StatelessWidget {
       color: Colors.white
   );
 
-  static const _buttonsTextStyle = TextStyle(
-      fontFamily: 'Poppins',
-      fontSize: 18,
-      color: Colors.white
-  );
+  static const _buttonsTextStyle = TextStyle(fontSize: 18);
 
   static const _spacing = SizedBox(width: 24);
 }

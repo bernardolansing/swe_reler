@@ -14,10 +14,10 @@ class Introduction extends StatelessWidget {
         alignment: Alignment.centerLeft,
         decoration: _pannelDecoration,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 150),
+          padding: const EdgeInsets.symmetric(horizontal: 150),
           child: Column(
             children: [
-              Spacer(),
+              const Spacer(),
               Text('descubra novos universos!'),
               Text('receba todos os meses livros seminovos e usados '
                   'selecionados especialmente para você.'),
@@ -25,7 +25,7 @@ class Introduction extends StatelessWidget {
                 onPressed: () {},
                 child: const Text('assinar'),
               ),
-              Spacer()
+              const Spacer()
             ],
           ),
         ),
