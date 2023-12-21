@@ -28,6 +28,9 @@ flutter:
     - family: Poppins
       fonts:
         - asset: fonts/Poppins-Regular.ttf
+    - family: Teko
+      fonts:
+        - asset: fonts/Teko-VariableFont_wght.ttf
   assets:
     - assets/logo34-white.png
     - assets/logo34-black.png

@@ -21,6 +21,20 @@ final theme = ThemeData(
       surface: _surfaceColor,
       onSurface: Colors.black54
   ),
+  textTheme: const TextTheme(
+      displayLarge: TextStyle(
+          fontSize: 72,
+          fontFamily: 'Teko',
+          fontWeight: FontWeight.w400,
+          color: Colors.black
+      ),
+      bodyMedium: TextStyle(
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w400,
+          fontSize: 18,
+          color: Colors.black
+      )
+  ),
   scaffoldBackgroundColor: _backgroundColor,
   textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(

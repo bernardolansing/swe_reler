@@ -18,14 +18,32 @@ class Introduction extends StatelessWidget {
           child: Column(
             children: [
               const Spacer(),
-              Text('descubra novos universos!'),
-              Text('receba todos os meses livros seminovos e usados '
-                  'selecionados especialmente para você.'),
+
+              Text(
+                  'descubra novos universos!',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.displayLarge
+              ),
+              const SizedBox(height: 24),
+
+              SizedBox(
+                width: 500,
+                child: Text(
+                  'receba todos os meses livros seminovos e usados '
+                      'selecionados especialmente para você.',
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ),
+              const SizedBox(height: 16),
+
               ElevatedButton(
                 onPressed: () {},
                 child: const Text('assinar'),
               ),
-              const Spacer()
+
+              const Spacer(),
             ],
           ),
         ),
