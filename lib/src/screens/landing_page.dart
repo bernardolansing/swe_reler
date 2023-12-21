@@ -25,7 +25,7 @@ class _NavigationBar extends StatelessWidget {
     color: Theme.of(context).colorScheme.primary,
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 64),
-      child: IntrinsicHeight(child: Row(
+      child: Row(
           children: [
             // We put the image inside a SizedBox so the content won't be pushed
             // aside when the image loads.
@@ -77,8 +77,8 @@ class _NavigationBar extends StatelessWidget {
               child: const Text('contato', style: _buttonsTextStyle),
             ),
 
-            const Expanded(child: Spacer()),
-            
+            const Expanded(child: SizedBox()),
+
             TextButton(
               onPressed: () {},
               child: const Text('login', style: _buttonsTextStyle),
@@ -90,7 +90,7 @@ class _NavigationBar extends StatelessWidget {
               child: const Text('cadastro', style: _buttonsTextStyle),
             )
           ]
-      )),
+      )
     ),
   );
 
