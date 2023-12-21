@@ -32,7 +32,7 @@ class _NavigationBar extends StatelessWidget {
             const SizedBox(
               width: 34,
               height: 34,
-              child: Image(image: AssetImage('assets/logo34.png')),
+              child: Image(image: AssetImage('assets/logo34-white.png')),
             ),
             const SizedBox(width: 8),
             const Text('RELER', style: _logoTextStyle),

@@ -29,4 +29,10 @@ flutter:
       fonts:
         - asset: fonts/Poppins-Regular.ttf
   assets:
-    - assets/logo34.png
+    - assets/logo34-white.png
+    - assets/logo34-black.png
+    - assets/landing-page/introduction-background.jpeg
+    - assets/landing-page/pick-a-plan.png
+    - assets/landing-page/receive-at-home.png
+    - assets/landing-page/sit-and-relax.png
+    - assets/landing-page/whats-in-the-box.jpeg
