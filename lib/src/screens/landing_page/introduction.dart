@@ -22,7 +22,7 @@ class Introduction extends StatelessWidget {
               Text(
                   'descubra novos universos!',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.displayLarge
+                  style: Theme.of(context).textTheme.headlineLarge
               ),
               const SizedBox(height: 24),
 

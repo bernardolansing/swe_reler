@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/screens/landing_page/how-it-works.dart';
 import 'package:swe_reler/src/screens/landing_page/introduction.dart';
 import 'package:swe_reler/src/screens/landing_page/navbar.dart';
 
@@ -15,6 +16,7 @@ class LandingPage extends StatelessWidget {
       children: [
         NavBar(),
         Introduction(),
+        HowItWorks(),
       ],
     )),
   );

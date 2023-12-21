@@ -22,11 +22,17 @@ final theme = ThemeData(
       onSurface: Colors.black54
   ),
   textTheme: const TextTheme(
-      displayLarge: TextStyle(
+      headlineLarge: TextStyle(
           fontSize: 72,
           fontFamily: 'Teko',
           fontWeight: FontWeight.w400,
           color: Colors.black
+      ),
+      headlineMedium: TextStyle(
+        fontSize: 64,
+        fontFamily: 'Teko',
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
       ),
       bodyMedium: TextStyle(
           fontFamily: 'Poppins',
