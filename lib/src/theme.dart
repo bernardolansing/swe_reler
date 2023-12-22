@@ -69,4 +69,7 @@ final theme = ThemeData(
         textStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 24),
       )
   ),
+  textSelectionTheme: TextSelectionThemeData(
+    selectionColor: Colors.purple.withAlpha(90)
+  ),
 );
