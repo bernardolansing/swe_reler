@@ -12,38 +12,40 @@ class Plans extends StatelessWidget {
         HighlightedText('planos'),
         SizedBox(height: 24),
 
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _PlanOffer(
-                planName: 'kit básico',
-                description: 'Lorem ipsum dolor sit amet, consectetur '
-                    'adipiscing elit. Proin vestibulum lectus in nulla '
-                    'dignissim, a imperdiet sem rhoncus.',
-                benefits: [
-                  '2 livros cuidadosamente selecionados',
-                  '2 brindes',
-                ],
-                price: 22
-            ),
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _PlanOffer(
+                  planName: 'kit básico',
+                  description: 'Lorem ipsum dolor sit amet, consectetur '
+                      'adipiscing elit. Proin vestibulum lectus in nulla '
+                      'dignissim, a imperdiet sem rhoncus.',
+                  benefits: [
+                    '2 livros cuidadosamente selecionados',
+                    '2 brindes',
+                  ],
+                  price: 22
+              ),
 
-            SizedBox(width: 24),
+              SizedBox(width: 24),
 
-            _PlanOffer(
-                planName: 'kit premium',
-                description: 'Lorem ipsum dolor sit amet, consectetur '
-                    'adipiscing elit. Proin vestibulum lectus in nulla '
-                    'dignissim, a imperdiet sem rhoncus.',
-                benefits: [
-                  '3 livros cuidadosamente selecionados',
-                  '4 brindes',
-                  'acesso ao grupo exclusivo do Discord',
-                  'cupons exclusivos com lojas parceiras',
-                ],
-                price: 30
-            ),
-          ],
-        )
+              _PlanOffer(
+                  planName: 'kit premium',
+                  description: 'Lorem ipsum dolor sit amet, consectetur '
+                      'adipiscing elit. Proin vestibulum lectus in nulla '
+                      'dignissim, a imperdiet sem rhoncus.',
+                  benefits: [
+                    '3 livros cuidadosamente selecionados',
+                    '4 brindes',
+                    'acesso ao grupo exclusivo do Discord',
+                    'cupons exclusivos com lojas parceiras',
+                  ],
+                  price: 30
+              ),
+            ],
+          ),
+        ),
       ],
     ),
   );
@@ -86,7 +88,14 @@ class _PlanOffer extends StatelessWidget {
                 softWrap: true,
                 style: _bodyTextStyle
             )),
-            const SizedBox(height: 32),
+
+            Expanded(
+              child: ConstrainedBox(
+                  constraints: const BoxConstraints(minHeight: 32)
+              )
+            ),
+
+            // const SizedBox(height: 32),
 
             Align(
               alignment: Alignment.centerRight,
