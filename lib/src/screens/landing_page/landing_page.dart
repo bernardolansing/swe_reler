@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:swe_reler/src/screens/landing_page/how-it-works.dart';
 import 'package:swe_reler/src/screens/landing_page/introduction.dart';
 import 'package:swe_reler/src/screens/landing_page/navbar.dart';
+import 'package:swe_reler/src/screens/landing_page/plans.dart';
 import 'package:swe_reler/src/screens/landing_page/whats_in_the_box.dart';
 
 class LandingPage extends StatelessWidget {
@@ -19,6 +20,7 @@ class LandingPage extends StatelessWidget {
         Introduction(),
         HowItWorks(),
         WhatsInTheBox(),
+        Plans(),
       ],
     )),
   );
