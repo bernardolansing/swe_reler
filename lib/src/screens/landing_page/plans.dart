@@ -16,7 +16,7 @@ class Plans extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _PlanOffer(
+              Expanded(child: _PlanOffer(
                   planName: 'kit básico',
                   description: 'Lorem ipsum dolor sit amet, consectetur '
                       'adipiscing elit. Proin vestibulum lectus in nulla '
@@ -26,11 +26,11 @@ class Plans extends StatelessWidget {
                     '2 brindes',
                   ],
                   price: 22
-              ),
+              )),
 
               SizedBox(width: 24),
 
-              _PlanOffer(
+              Expanded(child: _PlanOffer(
                   planName: 'kit premium',
                   description: 'Lorem ipsum dolor sit amet, consectetur '
                       'adipiscing elit. Proin vestibulum lectus in nulla '
@@ -42,7 +42,7 @@ class Plans extends StatelessWidget {
                     'cupons exclusivos com lojas parceiras',
                   ],
                   price: 30
-              ),
+              )),
             ],
           ),
         ),
