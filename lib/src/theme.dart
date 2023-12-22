@@ -45,7 +45,13 @@ final theme = ThemeData(
           fontWeight: FontWeight.w400,
           fontSize: 18,
           color: Colors.black
-      )
+      ),
+      labelSmall: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        color: Color(0xFF9B693B)
+      ),
   ),
   scaffoldBackgroundColor: _backgroundColor,
   textButtonTheme: TextButtonThemeData(
