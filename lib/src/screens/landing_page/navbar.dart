@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class NavBar extends StatelessWidget {
-  const NavBar({super.key});
+  final List<GlobalKey> sectionKeys;
+
+  const NavBar({super.key, required this.sectionKeys});
+
+  void _scrollToSection(int sectionIndex) => Scrollable.ensureVisible(
+      sectionKeys[sectionIndex].currentContext!,
+      duration: const Duration(seconds: 1, milliseconds: 500),
+      curve: Curves.fastLinearToSlowEaseIn
+  );
 
   // TODO: create better navbar that better suits mobile.
   @override
@@ -50,19 +58,19 @@ class NavBar extends StatelessWidget {
         _spacing,
 
         TextButton(
-            onPressed: () {},
+            onPressed: () => _scrollToSection(0),
             child: const Text('como funciona?', style: _buttonsTextStyle)
         ),
         _spacing,
 
         TextButton(
-            onPressed: () {},
+            onPressed: () => _scrollToSection(1),
             child: const Text('o que tem dentro?', style: _buttonsTextStyle)
         ),
         _spacing,
 
         TextButton(
-          onPressed: () {},
+          onPressed: () => _scrollToSection(2),
           child: const Text('planos', style: _buttonsTextStyle),
         ),
         _spacing,
@@ -74,7 +82,7 @@ class NavBar extends StatelessWidget {
         _spacing,
 
         TextButton(
-          onPressed: () {},
+          onPressed: () => _scrollToSection(3),
           child: const Text('contato', style: _buttonsTextStyle),
         ),
       ]
