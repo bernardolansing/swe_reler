@@ -18,7 +18,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ReLer',
       theme: theme,
-      home: const LandingPage(),
+      home: const SelectionArea(
+        child: LandingPage(),
+      ),
     );
   }
 }
