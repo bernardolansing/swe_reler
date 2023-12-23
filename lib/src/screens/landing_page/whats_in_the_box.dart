@@ -13,6 +13,7 @@ class WhatsInTheBox extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 65, vertical: 48),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
               height: 500,
@@ -24,41 +25,40 @@ class WhatsInTheBox extends StatelessWidget {
 
             const SizedBox(width: 64),
 
-            SizedBox(
-                height: 500,
-                width: 500,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const HighlightedText('o que vem na caixa?'),
-                    const Spacer(flex: 2),
+            Flexible(child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const HighlightedText('o que vem na caixa?'),
+                  const SizedBox(height: 32),
 
-                    Text('livros.', style: labelTextStyle),
-                    const Spacer(flex: 1),
-                    const Text('selecionados de acordo com as suas '
-                        'preferências.'),
-                    const Spacer(flex: 2),
+                  Text('livros.', style: labelTextStyle),
+                  const SizedBox(height: 16),
+                  const Text('selecionados de acordo com as suas '
+                      'preferências.'),
+                  const SizedBox(height: 32),
 
-                    Text('papelaria.', style: labelTextStyle),
-                    const Spacer(flex: 1),
-                    const Text('marcadores de página, canetas, post-its, '
-                        'pesos de papel e outras bugigangas.'),
-                    const Spacer(flex: 2),
+                  Text('papelaria.', style: labelTextStyle),
+                  const SizedBox(height: 16),
+                  const Text('marcadores de página, canetas, post-its, '
+                      'pesos de papel e outras bugigangas.'),
+                  const SizedBox(height: 32),
 
-                    Text('autocuidado.', style: labelTextStyle),
-                    const Spacer(flex: 1),
-                    const Text('Lorem ipsum dolor sit amet, consectetur '
-                        'adipiscing elit.'),
-                    const Spacer(flex: 2),
+                  Text('autocuidado.', style: labelTextStyle),
+                  const SizedBox(height: 16),
+                  const Text('Lorem ipsum dolor sit amet, consectetur '
+                      'adipiscing elit.'),
+                  const SizedBox(height: 32),
 
-                    Text('snacks e bebidas.', style: labelTextStyle),
-                    const Spacer(flex: 1),
-                    const Text('quem não gosta de um cafezinho com cookies '
-                        'na hora de ler um bom livro?'),
-                    const Spacer(flex: 2),
-                  ],
-                )
-            )
+                  Text('snacks e bebidas.', style: labelTextStyle),
+                  const SizedBox(height: 16),
+                  const Text('quem não gosta de um cafezinho com cookies '
+                      'na hora de ler um bom livro?'),
+                  const SizedBox(height: 32),
+                ],
+              ),
+            )),
           ],
         ),
       ),
