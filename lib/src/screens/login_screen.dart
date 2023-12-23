@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/widgets/input.dart';
+import 'package:swe_reler/src/widgets/or_divider.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -37,15 +38,7 @@ class LoginScreen extends StatelessWidget {
 
                 const SizedBox(height: 36),
 
-                const Row(
-                    children: [
-                      Expanded(child: Divider()),
-                      SizedBox(width: 16),
-                      Text('OU'),
-                      SizedBox(width: 16),
-                      Expanded(child: Divider()),
-                    ]
-                ),
+                const OrDivider(),
 
                 const SizedBox(height: 36),
 
