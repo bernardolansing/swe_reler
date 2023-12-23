@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:swe_reler/src/widgets/input.dart';
 
 class LoginScreen extends StatelessWidget {
-  final _linkTapRecognizer = TapGestureRecognizer()
-    ..onTap = () {}; // TODO: redirect to sign up screen.
-
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   /// Evaluates the width that the side image will have when shown on the
   /// screen. We have to calculate this because the image takes some time to
@@ -64,7 +61,9 @@ class LoginScreen extends StatelessWidget {
                         ),
                         TextSpan(
                             text: 'Cadastre-se.',
-                            recognizer: _linkTapRecognizer,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () => Navigator.of(context)
+                                  .pushNamed('/signup'),
                             style: const TextStyle(
                                 fontSize: 20,
                                 decoration: TextDecoration.underline,

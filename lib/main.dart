@@ -3,6 +3,7 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:swe_reler/src/screens/landing_page/landing_page_screen.dart';
 import 'package:swe_reler/src/screens/login_screen.dart';
+import 'package:swe_reler/src/screens/sign_up_screen.dart';
 import 'package:swe_reler/src/theme.dart';
 import 'firebase_options.dart';
 
@@ -32,7 +33,8 @@ class ReLerApp extends StatelessWidget {
     ),
     routes: {
       '/': (context) => LandingPageScreen(),
-      '/login': (context) => LoginScreen(),
+      '/login': (context) => const LoginScreen(),
+      '/signup': (context) => const SignUpScreen()
     },
   );
 }

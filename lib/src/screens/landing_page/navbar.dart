@@ -14,6 +14,9 @@ class NavBar extends StatelessWidget {
   Future<void> _openLoginScreen(BuildContext context) => Navigator.of(context)
       .pushNamed('/login');
 
+  Future<void> _openSignUpScreen(BuildContext context) => Navigator.of(context)
+      .pushNamed('/signup');
+
   // TODO: create better navbar that better suits mobile.
   @override
   Widget build(BuildContext context) => ColoredBox(
@@ -100,7 +103,7 @@ class NavBar extends StatelessWidget {
       _spacing,
 
       ElevatedButton(
-        onPressed: () {},
+        onPressed: () => _openSignUpScreen(context),
         child: const Text('cadastro', style: _buttonsTextStyle),
       )
     ],
