@@ -8,6 +8,18 @@ class LoginScreen extends StatelessWidget {
 
   LoginScreen({super.key});
 
+  /// Evaluates the width that the side image will have when shown on the
+  /// screen. We have to calculate this because the image takes some time to
+  /// load, and if its size isn't specificied it will push the other widgets
+  /// on loading, causing an ugly flick effect.
+  double _foreseeSideImageWidth(BuildContext context) {
+    const assetHeight = 982;
+    const assetWidth = 818;
+    final displayHeight = MediaQuery.of(context).size.height;
+
+    return assetWidth * (displayHeight / assetHeight);
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
     body: Row(
@@ -76,7 +88,10 @@ class LoginScreen extends StatelessWidget {
           ],
         )),
 
-        const Image(image: AssetImage('assets/login/woman-reading.png'))
+        Image(
+            image: const AssetImage('assets/login/woman-reading.png'),
+            width: _foreseeSideImageWidth(context),
+        )
       ],
     ),
   );
