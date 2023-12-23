@@ -7,21 +7,28 @@ import 'firebase_options.dart';
 
 void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const MyApp());
+  runApp(const ReLerApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ReLerApp extends StatelessWidget {
+  const ReLerApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ReLer',
-      theme: theme,
-      routes: {
-        '/': (context) => LandingPage(),
-        '/login': (context) => LoginScreen(),
-      },
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+    title: 'ReLer',
+    theme: theme,
+    // We set a custom builder to wrap all app routes with a SelectionArea
+    // widget. Otherwise, we would have to put it as a child of every Scaffold
+    // manually. For this to work, we have to manually create a Overlay widget
+    // and add the wrapped route as a OverlayEntry.
+    builder: (context, child) => Overlay(
+        initialEntries: [
+          OverlayEntry(builder: (context) => SelectionArea(child: child!))
+        ]
+    ),
+    routes: {
+      '/': (context) => LandingPage(),
+      '/login': (context) => LoginScreen(),
+    },
+  );
 }
