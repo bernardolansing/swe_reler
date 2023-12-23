@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/screens/login_screen.dart';
 
 class NavBar extends StatelessWidget {
   final List<GlobalKey> sectionKeys;
@@ -10,6 +11,9 @@ class NavBar extends StatelessWidget {
       duration: const Duration(seconds: 1, milliseconds: 500),
       curve: Curves.fastLinearToSlowEaseIn
   );
+
+  Future<void> _openLoginScreen(BuildContext context) => Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => LoginScreen()));
 
   // TODO: create better navbar that better suits mobile.
   @override
@@ -38,7 +42,7 @@ class NavBar extends StatelessWidget {
                     const Expanded(child: SizedBox()),
 
                   if (constraints.maxWidth > 370)
-                    _loginAndRegisterButtons,
+                    _buildLoginAndRegisterButtons(context),
                 ]
             ),
           )
@@ -88,10 +92,10 @@ class NavBar extends StatelessWidget {
       ]
   );
 
-  Widget get _loginAndRegisterButtons => Row(
+  Widget _buildLoginAndRegisterButtons(BuildContext context) => Row(
     children: [
       TextButton(
-        onPressed: () {},
+        onPressed: () => _openLoginScreen(context),
         child: const Text('login', style: _buttonsTextStyle),
       ),
       _spacing,
