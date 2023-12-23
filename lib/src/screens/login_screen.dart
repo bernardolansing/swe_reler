@@ -26,61 +26,63 @@ class LoginScreen extends StatelessWidget {
       children: [
         const Spacer(),
 
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 300),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('login', style: Theme.of(context).textTheme.headlineLarge),
+        SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 300),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('login', style: Theme.of(context).textTheme.headlineLarge),
 
-              const SizedBox(height: 16),
+                const SizedBox(height: 16),
 
-              const _LoginForm(),
+                const _LoginForm(),
 
-              const SizedBox(height: 36),
+                const SizedBox(height: 36),
 
-              ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('login')
-              ),
+                ElevatedButton(
+                    onPressed: () {},
+                    child: const Text('login')
+                ),
 
-              const SizedBox(height: 36),
+                const SizedBox(height: 36),
 
-              const Row(
-                  children: [
-                    Expanded(child: Divider()),
-                    SizedBox(width: 16),
-                    Text('OU'),
-                    SizedBox(width: 16),
-                    Expanded(child: Divider()),
-                  ]
-              ),
-
-              const SizedBox(height: 36),
-
-              RichText(
-                text: TextSpan(
+                const Row(
                     children: [
-                      const TextSpan(
-                          text: 'não possui conta? ',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500
-                          )
-                      ),
-                      TextSpan(
-                          text: 'Cadastre-se.',
-                          recognizer: _linkTapRecognizer,
-                          style: const TextStyle(
-                              fontSize: 20,
-                              decoration: TextDecoration.underline,
-                              fontWeight: FontWeight.w600
-                          )
-                      )
+                      Expanded(child: Divider()),
+                      SizedBox(width: 16),
+                      Text('OU'),
+                      SizedBox(width: 16),
+                      Expanded(child: Divider()),
                     ]
                 ),
-              ),
-            ],
+
+                const SizedBox(height: 36),
+
+                RichText(
+                  text: TextSpan(
+                      children: [
+                        const TextSpan(
+                            text: 'não possui conta? ',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500
+                            )
+                        ),
+                        TextSpan(
+                            text: 'Cadastre-se.',
+                            recognizer: _linkTapRecognizer,
+                            style: const TextStyle(
+                                fontSize: 20,
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.w600
+                            )
+                        )
+                      ]
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
 
