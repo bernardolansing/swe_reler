@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:swe_reler/src/screens/landing_page/landing_page.dart';
 import 'package:swe_reler/src/screens/login_screen.dart';
@@ -6,6 +7,9 @@ import 'package:swe_reler/src/theme.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  usePathUrlStrategy(); // select "path" URL strategy. By default, the strategy
+  // is "hash". When in "hash" strategy, routes will be like "/#/login", instead
+  // of just "/login".
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const ReLerApp());
 }
