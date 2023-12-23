@@ -72,4 +72,15 @@ final theme = ThemeData(
   textSelectionTheme: TextSelectionThemeData(
     selectionColor: Colors.purple.withAlpha(90)
   ),
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    contentPadding: const EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 8
+    ),
+    border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide.none
+    ),
+  )
 );

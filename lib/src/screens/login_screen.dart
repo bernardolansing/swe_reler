@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/widgets/input.dart';
 
 class LoginScreen extends StatelessWidget {
   final _linkTapRecognizer = TapGestureRecognizer()
@@ -16,6 +17,15 @@ class LoginScreen extends StatelessWidget {
             const Spacer(),
 
             Text('login', style: Theme.of(context).textTheme.headlineLarge),
+
+            const SizedBox(height: 16),
+
+            ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 300),
+                child: const _LoginForm()
+            ),
+
+            const SizedBox(height: 36),
 
             ElevatedButton(
                 onPressed: () {},
@@ -70,20 +80,28 @@ class LoginScreen extends StatelessWidget {
       ],
     ),
   );
-
-// @override
-// State<LoginScreen> createState() => _LoginScreenState();
 }
 
-// class _LoginScreenState extends State<LoginScreen> {
-//
-//
-//   @override
-//   Widget build(BuildContext context) => Scaffold(
-//     body: Row(
-//       children: [
-//
-//       ],
-//     ),
-//   );
-// }
+class _LoginForm extends StatefulWidget {
+  const _LoginForm();
+
+  @override
+  State<_LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<_LoginForm> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Input(title: 'email', controller: _emailController, autoFocus: true),
+
+      const SizedBox(height: 24),
+
+      Input(title: 'senha', controller: _passwordController, sensitive: true),
+    ],
+  );
+}
