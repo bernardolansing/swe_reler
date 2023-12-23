@@ -1,7 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/widgets/input.dart';
 import 'package:swe_reler/src/widgets/or_divider.dart';
+import 'package:swe_reler/src/widgets/text_with_link_portion.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -42,29 +42,10 @@ class LoginScreen extends StatelessWidget {
 
                 const SizedBox(height: 36),
 
-                RichText(
-                  text: TextSpan(
-                      children: [
-                        const TextSpan(
-                            text: 'não possui conta? ',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500
-                            )
-                        ),
-                        TextSpan(
-                            text: 'Cadastre-se.',
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () => Navigator.of(context)
-                                  .pushNamed('/signup'),
-                            style: const TextStyle(
-                                fontSize: 20,
-                                decoration: TextDecoration.underline,
-                                fontWeight: FontWeight.w600
-                            )
-                        )
-                      ]
-                  ),
+                TextWithLinkPortion(
+                    nonLinkPortion: 'não possui conta?',
+                    linkPortion: 'Cadastre-se.',
+                    onTap: () => Navigator.of(context).pushNamed('/signup')
                 ),
               ],
             ),
