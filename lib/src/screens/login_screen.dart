@@ -24,73 +24,71 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     body: Row(
       children: [
-        Expanded(child: Column(
-          children: [
-            const Spacer(),
+        const Spacer(),
 
-            Text('login', style: Theme.of(context).textTheme.headlineLarge),
+        ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 300),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('login', style: Theme.of(context).textTheme.headlineLarge),
 
-            const SizedBox(height: 16),
+              const SizedBox(height: 16),
 
-            ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 300),
-                child: const _LoginForm()
-            ),
+              const _LoginForm(),
 
-            const SizedBox(height: 36),
+              const SizedBox(height: 36),
 
-            ElevatedButton(
-                onPressed: () {},
-                child: const Text('login')
-            ),
+              ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('login')
+              ),
 
-            const SizedBox(height: 36),
+              const SizedBox(height: 36),
 
-            ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 300),
-                child: const Row(
-                    children: [
-                      Expanded(child: Divider()),
-                      SizedBox(width: 16),
-                      Text('OU'),
-                      SizedBox(width: 16),
-                      Expanded(child: Divider()),
-                    ]
-                )
-            ),
-
-            const SizedBox(height: 36),
-
-            RichText(
-              text: TextSpan(
+              const Row(
                   children: [
-                    const TextSpan(
-                        text: 'não possui conta? ',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500
-                        )
-                    ),
-                    TextSpan(
-                        text: 'Cadastre-se.',
-                        recognizer: _linkTapRecognizer,
-                        style: const TextStyle(
-                            fontSize: 20,
-                            decoration: TextDecoration.underline,
-                            fontWeight: FontWeight.w600
-                        )
-                    )
+                    Expanded(child: Divider()),
+                    SizedBox(width: 16),
+                    Text('OU'),
+                    SizedBox(width: 16),
+                    Expanded(child: Divider()),
                   ]
               ),
-            ),
 
-            const Spacer(),
-          ],
-        )),
+              const SizedBox(height: 36),
+
+              RichText(
+                text: TextSpan(
+                    children: [
+                      const TextSpan(
+                          text: 'não possui conta? ',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500
+                          )
+                      ),
+                      TextSpan(
+                          text: 'Cadastre-se.',
+                          recognizer: _linkTapRecognizer,
+                          style: const TextStyle(
+                              fontSize: 20,
+                              decoration: TextDecoration.underline,
+                              fontWeight: FontWeight.w600
+                          )
+                      )
+                    ]
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        const Spacer(),
 
         Image(
-            image: const AssetImage('assets/login/woman-reading.png'),
-            width: _foreseeSideImageWidth(context),
+          image: const AssetImage('assets/login/woman-reading.png'),
+          width: _foreseeSideImageWidth(context),
         )
       ],
     ),
