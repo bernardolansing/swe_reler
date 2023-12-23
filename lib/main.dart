@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:swe_reler/src/screens/landing_page/landing_page.dart';
+import 'package:swe_reler/src/screens/login_screen.dart';
 import 'package:swe_reler/src/theme.dart';
 import 'firebase_options.dart';
 
@@ -17,9 +18,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'ReLer',
       theme: theme,
-      home: SelectionArea(
-        child: LandingPage(),
-      ),
+      routes: {
+        '/': (context) => LandingPage(),
+        '/login': (context) => LoginScreen(),
+      },
     );
   }
 }

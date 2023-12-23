@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:swe_reler/src/screens/login_screen.dart';
 
 class NavBar extends StatelessWidget {
   final List<GlobalKey> sectionKeys;
@@ -13,7 +12,7 @@ class NavBar extends StatelessWidget {
   );
 
   Future<void> _openLoginScreen(BuildContext context) => Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => LoginScreen()));
+      .pushNamed('/login');
 
   // TODO: create better navbar that better suits mobile.
   @override
