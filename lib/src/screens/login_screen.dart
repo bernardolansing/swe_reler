@@ -40,13 +40,6 @@ class LoginScreen extends StatelessWidget {
 
                 const SizedBox(height: 36),
 
-                ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('login')
-                ),
-
-                const SizedBox(height: 36),
-
                 const Row(
                     children: [
                       Expanded(child: Divider()),
@@ -110,13 +103,19 @@ class _LoginFormState extends State<_LoginForm> {
 
   @override
   Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Input(title: 'email', controller: _emailController, autoFocus: true),
 
       const SizedBox(height: 24),
 
       Input(title: 'senha', controller: _passwordController, sensitive: true),
+
+      const SizedBox(height: 36),
+
+      ElevatedButton(
+          onPressed: () {},
+          child: const Text('login')
+      ),
     ],
   );
 }
