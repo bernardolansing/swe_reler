@@ -6,14 +6,10 @@ import 'plans.dart';
 import 'whats_in_the_box.dart';
 import 'footer.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPageScreen extends StatelessWidget {
   final _sectionKeys = List.generate(4, (index) => GlobalKey());
 
-  LandingPage({super.key});
-
-  MaterialPageRoute route(BuildContext context) => MaterialPageRoute(
-      builder: (context) => LandingPage()
-  );
+  LandingPageScreen({super.key});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -29,5 +25,3 @@ class LandingPage extends StatelessWidget {
     )),
   );
 }
-
-

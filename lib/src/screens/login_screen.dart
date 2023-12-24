@@ -1,12 +1,10 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/widgets/input.dart';
+import 'package:swe_reler/src/widgets/or_divider.dart';
+import 'package:swe_reler/src/widgets/text_with_link_portion.dart';
 
 class LoginScreen extends StatelessWidget {
-  final _linkTapRecognizer = TapGestureRecognizer()
-    ..onTap = () {}; // TODO: redirect to sign up screen.
-
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   /// Evaluates the width that the side image will have when shown on the
   /// screen. We have to calculate this because the image takes some time to
@@ -40,39 +38,14 @@ class LoginScreen extends StatelessWidget {
 
                 const SizedBox(height: 36),
 
-                const Row(
-                    children: [
-                      Expanded(child: Divider()),
-                      SizedBox(width: 16),
-                      Text('OU'),
-                      SizedBox(width: 16),
-                      Expanded(child: Divider()),
-                    ]
-                ),
+                const OrDivider(),
 
                 const SizedBox(height: 36),
 
-                RichText(
-                  text: TextSpan(
-                      children: [
-                        const TextSpan(
-                            text: 'não possui conta? ',
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500
-                            )
-                        ),
-                        TextSpan(
-                            text: 'Cadastre-se.',
-                            recognizer: _linkTapRecognizer,
-                            style: const TextStyle(
-                                fontSize: 20,
-                                decoration: TextDecoration.underline,
-                                fontWeight: FontWeight.w600
-                            )
-                        )
-                      ]
-                  ),
+                TextWithLinkPortion(
+                    nonLinkPortion: 'não possui conta?',
+                    linkPortion: 'Cadastre-se.',
+                    onTap: () => Navigator.of(context).pushNamed('/signup')
                 ),
               ],
             ),
