@@ -25,10 +25,10 @@ class SignUpScreen extends StatelessWidget {
 
         const Spacer(),
 
-        ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 428),
-          child: Expanded(
-            flex: 4,
+        Expanded(
+          flex: 4,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 428),
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(64),
               child: Column(
