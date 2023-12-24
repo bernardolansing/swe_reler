@@ -82,5 +82,13 @@ final theme = ThemeData(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide.none
     ),
+  ),
+  listTileTheme: const ListTileThemeData(
+    titleTextStyle: TextStyle(
+      color: Colors.black,
+      fontWeight: FontWeight.w400,
+      fontSize: 18,
+      fontFamily: 'Poppins',
+    )
   )
 );
