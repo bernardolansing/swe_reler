@@ -5,6 +5,8 @@ class Input extends StatefulWidget {
   final TextEditingController controller;
   final bool sensitive;
   final bool autoFocus;
+  final String? errorMessage;
+  final void Function()? errorDismisser;
 
   const Input({
     super.key,
@@ -12,6 +14,8 @@ class Input extends StatefulWidget {
     required this.controller,
     this.sensitive = false,
     this.autoFocus = false,
+    this.errorMessage,
+    this.errorDismisser,
   });
 
   @override
@@ -31,6 +35,15 @@ class _InputState extends State<Input> {
         controller: widget.controller,
         obscureText: widget.sensitive,
         autofocus: widget.autoFocus,
+        onChanged: (value) {
+          if (widget.errorMessage != null) {
+            assert (widget.errorDismisser != null);
+            widget.errorDismisser!();
+          }
+        },
+        decoration: InputDecoration(
+          errorText: widget.errorMessage
+        ),
       ),
     ],
   );

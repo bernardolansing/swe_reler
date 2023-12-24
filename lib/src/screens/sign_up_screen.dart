@@ -109,16 +109,46 @@ class _SignUpFormState extends State<_SignUpForm> {
   @override
   Widget build(BuildContext context) => Column(
     children: [
-      Input(title: 'nome', controller: _nameController),
+      Input(
+        title: 'nome',
+        controller: _nameController,
+        errorMessage: _emptyNameError ? 'O nome é obrigatório.' : null,
+        errorDismisser: () => setState(() => _emptyNameError = false),
+      ),
       const SizedBox(height: 24),
 
-      Input(title: 'e-mail', controller: _emailController),
+      Input(
+        title: 'e-mail',
+        controller: _emailController,
+        errorMessage: _emailErrorMessage,
+        errorDismisser: () => setState(() {
+          _emptyEmailError = false;
+          _invalidEmailError = false;
+        }),
+      ),
       const SizedBox(height: 36),
 
-      Input(title: 'crie uma senha', controller: _passwordController),
+      Input(
+        title: 'crie uma senha',
+        controller: _passwordController,
+        sensitive: true,
+        errorMessage: _passwordErrorMessage,
+        errorDismisser: () => setState(() {
+          _emptyPasswordError = false;
+          _invalidPasswordError = false;
+        }),
+      ),
       const SizedBox(height: 24),
 
-      Input(title: 'confirme sua senha', controller: _repeatPasswordController),
+      Input(
+        title: 'confirme sua senha',
+        controller: _repeatPasswordController,
+        sensitive: true,
+        errorMessage: _unmatchingPasswordsError
+            ? 'As senhas digitadas não batem!'
+            : null,
+        errorDismisser: () => setState(() => _unmatchingPasswordsError = false),
+      ),
       const SizedBox(height: 36),
 
       CheckboxListTile(
@@ -149,4 +179,18 @@ class _SignUpFormState extends State<_SignUpForm> {
         fontSize: 12
     ),
   );
+
+  String? get _emailErrorMessage {
+    if (_emptyEmailError) { return 'O e-mail é obrigatório.'; }
+    if (_invalidEmailError) { return 'Este endereço de e-mail é inválido!'; }
+    return null;
+  }
+
+  String? get _passwordErrorMessage {
+    if (_emptyPasswordError) { return 'Você deve fornecer uma senha.'; }
+    if (_invalidPasswordError) {
+      return 'A senha deve possuir mais de 5 caracteres!';
+    }
+    return null;
+  }
 }
