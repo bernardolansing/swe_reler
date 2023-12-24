@@ -11,10 +11,6 @@ class LandingPageScreen extends StatelessWidget {
 
   LandingPageScreen({super.key});
 
-  MaterialPageRoute route(BuildContext context) => MaterialPageRoute(
-      builder: (context) => LandingPageScreen()
-  );
-
   @override
   Widget build(BuildContext context) => Scaffold(
     body: SingleChildScrollView(child: Column(
@@ -29,5 +25,3 @@ class LandingPageScreen extends StatelessWidget {
     )),
   );
 }
-
-
