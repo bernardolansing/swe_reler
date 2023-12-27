@@ -38,7 +38,8 @@ final theme = ThemeData(
         fontSize: 48,
         fontFamily: 'Teko',
         fontWeight: FontWeight.w400,
-        color: Colors.black
+        color: Colors.black,
+        height: 0.75,
       ),
       bodyMedium: TextStyle(
           fontFamily: 'Poppins',
