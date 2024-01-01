@@ -45,37 +45,42 @@ class SidePannel extends StatelessWidget {
 
     return Container(
       color: Theme.of(context).colorScheme.secondary,
-      child: SizedBox(
-          width: sidePannelWidth,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(48),
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: DrawerMenuButton(),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height,
+        ),
+        child: SizedBox(
+            width: sidePannelWidth,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(48),
+                  child: Align(
+                    alignment: Alignment.centerRight,
+                    child: DrawerMenuButton(),
+                  ),
                 ),
-              ),
 
-              SizedBox(
-                width: paintWidth,
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LispectorsFlag(),
-                    SizedBox(height: 32),
+                SizedBox(
+                  width: paintWidth,
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LispectorsFlag(),
+                      SizedBox(height: 32),
 
-                    PointsFlag(),
-                    SizedBox(height: 32),
+                      PointsFlag(),
+                      SizedBox(height: 32),
 
-                    Leaderboard(),
-                    SizedBox(height: 32),
-                  ],
-                ),
-              )
-            ],
-          )
+                      Leaderboard(),
+                      SizedBox(height: 32),
+                    ],
+                  ),
+                )
+              ],
+            )
+        ),
       ),
     );
   }
