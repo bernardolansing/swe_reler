@@ -8,15 +8,23 @@ class SidePannel extends StatelessWidget {
 
   const SidePannel({super.key, this.loading = false, this.error = false});
 
+  double _computeSidePannelWidth(BuildContext context) {
+    const minWidth = 300.0;
+    const maxWidth = 415.0;
+    const idealWidthFraction = 0.274;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final idealSidePannelWidth = idealWidthFraction * screenWidth;
+
+    if (idealSidePannelWidth < minWidth) { return minWidth; }
+    if (idealSidePannelWidth > maxWidth) { return maxWidth; }
+    return idealSidePannelWidth;
+  }
+
   @override
   Widget build(BuildContext context) => Container(
-      color: Theme.of(context).colorScheme.secondary,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-            minWidth: 300,
-            maxWidth: 300,
-            minHeight: MediaQuery.of(context).size.height
-        ),
+    color: Theme.of(context).colorScheme.secondary,
+    child: SizedBox(
+        width: _computeSidePannelWidth(context),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -113,8 +121,8 @@ class SidePannel extends StatelessWidget {
 
             const SizedBox(height: 32),
           ],
-        ),
-      )
+        )
+    ),
   );
 
   static const _flagUpperText = Text(
