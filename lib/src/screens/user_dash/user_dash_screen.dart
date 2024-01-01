@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:swe_reler/src/screens/user_dash/side_pannel.dart';
+import 'package:swe_reler/src/screens/user_dash/side_pannel/side_pannel.dart';
 
 class UserDashScreen extends StatefulWidget {
   const UserDashScreen({super.key});
