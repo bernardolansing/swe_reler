@@ -4,37 +4,45 @@ import 'package:flutter/material.dart';
 class Leaderboard extends StatelessWidget {
   const Leaderboard({super.key});
 
+  static const _leaderboardHeight = 600.0;
+
   @override
-  Widget build(BuildContext context) => Stack(
-    children: [
-      CustomPaint(
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, constraints) => Stack(
+      children: [
+        CustomPaint(
           painter: _Painter(),
-          size: const Size(280, 600)
-      ),
-
-      Padding(
-        padding: const EdgeInsets.symmetric(
-            vertical: 24,
-            horizontal: 16
+          size: Size(constraints.maxWidth, _leaderboardHeight),
         ),
-        child: Wrap(
-          direction: Axis.vertical,
-          spacing: 16,
-          children: [
-            Text(
-                'leaderboard',
-                style: Theme.of(context).textTheme.headlineSmall
+
+        SizedBox(
+          width: _Painter.getContentWidth(constraints.maxWidth),
+          height: _leaderboardHeight,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+                vertical: 24,
+                horizontal: 16
             ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                    'leaderboard',
+                    style: Theme.of(context).textTheme.headlineSmall
+                ),
 
-            ...Iterable.generate(5, (index) => _LeaderboardCard(
-                username: 'Usuário X',
-                points: 100,
-                rank: index + 1
-            )),
-          ],
+                ...Iterable.generate(5, (index) => _LeaderboardCard(
+                    username: 'Usuário X',
+                    points: 100,
+                    rank: index + 1
+                )),
+              ],
+            ),
+          )
         ),
-      )
-    ],
+      ],
+    ),
   );
 }
 
@@ -42,6 +50,9 @@ class _Painter extends CustomPainter {
   static const _ellipsisMinorRadius = 40.0;
   static const _ellipsisGreaterRadius = 70.0;
   static const _borderRadius = 16.0;
+
+  static double getContentWidth(double paintWidth) =>
+      paintWidth - _ellipsisMinorRadius;
 
   Rect _getEllipsisPosition(Size size) => Rect.fromLTRB(
       size.width - 2 * _ellipsisMinorRadius,
@@ -95,7 +106,6 @@ class _LeaderboardCard extends StatelessWidget {
         color: Colors.white.withAlpha(89),
       ),
       child: SizedBox(
-        width: 205,
         child: IntrinsicHeight(
           child: Row(
             children: [
