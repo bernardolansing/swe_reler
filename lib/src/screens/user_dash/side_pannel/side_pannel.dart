@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:swe_reler/src/screens/user_dash/side_pannel/leaderboard.dart';
-import 'package:swe_reler/src/screens/user_dash/side_pannel/lispectors_flag.dart';
-import 'package:swe_reler/src/screens/user_dash/side_pannel/points_flag.dart';
+import 'leaderboard.dart';
+import 'flags.dart';
 import 'package:swe_reler/src/widgets/drawer_menu_button.dart';
 
 class SidePannel extends StatelessWidget {
