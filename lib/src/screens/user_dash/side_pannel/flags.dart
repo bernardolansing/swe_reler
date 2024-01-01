@@ -1,26 +1,11 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 
 abstract class _Flag extends StatelessWidget {
   const _Flag({super.key});
 
+  static const _paintHeight = 100.0;
   CustomPainter get _painter;
   String get _mainText;
-
-  Size _computePaintSize(BoxConstraints constraints) {
-    const idealPaintWidthMultiplier = 0.85;
-    const maxPaintWidth = 360.0;
-    const minPaintWidth = 290.0;
-    const paintHeight = 100.0;
-
-    late final double width;
-    final idealWidth = idealPaintWidthMultiplier * constraints.maxWidth;
-    if (idealWidth < minPaintWidth) { width = minPaintWidth; }
-    else if (idealWidth > maxPaintWidth) { width = maxPaintWidth; }
-    else { width = idealWidth; }
-
-    return Size(width, paintHeight);
-  }
 
   @override
   Widget build(BuildContext context) => Stack(
@@ -28,7 +13,7 @@ abstract class _Flag extends StatelessWidget {
       LayoutBuilder(
         builder: (context, constraints) => CustomPaint(
           painter: _painter,
-          size: _computePaintSize(constraints),
+          size: Size(constraints.maxWidth, _paintHeight),
         ),
       ),
 
