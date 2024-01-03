@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:swe_reler/src/screens/user_dash/hello_user.dart';
-import 'package:swe_reler/src/screens/user_dash/side_pannel/side_pannel.dart';
-import 'package:swe_reler/src/screens/user_dash/subscription_tag.dart';
+import 'hello_user.dart';
+import 'side_pannel/side_pannel.dart';
+import 'subscription_tag.dart';
+import 'your_reports.dart';
 
 class UserDashScreen extends StatefulWidget {
   const UserDashScreen({super.key});
@@ -22,6 +23,7 @@ class _UserDashScreenState extends State<UserDashScreen> {
             child: Padding(
               padding: EdgeInsets.fromLTRB(64, 0, 38, 64),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -31,6 +33,14 @@ class _UserDashScreenState extends State<UserDashScreen> {
                       SubscriptionTag(),
                       Spacer(),
                     ],
+                  ),
+
+                  SizedBox(height: 100),
+
+                  Wrap(
+                    children: [
+                      YourReports(),
+                    ]
                   ),
                 ],
               ),
