@@ -11,41 +11,57 @@ class HelloUser extends StatelessWidget {
       const HighlightedText('olá, user'),
       const SizedBox(height: 16),
 
-      Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-                color: Color(0xFFA7BFD6),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(16),
-                    topRight: Radius.circular(128),
-                    bottomLeft: Radius.circular(16),
-                    bottomRight: Radius.circular(16)
-                )
-            ),
-            child: const Padding(
-              padding: EdgeInsets.only(
-                left: 32,
-                top: 32,
-                right: 64,
-                bottom: 32
+      ConstrainedBox(
+        constraints: const BoxConstraints(maxHeight: 210),
+        child: Stack(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                  color: Color(0xFFA7BFD6),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16),
+                      topRight: Radius.circular(128),
+                      bottomLeft: Radius.circular(16),
+                      bottomRight: Radius.circular(16)
+                  )
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
+              child: const Padding(
+                // padding: EdgeInsets.all(32),
+                padding: EdgeInsets.only(
+                    left: 32,
+                    top: 32,
+                    right: 64,
+                    bottom: 48
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
                       'sua caixinha de janeiro chega entre',
-                      style: _boxArrivalTextStyle
-                  ),
-                  SizedBox(height: 16),
+                      style: _boxArrivalTextStyle,
+                    ),
+                    SizedBox(height: 16),
 
-                  Text('03/01 e 07/01', style: _datesTextStyle),
-                  SizedBox(height: 16),
+                    Text('03/01 e 07/01', style: _datesTextStyle),
+                    SizedBox(height: 16),
+                  ],
+                ),
+              ),
+            ),
+
+            const Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                children: [
+                  SizedBox(width: 43),
+                  Image(image: AssetImage('assets/user-dash/clouds.png')),
                 ],
               ),
-            ),
-          )
-        ],
+            )
+
+          ],
+        ),
       )
     ],
   );
@@ -58,9 +74,9 @@ class HelloUser extends StatelessWidget {
   );
 
   static const _datesTextStyle = TextStyle(
-    fontFamily: 'Poppins',
-    fontSize: 32,
-    fontWeight: FontWeight.w600,
-    color: Color(0xFF9B693B)
+      fontFamily: 'Poppins',
+      fontSize: 32,
+      fontWeight: FontWeight.w600,
+      color: Color(0xFF9B693B)
   );
 }
