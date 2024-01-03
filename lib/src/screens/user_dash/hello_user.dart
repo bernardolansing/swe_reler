@@ -12,7 +12,7 @@ class HelloUser extends StatelessWidget {
       const SizedBox(height: 16),
 
       ConstrainedBox(
-        constraints: const BoxConstraints(maxHeight: 210),
+        constraints: const BoxConstraints(maxWidth: 550, maxHeight: 210),
         child: Stack(
           children: [
             Container(
@@ -58,8 +58,12 @@ class HelloUser extends StatelessWidget {
                   Image(image: AssetImage('assets/user-dash/clouds.png')),
                 ],
               ),
-            )
+            ),
 
+            const Align(
+              alignment: Alignment.bottomRight,
+              child: Image(image: AssetImage('assets/user-dash/bicycle.png')),
+            ),
           ],
         ),
       )
