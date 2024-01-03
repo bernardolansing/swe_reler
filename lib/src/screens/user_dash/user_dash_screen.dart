@@ -25,13 +25,14 @@ class _UserDashScreenState extends State<UserDashScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                  Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    crossAxisAlignment: WrapCrossAlignment.end,
                     children: [
                       HelloUser(),
-                      Spacer(),
+                      SizedBox(width: 1),
                       SubscriptionTag(),
-                      Spacer(),
+                      SizedBox(width: 1),
                     ],
                   ),
 
