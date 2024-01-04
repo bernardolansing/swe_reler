@@ -13,7 +13,7 @@ class SidePannel extends StatelessWidget {
   double _computeSidePannelWidth(BuildContext context) {
     const minWidth = 300.0;
     const maxWidth = 415.0;
-    const idealWidthFraction = 0.274;
+    const idealWidthFraction = 0.25;
     final screenWidth = MediaQuery.of(context).size.width;
     final idealSidePannelWidth = idealWidthFraction * screenWidth;
 

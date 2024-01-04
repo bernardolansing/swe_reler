@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/screens/user_dash/donation_summary.dart';
 import 'hello_user.dart';
 import 'side_pannel/side_pannel.dart';
 import 'subscription_tag.dart';
@@ -39,8 +40,11 @@ class _UserDashScreenState extends State<UserDashScreen> {
                   SizedBox(height: 100),
 
                   Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    spacing: 28,
                     children: [
                       YourReports(),
+                      DonationSummary(),
                     ]
                   ),
                 ],
