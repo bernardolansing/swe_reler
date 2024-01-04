@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:swe_reler/src/screens/user_dash/donation_summary.dart';
+import 'donation_summary.dart';
+import 'your_coupons.dart';
 import 'hello_user.dart';
 import 'side_pannel/side_pannel.dart';
 import 'subscription_tag.dart';
@@ -47,6 +48,9 @@ class _UserDashScreenState extends State<UserDashScreen> {
                       DonationSummary(),
                     ]
                   ),
+
+                  SizedBox(height: 50),
+                  YourCoupons(),
                 ],
               ),
             ),
