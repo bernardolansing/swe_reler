@@ -82,7 +82,7 @@ class _Painter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
 
 class _LeaderboardCard extends StatelessWidget {

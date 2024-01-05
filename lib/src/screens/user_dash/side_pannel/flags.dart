@@ -80,9 +80,8 @@ class _LispectorsPainter extends CustomPainter {
     canvas.drawPath(path, paint);
   }
 
-  // TODO: check if we can avoid repainting.
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
 
 class PointsFlag extends _Flag {
@@ -115,5 +114,5 @@ class _PointsPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
