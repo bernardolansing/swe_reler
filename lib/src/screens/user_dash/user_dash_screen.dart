@@ -18,46 +18,48 @@ class _UserDashScreenState extends State<UserDashScreen> {
   @override
   Widget build(BuildContext context) => const Scaffold(
     body: SingleChildScrollView(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(64, 0, 38, 64),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Wrap(
-                    alignment: WrapAlignment.spaceBetween,
-                    crossAxisAlignment: WrapCrossAlignment.end,
-                    children: [
-                      HelloUser(),
-                      SizedBox(width: 1),
-                      SubscriptionTag(),
-                      SizedBox(width: 1),
-                    ],
-                  ),
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(64, 0, 38, 64),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Wrap(
+                      alignment: WrapAlignment.spaceBetween,
+                      crossAxisAlignment: WrapCrossAlignment.end,
+                      children: [
+                        HelloUser(),
+                        SizedBox(width: 1),
+                        SubscriptionTag(),
+                        SizedBox(width: 1),
+                      ],
+                    ),
 
-                  SizedBox(height: 100),
+                    SizedBox(height: 100),
 
-                  Wrap(
-                    alignment: WrapAlignment.spaceBetween,
-                    spacing: 28,
-                    children: [
-                      YourReports(),
-                      DonationSummary(),
-                    ]
-                  ),
+                    Wrap(
+                      alignment: WrapAlignment.spaceBetween,
+                      spacing: 28,
+                      children: [
+                        YourReports(),
+                        DonationSummary(),
+                      ]
+                    ),
 
-                  SizedBox(height: 50),
-                  YourCoupons(),
-                ],
+                    SizedBox(height: 50),
+                    YourCoupons(),
+                  ],
+                ),
               ),
             ),
-          ),
 
-          SidePannel()
-        ],
+            SidePannel()
+          ],
+        ),
       ),
     ),
   );

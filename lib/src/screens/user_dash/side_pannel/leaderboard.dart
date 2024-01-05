@@ -7,42 +7,42 @@ class Leaderboard extends StatelessWidget {
   static const _leaderboardHeight = 600.0;
 
   @override
-  Widget build(BuildContext context) => LayoutBuilder(
-    builder: (context, constraints) => Stack(
-      children: [
-        CustomPaint(
-          painter: _Painter(),
-          size: Size(constraints.maxWidth, _leaderboardHeight),
-        ),
+  Widget build(BuildContext context) => Stack(
+    children: [
+      CustomPaint(
+        painter: _Painter(),
+        size: const Size(double.infinity, _leaderboardHeight),
+      ),
 
-        SizedBox(
-            width: _Painter.getContentWidth(constraints.maxWidth),
-            height: _leaderboardHeight,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: 24,
-                  horizontal: 16
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                      'leaderboard',
-                      style: Theme.of(context).textTheme.headlineSmall
-                  ),
+      SizedBox(
+          height: _leaderboardHeight,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+            child: Row(
+              children: [
+                Expanded(child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                        'leaderboard',
+                        style: Theme.of(context).textTheme.headlineSmall
+                    ),
 
-                  ...Iterable.generate(5, (index) => _LeaderboardCard(
-                      username: 'Usuário X',
-                      points: 100,
-                      rank: index + 1
-                  )),
-                ],
-              ),
-            )
-        ),
-      ],
-    ),
+                    ...Iterable.generate(5, (index) => _LeaderboardCard(
+                        username: 'Usuário X',
+                        points: 100,
+                        rank: index + 1
+                    )),
+                  ],
+                )),
+
+                const SizedBox(width: _Painter._ellipsisMinorRadius),
+              ],
+            ),
+          )
+      ),
+    ],
   );
 }
 
@@ -50,9 +50,6 @@ class _Painter extends CustomPainter {
   static const _ellipsisMinorRadius = 40.0;
   static const _ellipsisGreaterRadius = 70.0;
   static const _borderRadius = 16.0;
-
-  static double getContentWidth(double paintWidth) =>
-      paintWidth - _ellipsisMinorRadius;
 
   Rect _getEllipsisPosition(Size size) => Rect.fromLTRB(
       size.width - 2 * _ellipsisMinorRadius,

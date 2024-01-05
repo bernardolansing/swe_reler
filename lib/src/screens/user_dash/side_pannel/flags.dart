@@ -10,11 +10,9 @@ abstract class _Flag extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Stack(
     children: [
-      LayoutBuilder(
-        builder: (context, constraints) => CustomPaint(
-          painter: _painter,
-          size: Size(constraints.maxWidth, _paintHeight),
-        ),
+      CustomPaint(
+        painter: _painter,
+        size: const Size(double.infinity, _paintHeight),
       ),
 
       Padding(
