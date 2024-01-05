@@ -16,30 +16,30 @@ class Leaderboard extends StatelessWidget {
         ),
 
         SizedBox(
-          width: _Painter.getContentWidth(constraints.maxWidth),
-          height: _leaderboardHeight,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-                vertical: 24,
-                horizontal: 16
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                    'leaderboard',
-                    style: Theme.of(context).textTheme.headlineSmall
-                ),
+            width: _Painter.getContentWidth(constraints.maxWidth),
+            height: _leaderboardHeight,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                  vertical: 24,
+                  horizontal: 16
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                      'leaderboard',
+                      style: Theme.of(context).textTheme.headlineSmall
+                  ),
 
-                ...Iterable.generate(5, (index) => _LeaderboardCard(
-                    username: 'Usuário X',
-                    points: 100,
-                    rank: index + 1
-                )),
-              ],
-            ),
-          )
+                  ...Iterable.generate(5, (index) => _LeaderboardCard(
+                      username: 'Usuário X',
+                      points: 100,
+                      rank: index + 1
+                  )),
+                ],
+              ),
+            )
         ),
       ],
     ),
@@ -97,56 +97,51 @@ class _LeaderboardCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.white.withAlpha(89),
-      ),
-      child: SizedBox(
-        child: IntrinsicHeight(
-          child: Row(
-            children: [
-              SizedBox(
-                width: 60,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: Center(
-                    child: Text(
-                      rank.toString(),
-                      style: textTheme.headlineSmall,
-                    ),
+  Widget build(BuildContext context) => Container(
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      color: Colors.white.withAlpha(89),
+    ),
+    child: SizedBox(
+      child: IntrinsicHeight(
+        child: Row(
+          children: [
+            SizedBox(
+              width: 60,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: Center(
+                  child: Text(
+                    rank.toString(),
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
               ),
+            ),
 
-              const VerticalDivider(
-                  thickness: 2,
-                  width: 2,
-                  color: Color(0xFFE2A447)
+            const VerticalDivider(
+                thickness: 2,
+                width: 2,
+                color: Color(0xFFE2A447)
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 8
               ),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 16,
-                    horizontal: 8
-                ),
-                child: Column(
-                  children: [
-                    Text(username, style: _usernameTextStyle),
-                    // const SizedBox(height: 16),
-                    Text('$points pontos'),
-                  ],
-                ),
-              )
-            ],
-          ),
+              child: Column(
+                children: [
+                  Text(username, style: _usernameTextStyle),
+                  Text('$points pontos'),
+                ],
+              ),
+            )
+          ],
         ),
       ),
-    );
-  }
+    ),
+  );
 
   static const _usernameTextStyle = TextStyle(
     fontFamily: 'Poppins',

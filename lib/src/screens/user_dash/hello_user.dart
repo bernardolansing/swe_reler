@@ -26,7 +26,6 @@ class HelloUser extends StatelessWidget {
                   )
               ),
               child: const Padding(
-                // padding: EdgeInsets.all(32),
                 padding: EdgeInsets.only(
                     left: 32,
                     top: 32,
