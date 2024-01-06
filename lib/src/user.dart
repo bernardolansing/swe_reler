@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class User {
   static String? _id;
@@ -70,6 +71,17 @@ class User {
           throw InvalidEmail();
       }
     }
+  }
+
+  /// Logs the user out and redirects them to the landing page, removing all
+  /// screens from the Navigator history.
+  static void logout(BuildContext context) {
+    FirebaseAuth.instance.signOut();
+    _id = null;
+    _email = null;
+    _displayName = null;
+    Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
+    log('Successful logout.');
   }
 
   /// Takes the result of a login/signup operation and updates the [User] class
