@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/user.dart';
+import 'package:swe_reler/src/widgets/info_dialog.dart';
 import 'package:swe_reler/src/widgets/input.dart';
 import 'package:swe_reler/src/widgets/or_divider.dart';
 import 'package:swe_reler/src/widgets/text_with_link_portion.dart';
@@ -153,37 +154,21 @@ class _LoginFormState extends State<_LoginForm> {
   }
 
   Future<void> _showWrongCredentailsDialog() => showDialog(
-    context: context,
-    builder: (context) => AlertDialog(
-      title: const Text('Conta não encontrada'),
-      content: const Text(
-          'Por favor, verifique o endereço de e-mail e senha digitados ou '
-              'crie uma conta.'
-      ),
-      actions: [
-        TextButton(
-          onPressed: Navigator.of(context).pop,
-          child: const Text('Ok'),
-        )
-      ],
-    )
+      context: context,
+      builder: (context) => const InfoDialog(
+        title: 'Conta não encontrada',
+        text: 'Por favor, verifique o endereço de e-mail e senha digitados ou '
+            'crie uma conta.',
+      )
   );
 
   /// Pops up a dialog that tells user that their account has been deleted.
   Future<void> _showDeletedUserDialog() => showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Conta eliminada'),
-        content: const Text(
-            'Esta conta de usuário foi excluída. Por favor, verifique o '
-                'endereço de e-mail digitado ou crie outra conta.'
-        ),
-        actions: [
-          TextButton(
-              onPressed: () {},
-              child: const Text('Ok')
-          )
-        ],
+      builder: (context) => const InfoDialog(
+        title: 'Conta eliminada',
+        text: 'Esta conta de usuário foi excluída. Por favor, verifique o '
+            'endereço de e-mail digitado ou crie outra conta.',
       )
   );
 }
