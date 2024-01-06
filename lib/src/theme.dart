@@ -7,21 +7,21 @@ const _errorColor = Color(0xFFBB2020);
 const _surfaceColor = Color(0xFFD6CAA7);
 
 final theme = ThemeData(
-  brightness: Brightness.light,
-  colorScheme: const ColorScheme(
-      brightness: Brightness.light,
-      primary: _primaryColor,
-      onPrimary: Colors.white,
-      secondary: _secondaryColor,
-      onSecondary: Colors.white,
-      background: _backgroundColor,
-      onBackground: Colors.black,
-      error: _errorColor,
-      onError: Colors.white,
-      surface: _surfaceColor,
-      onSurface: Colors.black54
-  ),
-  textTheme: const TextTheme(
+    brightness: Brightness.light,
+    colorScheme: const ColorScheme(
+        brightness: Brightness.light,
+        primary: _primaryColor,
+        onPrimary: Colors.white,
+        secondary: _secondaryColor,
+        onSecondary: Colors.white,
+        background: _backgroundColor,
+        onBackground: Colors.black,
+        error: _errorColor,
+        onError: Colors.white,
+        surface: _surfaceColor,
+        onSurface: Colors.black54
+    ),
+    textTheme: const TextTheme(
       headlineLarge: TextStyle(
           fontSize: 72,
           fontFamily: 'Teko',
@@ -38,7 +38,8 @@ final theme = ThemeData(
         fontSize: 48,
         fontFamily: 'Teko',
         fontWeight: FontWeight.w400,
-        color: Colors.black
+        color: Colors.black,
+        height: 0.75,
       ),
       bodyMedium: TextStyle(
           fontFamily: 'Poppins',
@@ -46,49 +47,55 @@ final theme = ThemeData(
           fontSize: 18,
           color: Colors.black
       ),
-      labelSmall: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-        color: Color(0xFF9B693B)
+      bodyLarge: TextStyle(
+          fontFamily: 'Poppins',
+          fontWeight: FontWeight.w600,
+          fontSize: 20,
+          color: Colors.black
       ),
-  ),
-  scaffoldBackgroundColor: _backgroundColor,
-  textButtonTheme: TextButtonThemeData(
-      style: TextButton.styleFrom(
+      labelSmall: TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: Color(0xFF9B693B)
+      ),
+    ),
+    scaffoldBackgroundColor: _backgroundColor,
+    textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+            foregroundColor: Colors.white,
+            textStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 24)
+        )
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
-          textStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 24)
-      )
-  ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: _secondaryColor,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        textStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 24),
-      )
-  ),
-  textSelectionTheme: TextSelectionThemeData(
-    selectionColor: Colors.purple.withAlpha(90)
-  ),
-  inputDecorationTheme: InputDecorationTheme(
-    filled: true,
-    contentPadding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 8
+          backgroundColor: _secondaryColor,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          textStyle: const TextStyle(fontFamily: 'Poppins', fontSize: 24),
+        )
     ),
-    border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide.none
+    textSelectionTheme: TextSelectionThemeData(
+        selectionColor: Colors.purple.withAlpha(90)
     ),
-  ),
-  listTileTheme: const ListTileThemeData(
-    titleTextStyle: TextStyle(
-      color: Colors.black,
-      fontWeight: FontWeight.w400,
-      fontSize: 18,
-      fontFamily: 'Poppins',
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 8
+      ),
+      border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide.none
+      ),
+    ),
+    listTileTheme: const ListTileThemeData(
+        titleTextStyle: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.w400,
+          fontSize: 18,
+          fontFamily: 'Poppins',
+        )
     )
-  )
 );
