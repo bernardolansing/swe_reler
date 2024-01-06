@@ -7,14 +7,14 @@ class User {
   static String? _email;
   static String? _displayName;
 
-  bool get signedIn => _id != null;
+  static bool get signedIn => _id != null;
 
-  String get email {
+  static String get email {
     assert (signedIn);
     return _email!;
   }
 
-  String get displayName {
+  static String get displayName {
     assert (signedIn);
     return _displayName!;
   }
