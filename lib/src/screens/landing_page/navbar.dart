@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/user.dart';
+import 'package:swe_reler/src/widgets/drawer_menu_button.dart';
 
 class NavBar extends StatelessWidget {
   final List<GlobalKey> sectionKeys;
@@ -17,7 +19,6 @@ class NavBar extends StatelessWidget {
   Future<void> _openSignUpScreen(BuildContext context) => Navigator.of(context)
       .pushNamed('/signup');
 
-  // TODO: create better navbar that better suits mobile.
   @override
   Widget build(BuildContext context) => ColoredBox(
       color: Theme.of(context).colorScheme.primary,
@@ -44,7 +45,10 @@ class NavBar extends StatelessWidget {
                     const Expanded(child: SizedBox()),
 
                   if (constraints.maxWidth > 370)
-                    _buildLoginAndRegisterButtons(context),
+                    if (User.signedIn)
+                      const DrawerMenuButton()
+                    else
+                      _buildLoginAndRegisterButtons(context)
                 ]
             ),
           )

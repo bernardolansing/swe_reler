@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/user.dart';
+import 'package:swe_reler/src/widgets/info_dialog.dart';
 import 'package:swe_reler/src/widgets/input.dart';
 import 'package:swe_reler/src/widgets/or_divider.dart';
 import 'package:swe_reler/src/widgets/text_with_link_portion.dart';
@@ -103,7 +105,21 @@ class _SignUpFormState extends State<_SignUpForm> {
 
     if (errorStates.any((error) => error)) { return; }
 
-    // TODO: implement sign up. Remember to update _invalidEmailError.
+    try {
+      await User.signUpWithEmail(
+          name: _nameController.text,
+          email: _emailController.text,
+          password: _passwordController.text
+      );
+
+      // After the sign up is succeeded, we want to remove the previous screens
+      // from the navigation history and put the user dash screen.
+      if (! context.mounted) { return; }
+      Navigator.of(context).pushNamedAndRemoveUntil('/dash', (route) => false);
+    }
+
+    on InvalidEmail { setState(() => _invalidEmailError = true); }
+    on UsedEmail { _showEmailAlreadyInUseWarning(); }
   }
 
   @override
@@ -193,4 +209,13 @@ class _SignUpFormState extends State<_SignUpForm> {
     }
     return null;
   }
+
+  Future<void> _showEmailAlreadyInUseWarning() => showDialog(
+      context: context,
+      builder: (context) => const InfoDialog(
+        title: 'E-mail em uso',
+        text: 'Este endereço de e-mail já está sendo utilizado por outro '
+            'usuário. Experimente fazer login ou escolher outro e-mail.',
+      )
+  );
 }

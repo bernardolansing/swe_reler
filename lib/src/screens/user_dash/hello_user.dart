@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/user.dart';
 import 'package:swe_reler/src/widgets/highlighted_text.dart';
 
 class HelloUser extends StatelessWidget {
   const HelloUser({super.key});
 
+  String get _userFirstName => User.displayName.split(' ').first;
+
   @override
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      const HighlightedText('olá, user'),
+      HighlightedText('olá, $_userFirstName'),
       const SizedBox(height: 16),
 
       ConstrainedBox(
