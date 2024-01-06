@@ -3,14 +3,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 class User {
   static String? _id;
   static String? _email;
+  static String? _displayName;
 
   bool get signedIn => _id != null;
 
   String get email {
-    assert (_email != null); // Ensure that user is signed in.
+    assert (signedIn);
     return _email!;
   }
+
+  String get displayName {
+    assert (signedIn);
+    return _displayName!;
+  }
   
+  /// Authenticate with email and password. May throw [InvalidEmail],
+  /// [UserNotFound], [WrongPassword] and [DeletedAccount].
   static Future<void> loginWithEmail(String email, String password) async {
     try {
       final result = await FirebaseAuth.instance
@@ -33,12 +41,23 @@ class User {
     }
   }
 
-  static Future<void> signUpWithEmail(String email, String password) async {
+  /// Creates an account with email and password. May throw [UsedEmail] and
+  /// [InvalidEmail].
+  static Future<void> signUpWithEmail({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
     try {
       final result = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      _updateUser(result);
+      _updateUser(result); // Won't take in account the provided display name,
+      // so we have to set it manually later.
+      _displayName = name;
+      result.user!.updateDisplayName(name); // As the user's display name can't
+      // be set straight at its creation time, we have to order the change in
+      // this another request.
     }
 
     on FirebaseAuthException catch (error) {
@@ -57,6 +76,7 @@ class User {
     assert (credential.user != null);
     _id = credential.user!.uid;
     _email = credential.user!.email!;
+    _displayName = credential.user!.displayName;
   }
 }
 
