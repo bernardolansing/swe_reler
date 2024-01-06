@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class User {
@@ -20,21 +21,22 @@ class User {
   /// Authenticate with email and password. May throw [InvalidEmail],
   /// [UserNotFound], [WrongPassword] and [DeletedAccount].
   static Future<void> loginWithEmail(String email, String password) async {
+    log('Trying to login with email: $email');
     try {
       final result = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
       _updateUser(result);
+      log('Successful login with email: $email');
     }
 
     on FirebaseAuthException catch (error) {
+      log('Failed login attempt with email: $email');
       switch (error.code) {
         case 'invalid-email':
           throw InvalidEmail();
-        case 'user-not-found':
-          throw UserNotFound();
-        case 'wrong-password':
-          throw WrongPassword();
+        case 'invalid-credential':
+          throw WrongCredentials();
         case 'user-disabled':
           throw DeletedAccount();
       }
@@ -86,11 +88,8 @@ class InvalidEmail implements Exception {}
 /// This email address already belongs to another account.
 class UsedEmail implements Exception {}
 
-/// The provided email does not belong to any user account.
-class UserNotFound implements Exception {}
-
-/// User was identified, but the wrong password has been supplied.
-class WrongPassword implements Exception {}
+/// The supplied authentication credentials didn't match for any account.
+class WrongCredentials implements Exception {}
 
 /// The supplied credentials belong to a user account that has been deleted.
 class DeletedAccount implements Exception {}
