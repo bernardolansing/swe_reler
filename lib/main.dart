@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:swe_reler/src/screens/landing_page/landing_page_screen.dart';
-import 'package:swe_reler/src/screens/login_screen.dart';
-import 'package:swe_reler/src/screens/sign_up_screen.dart';
-import 'package:swe_reler/src/screens/user_dash/user_dash_screen.dart';
-import 'package:swe_reler/src/theme.dart';
+import 'src/screens/landing_page/landing_page_screen.dart';
+import 'src/screens/login_screen.dart';
+import 'src/screens/sign_up_screen.dart';
+import 'src/screens/user_dash/user_dash_screen.dart';
+import 'src/theme.dart';
+import 'src/user.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -36,7 +37,9 @@ class ReLerApp extends StatelessWidget {
       '/': (context) => LandingPageScreen(),
       '/login': (context) => const LoginScreen(),
       '/signup': (context) => const SignUpScreen(),
-      '/dash': (context) => const UserDashScreen(),
+      '/dash': (context) => User.signedIn
+          ? const UserDashScreen()
+          : LandingPageScreen(),
     },
   );
 }
