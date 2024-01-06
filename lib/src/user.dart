@@ -20,7 +20,7 @@ class User {
   }
   
   /// Authenticate with email and password. May throw [InvalidEmail],
-  /// [UserNotFound], [WrongPassword] and [DeletedAccount].
+  /// [WrongCredentials], and [DeletedAccount].
   static Future<void> loginWithEmail(String email, String password) async {
     log('Trying to login with email: $email');
     try {
