@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/user.dart';
-import 'package:swe_reler/src/widgets/info_dialog.dart';
+import 'package:swe_reler/src/widgets/app_dialog.dart';
 import 'package:swe_reler/src/widgets/input.dart';
 import 'package:swe_reler/src/widgets/or_divider.dart';
 import 'package:swe_reler/src/widgets/text_with_link_portion.dart';
@@ -212,10 +212,12 @@ class _SignUpFormState extends State<_SignUpForm> {
 
   Future<void> _showEmailAlreadyInUseWarning() => showDialog(
       context: context,
-      builder: (context) => const InfoDialog(
+      builder: (context) => const AppDialog(
         title: 'E-mail em uso',
-        text: 'Este endereço de e-mail já está sendo utilizado por outro '
-            'usuário. Experimente fazer login ou escolher outro e-mail.',
+        content: Text(
+            'Este endereço de e-mail já está sendo utilizado por outro '
+                'usuário. Experimente fazer login ou escolher outro e-mail.'
+        ),
       )
   );
 }

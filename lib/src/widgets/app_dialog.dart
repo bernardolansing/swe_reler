@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class AppDialog extends StatelessWidget {
   final String? title;
   final Widget content;
-  final List<Widget> actions;
+  final List<Widget>? actions;
 
   const AppDialog({
     super.key,
     this.title,
     required this.content,
-    required this.actions
+    this.actions
   });
 
   @override
@@ -28,7 +28,7 @@ class AppDialog extends StatelessWidget {
       ],
     ),
     actionsAlignment: MainAxisAlignment.spaceAround,
-    actions: actions,
+    actions: actions ?? _buildDefaultActions(context),
   );
 
   Widget _buildCloseDialogButton(BuildContext context) => Align(
@@ -48,4 +48,11 @@ class AppDialog extends StatelessWidget {
       const SizedBox(height: 16),
     ],
   );
+
+  List<Widget> _buildDefaultActions(BuildContext context) => [
+    ElevatedButton(
+      onPressed: Navigator.of(context).pop,
+      child: const Text('Ok'),
+    )
+  ];
 }
