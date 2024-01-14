@@ -106,7 +106,7 @@ class _SignUpFormState extends State<_SignUpForm> {
     if (errorStates.any((error) => error)) { return; }
 
     try {
-      await User.signUpWithEmail(
+      await AppUser.signUpWithEmail(
           name: _nameController.text,
           email: _emailController.text,
           password: _passwordController.text

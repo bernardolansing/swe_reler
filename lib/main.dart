@@ -10,10 +10,11 @@ import 'src/user.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  usePathUrlStrategy(); // select "path" URL strategy. By default, the strategy
+  usePathUrlStrategy(); // Select "path" URL strategy. By default, the strategy
   // is "hash". When in "hash" strategy, routes will be like "/#/login", instead
   // of just "/login".
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await AppUser.initialize();
   runApp(const ReLerApp());
 }
 
@@ -37,7 +38,7 @@ class ReLerApp extends StatelessWidget {
       '/': (context) => LandingPageScreen(),
       '/login': (context) => const LoginScreen(),
       '/signup': (context) => const SignUpScreen(),
-      '/dash': (context) => User.signedIn
+      '/dash': (context) => AppUser.signedIn
           ? const UserDashScreen()
           : LandingPageScreen(),
     },

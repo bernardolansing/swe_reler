@@ -5,7 +5,7 @@ import 'package:swe_reler/src/widgets/highlighted_text.dart';
 class HelloUser extends StatelessWidget {
   const HelloUser({super.key});
 
-  String get _userFirstName => User.displayName.split(' ').first;
+  String get _userFirstName => AppUser.displayName.split(' ').first;
 
   @override
   Widget build(BuildContext context) => Column(

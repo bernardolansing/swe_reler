@@ -45,7 +45,7 @@ class NavBar extends StatelessWidget {
                     const Expanded(child: SizedBox()),
 
                   if (constraints.maxWidth > 370)
-                    if (User.signedIn)
+                    if (AppUser.signedIn)
                       const DrawerMenuButton()
                     else
                       _buildLoginAndRegisterButtons(context)

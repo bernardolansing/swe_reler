@@ -93,7 +93,7 @@ class _LoginFormState extends State<_LoginForm> {
     if (_emptyEmailError || _emptyPasswordError) { return; }
 
     try {
-      await User
+      await AppUser
           .loginWithEmail(_emailController.text, _passwordController.text);
 
       // After the login is succeeded, we want to remove the previous screens

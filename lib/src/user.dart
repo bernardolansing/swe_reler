@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class User {
+class AppUser {
   static String? _id;
   static String? _email;
   static String? _displayName;
@@ -18,6 +18,16 @@ class User {
     assert (signedIn);
     return _displayName!;
   }
+
+  static Future<void> initialize() async {
+    // Listen to auth state changes.
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user != null) { _updateUser(user); }
+    });
+
+    // Increase id token persistence.
+    await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
+  }
   
   /// Authenticate with email and password. May throw [InvalidEmail],
   /// [WrongCredentials], and [DeletedAccount].
@@ -27,7 +37,7 @@ class User {
       final result = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      _updateUser(result);
+      _updateUser(result.user!);
       log('Successful login with email: $email');
     }
 
@@ -42,6 +52,9 @@ class User {
           throw DeletedAccount();
       }
     }
+
+    FirebaseAuth.instance.setPersistence(Persistence.LOCAL); // Make the id
+    // token last longer.
   }
 
   /// Creates an account with email and password. May throw [UsedEmail] and
@@ -55,8 +68,8 @@ class User {
       final result = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      _updateUser(result); // Won't take in account the provided display name,
-      // so we have to set it manually later.
+      _updateUser(result.user!); // Won't take in account the provided display
+      // name, so we have to set it manually later.
       _displayName = name;
       result.user!.updateDisplayName(name); // As the user's display name can't
       // be set straight at its creation time, we have to order the change in
@@ -84,13 +97,12 @@ class User {
     log('Successful logout.');
   }
 
-  /// Takes the result of a login/signup operation and updates the [User] class
-  /// fields accordingly.
-  static void _updateUser(UserCredential credential) {
-    assert (credential.user != null);
-    _id = credential.user!.uid;
-    _email = credential.user!.email!;
-    _displayName = credential.user!.displayName;
+  /// Takes the result of a login/signup operation and updates the [AppUser]
+  /// class fields accordingly.
+  static void _updateUser(User user) {
+    _id = user.uid;
+    _email = user.email;
+    _displayName = user.displayName;
   }
 }
 
