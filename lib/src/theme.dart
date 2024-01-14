@@ -59,6 +59,12 @@ final theme = ThemeData(
           fontWeight: FontWeight.w600,
           color: Color(0xFF9B693B)
       ),
+      labelLarge: TextStyle(
+          fontFamily: 'Teko',
+          fontSize: 48,
+          fontWeight: FontWeight.w400,
+          color: Color(0xFF9B693B)
+      ),
     ),
     scaffoldBackgroundColor: _backgroundColor,
     textButtonTheme: TextButtonThemeData(

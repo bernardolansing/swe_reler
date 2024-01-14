@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/screens/user_dash/pending_donations_dialog.dart';
 
 class DonationSummary extends StatelessWidget {
   const DonationSummary({super.key});
@@ -48,7 +49,10 @@ class DonationSummary extends StatelessWidget {
         const SizedBox(height: 32),
 
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () => showDialog(
+              context: context,
+              builder: (context) => const PendingDonationsDialog()
+          ),
           child: const Text('veja todas as doações pendentes'),
         ),
         const SizedBox(height: 24),
@@ -62,10 +66,10 @@ class DonationSummary extends StatelessWidget {
   );
 
   static const _packageNameTextStyle = TextStyle(
-    fontFamily: 'Poppins',
-    fontSize: 20,
-    color: Color(0xFF9B693B),
-    fontWeight: FontWeight.w400,
-    height: 0.75
+      fontFamily: 'Poppins',
+      fontSize: 20,
+      color: Color(0xFF9B693B),
+      fontWeight: FontWeight.w400,
+      height: 0.75
   );
 }
