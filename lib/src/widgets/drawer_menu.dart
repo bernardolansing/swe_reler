@@ -14,6 +14,20 @@ class DrawerMenu extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: Navigator.of(context).pop,
+                style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(
+                      Colors.white.withAlpha(76)
+                  )
+                ),
+                icon: const Icon(Icons.close, size: 36),
+              ),
+            ),
+            const SizedBox(height: 64),
+
             TextButton(
               onPressed: () {},
               child: const Text('home'),
