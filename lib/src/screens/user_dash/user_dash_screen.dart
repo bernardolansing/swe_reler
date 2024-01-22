@@ -42,8 +42,9 @@ class _UserDashScreenState extends State<UserDashScreen> {
                     SizedBox(height: 100),
 
                     Wrap(
-                      alignment: WrapAlignment.spaceBetween,
+                      alignment: WrapAlignment.spaceAround,
                       spacing: 28,
+                      runSpacing: 56,
                       children: [
                         YourReports(),
                         DonationSummary(),
