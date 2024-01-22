@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/user.dart';
-import 'package:swe_reler/src/widgets/drawer_menu_button.dart';
+import 'package:swe_reler/src/widgets/drawer_menu.dart';
 
 class NavBar extends StatelessWidget {
   final List<GlobalKey> sectionKeys;

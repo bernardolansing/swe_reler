@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'leaderboard.dart';
 import 'flags.dart';
-import 'package:swe_reler/src/widgets/drawer_menu_button.dart';
+import 'package:swe_reler/src/widgets/drawer_menu.dart';
 
 class SidePannel extends StatelessWidget {
   final bool loading;

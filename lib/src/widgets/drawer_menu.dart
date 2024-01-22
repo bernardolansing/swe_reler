@@ -1,5 +1,14 @@
 import 'package:flutter/material.dart';
 
+class DrawerMenu extends StatelessWidget {
+  const DrawerMenu({super.key});
+
+  @override
+  Widget build(BuildContext context) => const Drawer(
+
+  );
+}
+
 class DrawerMenuButton extends StatelessWidget {
   const DrawerMenuButton({super.key});
 
@@ -9,6 +18,6 @@ class DrawerMenuButton extends StatelessWidget {
         backgroundColor: MaterialStatePropertyAll(Color(0x4DFFFFFF)),
         iconSize: MaterialStatePropertyAll(36)
     ),
-    onPressed: () {}, // TODO: implement drawer menu.
+    onPressed: Scaffold.of(context).openEndDrawer,
   );
 }

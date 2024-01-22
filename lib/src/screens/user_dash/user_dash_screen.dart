@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/widgets/drawer_menu.dart';
 import 'donation_summary.dart';
 import 'your_coupons.dart';
 import 'hello_user.dart';
@@ -17,6 +18,7 @@ class _UserDashScreenState extends State<UserDashScreen> {
 
   @override
   Widget build(BuildContext context) => const Scaffold(
+    endDrawer: DrawerMenu(),
     body: SingleChildScrollView(
       child: IntrinsicHeight(
         child: Row(
