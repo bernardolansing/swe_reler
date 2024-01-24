@@ -32,6 +32,9 @@ class AppUser {
     return _points!;
   }
 
+  static DocumentReference get _userDoc => FirebaseFirestore.instance
+      .collection('users').doc(_id);
+
   static Future<void> initialize() async {
     // Listen to auth state changes.
     FirebaseAuth.instance.authStateChanges().listen((user) {
@@ -54,6 +57,12 @@ class AppUser {
       _email = user.email;
       _displayName = user.displayName;
       log('Successful login with email: $email');
+
+      // Fetch further user data from database:
+      final snapshot = await _userDoc.get();
+      final data = snapshot.data() as Map;
+      _credits = data['credits'];
+      _points = data['points'];
     }
 
     on FirebaseAuthException catch (error) {
@@ -95,7 +104,7 @@ class AppUser {
         'credits': 0,
         'points': 0,
       };
-      FirebaseFirestore.instance.collection('users').doc(_id).set(entry);
+      _userDoc.set(entry);
       _credits = 0;
       _points = 0;
     }
@@ -117,6 +126,8 @@ class AppUser {
     _id = null;
     _email = null;
     _displayName = null;
+    _credits = null;
+    _points = null;
     Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
     log('Successful logout.');
   }
