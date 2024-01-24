@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/user.dart';
 
 abstract class _Flag extends StatelessWidget {
   const _Flag({super.key});
@@ -52,7 +53,7 @@ class LispectorsFlag extends _Flag {
   const LispectorsFlag({super.key});
 
   @override
-  String get _mainText => "100 Lispector's";
+  String get _mainText => "${AppUser.lispectors} Lispector's";
 
   @override
   CustomPainter get _painter => _LispectorsPainter();
@@ -86,7 +87,7 @@ class PointsFlag extends _Flag {
   const PointsFlag({super.key});
 
   @override
-  String get _mainText => '100 pontos';
+  String get _mainText => '${AppUser.points} pontos';
 
   @override
   CustomPainter get _painter => _PointsPainter();
