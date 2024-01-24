@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,8 @@ class AppUser {
   static String? _id;
   static String? _email;
   static String? _displayName;
+  static int? _credits;
+  static int? _points;
 
   static bool get signedIn => _id != null;
 
@@ -18,11 +21,21 @@ class AppUser {
     assert (signedIn);
     return _displayName!;
   }
+  
+  static int get credits {
+    assert(signedIn);
+    return _credits!;
+  }
+  
+  static int get points {
+    assert (signedIn);
+    return _points!;
+  }
 
   static Future<void> initialize() async {
     // Listen to auth state changes.
     FirebaseAuth.instance.authStateChanges().listen((user) {
-      if (user != null) { _updateUser(user); }
+      if (user != null) { _updateUserId(user); }
     });
 
     // Increase id token persistence.
@@ -32,12 +45,14 @@ class AppUser {
   /// Authenticate with email and password. May throw [InvalidEmail],
   /// [WrongCredentials], and [DeletedAccount].
   static Future<void> loginWithEmail(String email, String password) async {
-    log('Trying to login with email: $email');
     try {
       final result = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      _updateUser(result.user!);
+      final user = result.user!;
+      _id = user.uid;
+      _email = user.email;
+      _displayName = user.displayName;
       log('Successful login with email: $email');
     }
 
@@ -68,12 +83,21 @@ class AppUser {
       final result = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      _updateUser(result.user!); // Won't take in account the provided display
-      // name, so we have to set it manually later.
+      _id = result.user!.uid;
+      _email = result.user!.email;
       _displayName = name;
       result.user!.updateDisplayName(name); // As the user's display name can't
       // be set straight at its creation time, we have to order the change in
       // this another request.
+
+      // Upload user entry to the database:
+      final entry = {
+        'credits': 0,
+        'points': 0,
+      };
+      FirebaseFirestore.instance.collection('users').doc(_id).set(entry);
+      _credits = 0;
+      _points = 0;
     }
 
     on FirebaseAuthException catch (error) {
@@ -99,7 +123,7 @@ class AppUser {
 
   /// Takes the result of a login/signup operation and updates the [AppUser]
   /// class fields accordingly.
-  static void _updateUser(User user) {
+  static void _updateUserId(User user) {
     _id = user.uid;
     _email = user.email;
     _displayName = user.displayName;
