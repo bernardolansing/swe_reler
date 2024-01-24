@@ -1,6 +1,6 @@
 # ReLer
 ReLer is a hypothetical project for the software engineering course at university. It is about a
-business ideia of monetized redistribution of second hand books.
+business idea of monetized redistribution of second hand books.
 
 ## The idea
 ReLer's customers may donate their books to our staff, acquiring "Lispector's" (our virtual
