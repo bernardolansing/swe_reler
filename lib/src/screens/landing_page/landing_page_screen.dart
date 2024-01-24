@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/widgets/drawer_menu.dart';
 import 'how-it-works.dart';
 import 'introduction.dart';
 import 'navbar.dart';
@@ -13,6 +14,7 @@ class LandingPageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    endDrawer: const DrawerMenu(),
     body: SingleChildScrollView(child: Column(
       children: [
         NavBar(sectionKeys: _sectionKeys),
