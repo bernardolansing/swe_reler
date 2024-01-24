@@ -7,7 +7,7 @@ class AppUser {
   static String? _id;
   static String? _email;
   static String? _displayName;
-  static int? _credits;
+  static int? _lispectors;
   static int? _points;
 
   static bool get signedIn => _id != null;
@@ -22,9 +22,9 @@ class AppUser {
     return _displayName!;
   }
   
-  static int get credits {
+  static int get lispectors {
     assert(signedIn);
-    return _credits!;
+    return _lispectors!;
   }
   
   static int get points {
@@ -61,7 +61,7 @@ class AppUser {
       // Fetch further user data from database:
       final snapshot = await _userDoc.get();
       final data = snapshot.data() as Map;
-      _credits = data['credits'];
+      _lispectors = data['lispectors'];
       _points = data['points'];
     }
 
@@ -101,11 +101,11 @@ class AppUser {
 
       // Upload user entry to the database:
       final entry = {
-        'credits': 0,
+        'lispectors': 0,
         'points': 0,
       };
       _userDoc.set(entry);
-      _credits = 0;
+      _lispectors = 0;
       _points = 0;
     }
 
@@ -126,7 +126,7 @@ class AppUser {
     _id = null;
     _email = null;
     _displayName = null;
-    _credits = null;
+    _lispectors = null;
     _points = null;
     Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
     log('Successful logout.');
