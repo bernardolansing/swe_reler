@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'data_types.dart';
 
 class AppUser {
   static String? _id;
@@ -9,6 +10,7 @@ class AppUser {
   static String? _displayName;
   static int? _lispectors;
   static int? _points;
+  static List<Donation>? _donations;
 
   static bool get signedIn => _id != null;
 
@@ -30,6 +32,11 @@ class AppUser {
   static int get points {
     assert (signedIn);
     return _points!;
+  }
+
+  static List<Donation> get donations {
+    assert(signedIn);
+    return _donations!;
   }
 
   static DocumentReference get _userDoc => FirebaseFirestore.instance
@@ -63,6 +70,9 @@ class AppUser {
       final data = snapshot.data() as Map;
       _lispectors = data['lispectors'];
       _points = data['points'];
+      _donations = (data['donations'] as List)
+          .map((entry) => Donation(entry as Map))
+          .toList(growable: false);
     }
 
     on FirebaseAuthException catch (error) {
@@ -103,6 +113,7 @@ class AppUser {
       final entry = {
         'lispectors': 0,
         'points': 0,
+        'donations': [],
       };
       _userDoc.set(entry);
       _lispectors = 0;
