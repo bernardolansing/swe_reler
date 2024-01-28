@@ -5,6 +5,7 @@ import 'src/screens/landing_page/landing_page_screen.dart';
 import 'src/screens/login_screen.dart';
 import 'src/screens/sign_up_screen.dart';
 import 'src/screens/user_dash/user_dash_screen.dart';
+import 'src/screens/store_screen/store_screen.dart';
 import 'src/theme.dart';
 import 'src/user.dart';
 import 'firebase_options.dart';
@@ -23,24 +24,23 @@ class ReLerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-    title: 'ReLer',
-    theme: theme,
-    // We set a custom builder to wrap all app routes with a SelectionArea
-    // widget. Otherwise, we would have to put it as a child of every Scaffold
-    // manually. For this to work, we have to manually create a Overlay widget
-    // and add the wrapped route as a OverlayEntry.
-    builder: (context, child) => Overlay(
-        initialEntries: [
+        title: 'ReLer',
+        theme: theme,
+        // We set a custom builder to wrap all app routes with a SelectionArea
+        // widget. Otherwise, we would have to put it as a child of every Scaffold
+        // manually. For this to work, we have to manually create a Overlay widget
+        // and add the wrapped route as a OverlayEntry.
+        builder: (context, child) => Overlay(initialEntries: [
           OverlayEntry(builder: (context) => SelectionArea(child: child!))
-        ]
-    ),
-    routes: {
-      '/': (context) => LandingPageScreen(),
-      '/login': (context) => const LoginScreen(),
-      '/signup': (context) => const SignUpScreen(),
-      '/dash': (context) => AppUser.signedIn
-          ? const UserDashScreen()
-          : LandingPageScreen(),
-    },
-  );
+        ]),
+        routes: {
+          '/': (context) => LandingPageScreen(),
+          '/store': (context) => const StoreScreen(),
+          //'/cart': (context) =>
+          '/login': (context) => const LoginScreen(),
+          '/signup': (context) => const SignUpScreen(),
+          '/dash': (context) =>
+              AppUser.signedIn ? const UserDashScreen() : LandingPageScreen(),
+        },
+      );
 }
