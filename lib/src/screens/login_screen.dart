@@ -114,6 +114,7 @@ class _LoginFormState extends State<_LoginForm> {
         title: 'email',
         controller: _emailController,
         autoFocus: true,
+        type: InputType.email,
         errorMessage: _emailErrorMessage,
         errorDismisser: () => setState(() {
           _emptyEmailError = false;
@@ -125,7 +126,7 @@ class _LoginFormState extends State<_LoginForm> {
       Input(
         title: 'senha',
         controller: _passwordController,
-        sensitive: true,
+        type: InputType.password,
         errorMessage: _passwordErrorMessage,
         errorDismisser: () => setState(() => _emptyPasswordError = false),
       ),

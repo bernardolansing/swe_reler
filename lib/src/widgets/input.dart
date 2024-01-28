@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 
+enum InputType {
+  email,
+  password,
+  text,
+}
+
 class Input extends StatefulWidget {
   final String title;
   final TextEditingController controller;
-  final bool sensitive;
+  final InputType type;
   final bool autoFocus;
   final String? errorMessage;
   final void Function()? errorDismisser;
@@ -12,7 +18,7 @@ class Input extends StatefulWidget {
     super.key,
     required this.title,
     required this.controller,
-    this.sensitive = false,
+    this.type = InputType.text,
     this.autoFocus = false,
     this.errorMessage,
     this.errorDismisser,
@@ -33,17 +39,18 @@ class _InputState extends State<Input> {
 
       TextFormField(
         controller: widget.controller,
-        obscureText: widget.sensitive,
+        obscureText: widget.type == InputType.password,
         autofocus: widget.autoFocus,
+        keyboardType: widget.type == InputType.email
+            ? TextInputType.emailAddress
+            : TextInputType.text,
         onChanged: (value) {
           if (widget.errorMessage != null) {
             assert (widget.errorDismisser != null);
             widget.errorDismisser!();
           }
         },
-        decoration: InputDecoration(
-          errorText: widget.errorMessage
-        ),
+        decoration: InputDecoration(errorText: widget.errorMessage),
       ),
     ],
   );

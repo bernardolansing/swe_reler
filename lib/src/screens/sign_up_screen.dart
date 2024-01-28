@@ -137,6 +137,7 @@ class _SignUpFormState extends State<_SignUpForm> {
         title: 'e-mail',
         controller: _emailController,
         errorMessage: _emailErrorMessage,
+        type: InputType.email,
         errorDismisser: () => setState(() {
           _emptyEmailError = false;
           _invalidEmailError = false;
@@ -147,7 +148,7 @@ class _SignUpFormState extends State<_SignUpForm> {
       Input(
         title: 'crie uma senha',
         controller: _passwordController,
-        sensitive: true,
+        type: InputType.password,
         errorMessage: _passwordErrorMessage,
         errorDismisser: () => setState(() {
           _emptyPasswordError = false;
@@ -159,7 +160,7 @@ class _SignUpFormState extends State<_SignUpForm> {
       Input(
         title: 'confirme sua senha',
         controller: _repeatPasswordController,
-        sensitive: true,
+        type: InputType.password,
         errorMessage: _unmatchingPasswordsError
             ? 'As senhas digitadas não batem!'
             : null,
