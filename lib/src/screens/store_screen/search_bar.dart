@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/screens/store_screen/book_list.dart';
 
 class StoreSearchBar extends StatelessWidget {
   const StoreSearchBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,22 +17,20 @@ class StoreSearchBar extends StatelessWidget {
             width: 2, // Largura da borda
           ),
         ),
-        child:
-            const Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          SizedBox(width: 1),
-          Expanded(child: TextFieldExample()),
-          Padding(
+        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const SizedBox(width: 1),
+          const Expanded(child: TextFieldExample()),
+          const Padding(
               padding: EdgeInsets.only(top: 5, bottom: 5),
               child: SizedBox(
                   width: 2,
                   height: double.infinity,
                   child: ColoredBox(color: Color(0xFFD6CAA7)))),
           IconButton(
-            mouseCursor: MaterialStateMouseCursor.clickable,
-            onPressed: null,
-            icon: Icon(Icons.search,
-                size: 25, color: Color.fromARGB(255, 206, 191, 146)),
-          )
+              icon: const Icon(Icons.search,
+                  size: 25, color: Color.fromARGB(255, 206, 191, 146)),
+              mouseCursor: MaterialStateMouseCursor.clickable,
+              onPressed: () {})
         ]));
   }
 }
@@ -51,7 +51,11 @@ class _TextFieldExampleState extends State<TextFieldExample> {
           style: _textStyle,
           decoration: const InputDecoration(
               filled: false, hintText: 'busque por obra ou brinde'),
-          onSubmitted: (String value) {},
+          onSubmitted: (String value) {
+            setState(() {
+              //selected = value;
+            });
+          },
         ),
       ),
     );

@@ -93,7 +93,6 @@ class StoreScreen extends StatelessWidget {
 
 const List<String> _genreOptions = [
   'Ação',
-  'Animação',
   'Comédia',
   'Fantasia',
   'Horror',
@@ -103,18 +102,28 @@ const List<String> _genreOptions = [
   'Crime',
   'História',
   'Mistério',
-  'Sci-fi'
+  'Suspense',
+  'Sci-fi',
+  'Infantil'
 ];
 
 const List<String> _authorOptions = [
   'Machado de Assis',
   'Clarice Lispector',
-  'Cecília Meirelles',
-  'Carlos Drummond de Andrade',
-  'José de Alencar',
-  'Mario Quintana',
-  'Guimarães Rosa',
-  'Luis Fernando Veríssimo'
+  'William P. Young',
+  'Jeff Kiney',
+  'Stephen King',
+  'George R. R. Martin',
+  'Charlie Donlea',
+  'J. R. R. Tolkien',
+  'C. J. Tudor',
+  'Suzanne Collins',
+  'Antoine de Saint-Exupéry',
+  'Ann Rule',
+  'Yuval Noah Harari',
+  'David Bodanis',
+  'Christopher Nolan',
+  'J. K. Rowling',
 ];
 
 const _textStyle = TextStyle(
