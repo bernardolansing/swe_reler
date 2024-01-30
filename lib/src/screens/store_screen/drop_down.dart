@@ -5,7 +5,9 @@ import 'package:multiselect/multiselect.dart';
 class Dropdown extends StatefulWidget {
   final List<String> options;
   final String hint;
-  const Dropdown(this.options, this.hint, {super.key});
+
+  const Dropdown({required this.options, required this.hint, super.key});
+
   @override
   // ignore: library_private_types_in_public_api
   _DropdownState createState() => _DropdownState();
@@ -13,15 +15,14 @@ class Dropdown extends StatefulWidget {
 
 class _DropdownState extends State<Dropdown> {
   List<String> selected = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: DropDownMultiSelect(
-          onChanged: (List<String> x) {
+          onChanged: (List<String> values) {
             setState(() {
-              selected = x;
+              selected = values;
             });
           },
           options: widget.options,

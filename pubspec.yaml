@@ -14,7 +14,6 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^10.6.0
   multiselect: ^0.1.0
-  getwidget: ^4.0.0
 
 dev_dependencies:
   flutter_test:

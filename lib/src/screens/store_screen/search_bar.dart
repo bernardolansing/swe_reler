@@ -43,20 +43,6 @@ class TextFieldExample extends StatefulWidget {
 }
 
 class _TextFieldExampleState extends State<TextFieldExample> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,27 +51,7 @@ class _TextFieldExampleState extends State<TextFieldExample> {
           style: _textStyle,
           decoration: const InputDecoration(
               filled: false, hintText: 'busque por obra ou brinde'),
-          controller: _controller,
-          onSubmitted: (String value) async {
-            await showDialog<void>(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text('Thanks!'),
-                  content: Text(
-                      'You typed "$value", which has length ${value.characters.length}.'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                );
-              },
-            );
-          },
+          onSubmitted: (String value) {},
         ),
       ),
     );

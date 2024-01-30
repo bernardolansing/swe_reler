@@ -3,8 +3,8 @@ import 'package:swe_reler/src/screens/store_screen/cart_button.dart';
 import 'package:swe_reler/src/screens/store_screen/search_bar.dart';
 import 'package:swe_reler/src/widgets/drawer_menu.dart';
 import 'package:swe_reler/src/widgets/highlighted_text.dart';
-import 'package:swe_reler/src/screens/store_screen/dropdown.dart';
-import 'package:swe_reler/src/screens/store_screen/book.dart';
+import 'package:swe_reler/src/screens/store_screen/drop_down.dart';
+import 'package:swe_reler/src/screens/store_screen/book_list.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
@@ -37,7 +37,7 @@ class StoreScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 40),
+                    SizedBox(height: 30),
                     HighlightedText('loja'),
                     SizedBox(height: 16),
                     Expanded(
@@ -56,7 +56,8 @@ class StoreScreen extends StatelessWidget {
                                     width: 320,
                                     height: 50,
                                     child: Dropdown(
-                                        generoOptions, 'Selecione gênero(s)')),
+                                        hint: 'Selecione gênero(s)',
+                                        options: _genreOptions)),
                                 SizedBox(height: 16),
                                 Text('Autores', style: _textStyle),
                                 SizedBox(height: 16),
@@ -64,40 +65,24 @@ class StoreScreen extends StatelessWidget {
                                     width: 320,
                                     height: 50,
                                     child: Dropdown(
-                                        autorOptions, 'Selecione autor(es)')),
+                                        options: _authorOptions,
+                                        hint: 'Selecione autor(es)')),
                                 SizedBox(height: 16),
                               ],
                             )),
                         SizedBox(width: 32),
-                        SizedBox(
-                            width: 2,
-                            height: 500,
-                            child: ColoredBox(
-                                color: Color.fromARGB(101, 155, 105, 59))),
+                        Padding(
+                            padding: EdgeInsets.only(bottom: 15),
+                            child: SizedBox(
+                                width: 2,
+                                height: double.infinity,
+                                child: ColoredBox(
+                                    color: Color.fromARGB(101, 155, 105, 59)))),
                         SizedBox(width: 32),
                         Expanded(
                             child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            StoreSearchBar(),
-                            Wrap(
-                              spacing: 60,
-                              children: [
-                                Book(),
-                                Book(),
-                                Book(),
-                                Book(),
-                                Book(),
-                                Book(),
-                                Book(),
-                                Book(),
-                                Book(),
-                                Book(),
-                                Book(),
-                                Book()
-                              ],
-                            )
-                          ],
+                          children: [StoreSearchBar(), BookList()],
                         ))
                       ],
                     ))
@@ -106,7 +91,7 @@ class StoreScreen extends StatelessWidget {
       ));
 }
 
-const List<String> generoOptions = [
+const List<String> _genreOptions = [
   'Ação',
   'Animação',
   'Comédia',
@@ -121,7 +106,7 @@ const List<String> generoOptions = [
   'Sci-fi'
 ];
 
-const List<String> autorOptions = [
+const List<String> _authorOptions = [
   'Machado de Assis',
   'Clarice Lispector',
   'Cecília Meirelles',
