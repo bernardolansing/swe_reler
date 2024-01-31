@@ -1,7 +1,7 @@
 class Book {
   final String title;
   final String author;
-  final String genre;
+  final List<Genre> genres;
   final String picture;
   final String price;
   final String evaluation;
@@ -11,7 +11,7 @@ class Book {
   Book({
     required this.title,
     required this.author,
-    required this.genre,
+    required this.genres,
     required this.picture,
     required this.price,
     required this.evaluation,
@@ -20,11 +20,31 @@ class Book {
   });
 }
 
+enum Genre {
+  action('Ação'),
+  comedy('Comédia'),
+  fantasy('Fantasia'),
+  romance('Romance'),
+  adventure('Aventura'),
+  horror('Terror'),
+  biography('Biografia'),
+  crime('Crime'),
+  history('História'),
+  mystery('Mistério'),
+  thriller('Suspense'),
+  scifi('Sci-fi'),
+  children('Infantil');
+
+  final String title;
+
+  const Genre(this.title);
+}
+
 List<Book> bookCardList = [
   Book(
       title: 'Água viva',
       author: 'Clarice Lispector',
-      genre: 'Romance',
+      genres: [Genre.romance],
       picture: '/books/agua-viva.jpg',
       price: '49.99',
       evaluation: '4.0',
@@ -34,7 +54,7 @@ List<Book> bookCardList = [
   Book(
       title: 'A cabana',
       author: 'William P. Young',
-      genre: 'Romance, Suspense',
+      genres: [Genre.romance, Genre.thriller],
       picture: '/books/cabana.jpg',
       price: '45.99',
       evaluation: '4.5',
@@ -44,7 +64,7 @@ List<Book> bookCardList = [
   Book(
       title: 'Diário de um banana',
       author: 'Jeff Kiney',
-      genre: 'Comédia',
+      genres: [Genre.comedy],
       picture: '/books/diario-banana.jpg',
       price: '20.00',
       evaluation: '3.7',
@@ -54,7 +74,7 @@ List<Book> bookCardList = [
   Book(
       title: 'Dom Casmurro',
       author: 'Machado de Assis',
-      genre: 'Romance',
+      genres: [Genre.romance],
       picture: '/books/dom-casmurro.jpg',
       price: '60.00',
       evaluation: '4.1',
@@ -64,7 +84,7 @@ List<Book> bookCardList = [
   Book(
       title: 'Doutor Sono',
       author: 'Stephen King',
-      genre: 'Horror, Fantasia, Mistério, Suspense',
+      genres: [Genre.horror, Genre.fantasy, Genre.mystery, Genre.thriller],
       picture: '/books/doutor-sono.jpg',
       price: '74.99',
       evaluation: '4.2',
@@ -74,7 +94,7 @@ List<Book> bookCardList = [
   Book(
       title: 'Fogo e sangue',
       author: 'George R. R. Martin',
-      genre: 'Fantasia',
+      genres: [Genre.fantasy],
       picture: '/books/fogo-sangue.jpg',
       price: '64.99',
       evaluation: '4.8',
@@ -84,7 +104,7 @@ List<Book> bookCardList = [
   Book(
       title: 'A garota do lago',
       author: 'Charlie Donlea',
-      genre: 'Suspense, Mistério',
+      genres: [Genre.thriller, Genre.mystery],
       picture: '/books/garota-lago.jpg',
       price: '29.99',
       evaluation: '3.9',
@@ -94,7 +114,7 @@ List<Book> bookCardList = [
   Book(
       title: 'O hobbit',
       author: 'J. R. R. Tolkien',
-      genre: 'Fantasia, Romance, Aventura',
+      genres: [Genre.fantasy, Genre.romance, Genre.adventure],
       picture: '/books/hobbit.jpg',
       price: '52.00',
       evaluation: '4.4',
@@ -104,7 +124,7 @@ List<Book> bookCardList = [
   Book(
       title: 'O homem de giz',
       author: 'C. J. Tudor',
-      genre: 'Suspense, Romance, Mistério',
+      genres: [Genre.thriller, Genre.romance, Genre.mystery],
       picture: '/books/homem-giz.jpg',
       price: '57.99',
       evaluation: '4.0',
@@ -114,7 +134,7 @@ List<Book> bookCardList = [
   Book(
       title: 'O iluminado',
       author: 'Stephen King',
-      genre: 'Ação, Suspense, Mistério, Horror',
+      genres: [Genre.action, Genre.thriller, Genre.mystery, Genre.horror],
       picture: '/books/iluminado.jpg',
       price: '59.99',
       evaluation: '4.9',
@@ -124,7 +144,7 @@ List<Book> bookCardList = [
   Book(
       title: 'Jogos vorazes',
       author: 'Suzanne Collins',
-      genre: 'Ação, Romance, Suspense',
+      genres: [Genre.action, Genre.romance, Genre.thriller],
       picture: '/books/jogos-vorazes.jpg',
       price: '32.99',
       evaluation: '4.3',
@@ -134,7 +154,7 @@ List<Book> bookCardList = [
   Book(
       title: 'O pequeno principe',
       author: 'Antoine de Saint-Exupéry',
-      genre: 'Infantil',
+      genres: [Genre.children],
       picture: '/books/pequeno-principe.jpg',
       price: '30.00',
       evaluation: '5.0',
@@ -144,7 +164,7 @@ List<Book> bookCardList = [
   Book(
       title: 'O senhor dos anéis',
       author: 'J. R. R. Tolkien',
-      genre: 'Fantasia, Romance, Aventura',
+      genres: [Genre.fantasy, Genre.romance, Genre.adventure],
       picture: '/books/lord-rings.jpg',
       price: '62.00',
       evaluation: '4.7',
@@ -154,7 +174,7 @@ List<Book> bookCardList = [
   Book(
       title: 'Ted Bundy: Um Estranho ao Meu Lado',
       author: 'Ann Rule',
-      genre: 'Crime',
+      genres: [Genre.crime],
       picture: '/books/ted-bundy.jpg',
       price: '74.99',
       evaluation: '4.2',
@@ -164,7 +184,7 @@ List<Book> bookCardList = [
   Book(
       title: 'Sapiens - Uma Breve História da Humanidade',
       author: 'Yuval Noah Harari',
-      genre: 'História',
+      genres: [Genre.history],
       picture: '/books/sapiens.jpg',
       price: '44.70',
       evaluation: '4.9',
@@ -174,7 +194,7 @@ List<Book> bookCardList = [
   Book(
       title: 'Einstein: Biografia de um gênio imperfeito',
       author: 'David Bodanis',
-      genre: 'Biografia',
+      genres: [Genre.biography],
       picture: '/books/einstein.jpg',
       price: '73.45',
       evaluation: '4.7',
@@ -184,7 +204,7 @@ List<Book> bookCardList = [
   Book(
       title: 'Interestelar',
       author: 'Christopher Nolan',
-      genre: 'Sci-fi',
+      genres: [Genre.scifi],
       picture: '/books/interestelar.jpg',
       price: '44.90',
       evaluation: '4.6',
@@ -194,7 +214,7 @@ List<Book> bookCardList = [
   Book(
       title: 'Harry Potter e a pedra filosofal',
       author: 'J. K. Rowling',
-      genre: 'Ação, Aventura, Fantasia, Infantil',
+      genres: [Genre.action, Genre.adventure, Genre.fantasy, Genre.children],
       picture: '/books/harry-potter.jpg',
       price: '34.99',
       evaluation: '4.9',

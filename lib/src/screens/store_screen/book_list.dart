@@ -5,50 +5,18 @@ class BookList extends StatelessWidget {
   const BookList({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    List<Widget> children = [];
-
-    for (Book b in bookCardList) {
-      children.add(BookCard(
-        title: b.title,
-        evaluation: b.evaluation,
-        price: b.price,
-        picture: b.picture,
-        author: b.author,
-        genre: b.genre,
-        resume: b.resume,
-        quantity: b.quantity,
-      ));
-    }
-
-    return Wrap(
-      spacing: 60,
-      children: children,
-    );
-  }
+  Widget build(BuildContext context) => Wrap(
+    spacing: 60,
+    children: bookCardList
+        .map((book) => BookCard(book))
+        .toList(growable: false),
+  );
 }
 
 class BookCard extends StatefulWidget {
-  final String title;
-  final String evaluation;
-  final String price;
-  final String picture;
-  final String author;
-  final String genre;
-  final String resume;
-  final int quantity;
+  final Book book;
 
-  const BookCard({
-    super.key,
-    required this.title,
-    required this.evaluation,
-    required this.price,
-    required this.picture,
-    required this.author,
-    required this.genre,
-    required this.resume,
-    required this.quantity
-  });
+  const BookCard(this.book, {super.key});
 
   @override
   State<BookCard> createState() => _BookCardState();
@@ -70,7 +38,7 @@ class _BookCardState extends State<BookCard> {
                   width: 500,
                   child: Column(children: [
                     Image(
-                        image: AssetImage(widget.picture),
+                        image: AssetImage(widget.book.picture),
                         width: 250,
                         height: 400),
                     Column(
@@ -82,7 +50,7 @@ class _BookCardState extends State<BookCard> {
                               style: _textStyle4,
                             ),
                             Text(
-                              widget.title,
+                              widget.book.title,
                               textAlign: TextAlign.justify,
                             )
                           ]),
@@ -92,7 +60,7 @@ class _BookCardState extends State<BookCard> {
                               style: _textStyle4,
                             ),
                             Text(
-                              widget.author,
+                              widget.book.author,
                               textAlign: TextAlign.justify,
                             )
                           ]),
@@ -102,7 +70,7 @@ class _BookCardState extends State<BookCard> {
                               style: _textStyle4,
                             ),
                             Text(
-                              widget.genre,
+                              widget.book.genres.map((g) => g.title).join(', '),
                               textAlign: TextAlign.justify,
                             )
                           ]),
@@ -113,7 +81,7 @@ class _BookCardState extends State<BookCard> {
                                   height: 2,
                                   child: ColoredBox(color: Color(0xFF9B693B)))),
                           Text(
-                            widget.resume,
+                            widget.book.resume,
                             textAlign: TextAlign.justify,
                           ),
                           const Padding(
@@ -128,7 +96,7 @@ class _BookCardState extends State<BookCard> {
                               style: _textStyle4,
                             ),
                             Text(
-                              '${widget.quantity}',
+                              '${widget.book.quantity}',
                               textAlign: TextAlign.justify,
                             )
                           ])
@@ -136,9 +104,9 @@ class _BookCardState extends State<BookCard> {
                     Row(children: [
                       const Icon(Icons.star,
                           size: 30, color: Color(0xFF718E76)),
-                      Text(widget.evaluation, style: _textStyle5),
+                      Text(widget.book.evaluation, style: _textStyle5),
                       const SizedBox(width: 10),
-                      Text('R\$${widget.price}', style: _textStyle5)
+                      Text('R\$${widget.book.price}', style: _textStyle5)
                     ])
                   ]),
                 ),
@@ -174,15 +142,15 @@ class _BookCardState extends State<BookCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 10),
-                  Image(image: AssetImage(widget.picture)),
+                  Image(image: AssetImage(widget.book.picture)),
                   const SizedBox(height: 7),
-                  Text(widget.title, style: _textStyle1),
+                  Text(widget.book.title, style: _textStyle1),
                   const SizedBox(height: 7),
                   Row(children: [
                     const Icon(Icons.star, size: 20, color: Color(0xFF718E76)),
-                    Text(widget.evaluation, style: _textStyle2),
+                    Text(widget.book.evaluation, style: _textStyle2),
                     const SizedBox(width: 10),
-                    Text('R\$${widget.price}', style: _textStyle2)
+                    Text('R\$${widget.book.price}', style: _textStyle2)
                   ]),
                 ],
               ),
