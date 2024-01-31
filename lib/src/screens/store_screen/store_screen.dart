@@ -20,12 +20,12 @@ class StoreScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: double.infinity, // Ocupar toda a largura da tela
+                      width: double.infinity,
                       child: Row(
                         children: [
                           Expanded(
                             child:
-                                SizedBox(), // Widget vazio que ocupa todo o espaço disponível
+                            SizedBox(),
                           ),
                           Align(
                               alignment: Alignment.centerRight,
@@ -42,50 +42,50 @@ class StoreScreen extends StatelessWidget {
                     SizedBox(height: 16),
                     Expanded(
                         child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                            width: 320,
-                            height: double.infinity,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Gêneros', style: _textStyle),
-                                SizedBox(height: 16),
-                                SizedBox(
-                                    width: 320,
-                                    height: 50,
-                                    child: Dropdown(
-                                        hint: 'Selecione gênero(s)',
-                                        options: _genreOptions)),
-                                SizedBox(height: 16),
-                                Text('Autores', style: _textStyle),
-                                SizedBox(height: 16),
-                                SizedBox(
-                                    width: 320,
-                                    height: 50,
-                                    child: Dropdown(
-                                        options: _authorOptions,
-                                        hint: 'Selecione autor(es)')),
-                                SizedBox(height: 16),
-                              ],
-                            )),
-                        SizedBox(width: 32),
-                        Padding(
-                            padding: EdgeInsets.only(bottom: 15),
-                            child: SizedBox(
-                                width: 2,
-                                height: double.infinity,
-                                child: ColoredBox(
-                                    color: Color.fromARGB(101, 155, 105, 59)))),
-                        SizedBox(width: 32),
-                        Expanded(
-                            child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [StoreSearchBar(), BookList()],
+                          children: [
+                            SizedBox(
+                                width: 320,
+                                height: double.infinity,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Gêneros', style: _textStyle),
+                                    SizedBox(height: 16),
+                                    SizedBox(
+                                        width: 320,
+                                        height: 50,
+                                        child: Dropdown(
+                                            hint: 'Selecione gênero(s)',
+                                            options: _genreOptions)),
+                                    SizedBox(height: 16),
+                                    Text('Autores', style: _textStyle),
+                                    SizedBox(height: 16),
+                                    SizedBox(
+                                        width: 320,
+                                        height: 50,
+                                        child: Dropdown(
+                                            options: _authorOptions,
+                                            hint: 'Selecione autor(es)')),
+                                    SizedBox(height: 16),
+                                  ],
+                                )),
+                            SizedBox(width: 32),
+                            Padding(
+                                padding: EdgeInsets.only(bottom: 15),
+                                child: SizedBox(
+                                    width: 2,
+                                    height: double.infinity,
+                                    child: ColoredBox(
+                                        color: Color.fromARGB(101, 155, 105, 59)))),
+                            SizedBox(width: 32),
+                            Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [StoreSearchBar(), BookList()],
+                                ))
+                          ],
                         ))
-                      ],
-                    ))
                   ])),
         ),
       ));
@@ -130,4 +130,5 @@ const _textStyle = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 18,
     fontWeight: FontWeight.w600,
-    color: Color(0xFF9B693B));
+    color: Color(0xFF9B693B)
+);

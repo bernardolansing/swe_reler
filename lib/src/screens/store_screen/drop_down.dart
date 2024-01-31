@@ -1,4 +1,3 @@
-// Import multiselct
 import 'package:flutter/material.dart';
 import 'package:multiselect/multiselect.dart';
 
@@ -9,12 +8,12 @@ class Dropdown extends StatefulWidget {
   const Dropdown({required this.options, required this.hint, super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _DropdownState createState() => _DropdownState();
+  State<Dropdown> createState() => _DropdownState();
 }
 
 class _DropdownState extends State<Dropdown> {
   List<String> selected = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,5 +49,8 @@ class _DropdownState extends State<Dropdown> {
   }
 }
 
-const _textStyle =
-    TextStyle(fontFamily: 'Poppins', fontSize: 14, color: Color(0xFF4F493D));
+const _textStyle = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 14,
+    color: Color(0xFF4F493D)
+);

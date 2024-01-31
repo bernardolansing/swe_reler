@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/screens/store_screen/book.dart';
-import 'package:swe_reler/src/screens/store_screen/search_bar.dart';
 
 class BookList extends StatelessWidget {
   const BookList({super.key});
@@ -9,7 +8,6 @@ class BookList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> children = [];
 
-    //for (int i = 0; i < 12; i++) {
     for (Book b in bookCardList) {
       children.add(BookCard(
         title: b.title,
@@ -39,20 +37,21 @@ class BookCard extends StatefulWidget {
   final String genre;
   final String resume;
   final int quantity;
-  const BookCard(
-      {super.key,
-      required this.title,
-      required this.evaluation,
-      required this.price,
-      required this.picture,
-      required this.author,
-      required this.genre,
-      required this.resume,
-      required this.quantity});
+
+  const BookCard({
+    super.key,
+    required this.title,
+    required this.evaluation,
+    required this.price,
+    required this.picture,
+    required this.author,
+    required this.genre,
+    required this.resume,
+    required this.quantity
+  });
 
   @override
-  // ignore: library_private_types_in_public_api
-  _BookCardState createState() => _BookCardState();
+  State<BookCard> createState() => _BookCardState();
 }
 
 class _BookCardState extends State<BookCard> {
@@ -149,7 +148,7 @@ class _BookCardState extends State<BookCard> {
                       Navigator.pop(context);
                     },
                     child:
-                        const Text('Adicionar no carrinho', style: _textStyle7),
+                    const Text('Adicionar no carrinho', style: _textStyle7),
                   ),
                   TextButton(
                     onPressed: () {
@@ -169,7 +168,7 @@ class _BookCardState extends State<BookCard> {
               height: 235,
               decoration: BoxDecoration(
                 borderRadius:
-                    BorderRadius.circular(10), // Raio dos cantos arredondados
+                BorderRadius.circular(10), // Raio dos cantos arredondados
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -195,34 +194,45 @@ const _textStyle1 = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 10,
     fontWeight: FontWeight.w600,
-    color: Color(0xFF9B693B));
+    color: Color(0xFF9B693B)
+);
 
-const _textStyle2 =
-    TextStyle(fontFamily: 'Poppins', fontSize: 10, color: Colors.black);
+const _textStyle2 = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 10,
+    color: Colors.black
+);
 
 const _textStyle3 = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 18,
     fontWeight: FontWeight.w500,
-    color: Color(0xFF9B693B));
+    color: Color(0xFF9B693B)
+);
 
 const _textStyle4 = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 18,
     fontWeight: FontWeight.w600,
-    color: Color(0xFF9B693B));
+    color: Color(0xFF9B693B)
+);
 
-const _textStyle5 =
-    TextStyle(fontFamily: 'Poppins', fontSize: 18, color: Colors.black);
+const _textStyle5 = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 18,
+    color: Colors.black
+);
 
 const _textStyle6 = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 18,
     fontWeight: FontWeight.w600,
-    color: Color.fromARGB(255, 29, 28, 28));
+    color: Color.fromARGB(255, 29, 28, 28)
+);
 
 const _textStyle7 = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 18,
     fontWeight: FontWeight.w600,
-    color: Color.fromARGB(255, 34, 68, 40));
+    color: Color.fromARGB(255, 34, 68, 40)
+);

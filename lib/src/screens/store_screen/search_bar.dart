@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:swe_reler/src/screens/store_screen/book_list.dart';
 
 class StoreSearchBar extends StatelessWidget {
   const StoreSearchBar({super.key});
@@ -11,7 +10,7 @@ class StoreSearchBar extends StatelessWidget {
         height: 40,
         decoration: BoxDecoration(
           borderRadius:
-              BorderRadius.circular(8), // Raio dos cantos arredondados
+          BorderRadius.circular(8), // Raio dos cantos arredondados
           border: Border.all(
             color: const Color(0xFFD6CAA7), // Cor da borda (outline)
             width: 2, // Largura da borda
@@ -45,17 +44,14 @@ class TextFieldExample extends StatefulWidget {
 class _TextFieldExampleState extends State<TextFieldExample> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: TextField(
           style: _textStyle,
-          decoration: const InputDecoration(
-              filled: false, hintText: 'busque por obra ou brinde'),
-          onSubmitted: (String value) {
-            setState(() {
-              //selected = value;
-            });
-          },
+          decoration: InputDecoration(
+              filled: false,
+              hintText: 'busque por obra ou brinde'
+          ),
         ),
       ),
     );

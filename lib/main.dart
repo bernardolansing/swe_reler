@@ -24,23 +24,25 @@ class ReLerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'ReLer',
-        theme: theme,
-        // We set a custom builder to wrap all app routes with a SelectionArea
-        // widget. Otherwise, we would have to put it as a child of every Scaffold
-        // manually. For this to work, we have to manually create a Overlay widget
-        // and add the wrapped route as a OverlayEntry.
-        builder: (context, child) => Overlay(initialEntries: [
-          OverlayEntry(builder: (context) => SelectionArea(child: child!))
-        ]),
-        routes: {
-          '/': (context) => LandingPageScreen(),
-          '/store': (context) =>
-              AppUser.signedIn ? const StoreScreen() : LandingPageScreen(),
-          '/login': (context) => const LoginScreen(),
-          '/signup': (context) => const SignUpScreen(),
-          '/dash': (context) =>
-              AppUser.signedIn ? const UserDashScreen() : LandingPageScreen(),
-        },
-      );
+    title: 'ReLer',
+    theme: theme,
+    // We set a custom builder to wrap all app routes with a SelectionArea
+    // widget. Otherwise, we would have to put it as a child of every Scaffold
+    // manually. For this to work, we have to manually create a Overlay widget
+    // and add the wrapped route as a OverlayEntry.
+    builder: (context, child) => Overlay(initialEntries: [
+      OverlayEntry(builder: (context) => SelectionArea(child: child!))
+    ]),
+    routes: {
+      '/': (context) => LandingPageScreen(),
+      '/store': (context) => AppUser.signedIn
+          ? const StoreScreen()
+          : LandingPageScreen(),
+      '/login': (context) => const LoginScreen(),
+      '/signup': (context) => const SignUpScreen(),
+      '/dash': (context) => AppUser.signedIn
+          ? const UserDashScreen()
+          : LandingPageScreen(),
+    },
+  );
 }
