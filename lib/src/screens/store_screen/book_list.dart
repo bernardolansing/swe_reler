@@ -7,7 +7,7 @@ class BookList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Wrap(
-    spacing: 60,
+    spacing: 40,
     children: bookCardList
         .map((book) => BookCard(book))
         .toList(growable: false),
@@ -30,30 +30,45 @@ class _BookCardState extends State<BookCard> {
         context: context,
         builder: (context) => _BookDialog(widget.book)
     ),
-    child: Container(
-      width: 100,
-      height: 235,
-      decoration: BoxDecoration(
-        borderRadius:
-        BorderRadius.circular(10),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 10),
-          Image(image: AssetImage(widget.book.picture)),
-          const SizedBox(height: 7),
-          Text(widget.book.title, style: _textStyle1),
-          const SizedBox(height: 7),
-          Row(children: [
-            const Icon(Icons.star, size: 20, color: Color(0xFF718E76)),
-            Text(widget.book.evaluation, style: _textStyle2),
-            const SizedBox(width: 10),
-            Text('R\$${widget.book.price}', style: _textStyle2)
-          ]),
-        ],
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 120),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 10),
+            Image(image: AssetImage(widget.book.picture)),
+            const SizedBox(height: 7),
+            Text(widget.book.title, style: _titleTextStyle),
+            const SizedBox(height: 7),
+            Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.star, size: 20, color: Color(0xFF718E76)),
+                  Text(widget.book.evaluation, style: _bookDetailsTextStyle),
+                  const SizedBox(width: 10),
+                  Text('R\$${widget.book.price}', style: _bookDetailsTextStyle)
+                ]
+            ),
+          ],
+        ),
       ),
     ),
+  );
+
+  static const _titleTextStyle = TextStyle(
+      fontFamily: 'Poppins',
+      fontSize: 14,
+      fontWeight: FontWeight.w600,
+      color: Color(0xFF9B693B)
+  );
+
+  static const _bookDetailsTextStyle = TextStyle(
+      fontFamily: 'Poppins',
+      fontSize: 10,
+      color: Colors.black
   );
 }
 
@@ -149,16 +164,3 @@ class _BookDialog extends StatelessWidget {
       color: Color(0xFF9B693B)
   );
 }
-
-const _textStyle1 = TextStyle(
-    fontFamily: 'Poppins',
-    fontSize: 10,
-    fontWeight: FontWeight.w600,
-    color: Color(0xFF9B693B)
-);
-
-const _textStyle2 = TextStyle(
-    fontFamily: 'Poppins',
-    fontSize: 10,
-    color: Colors.black
-);
