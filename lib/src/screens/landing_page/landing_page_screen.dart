@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/widgets/drawer_menu.dart';
-import 'how-it-works.dart';
+import 'how_it_works.dart';
 import 'introduction.dart';
 import 'navbar.dart';
 import 'plans.dart';
