@@ -12,7 +12,7 @@ class DrawerMenu extends StatelessWidget {
     Scaffold.of(context).closeEndDrawer();
 
     // User requested to navigate to a route other than the current.
-    if (currentRoute != null && ! currentRoute.endsWith(route)) {
+    if (currentRoute != null && !currentRoute.endsWith(route)) {
       Navigator.of(context).pushNamed(route);
     }
   }
@@ -46,8 +46,8 @@ class DrawerMenu extends StatelessWidget {
                 onPressed: () => _pushIfNotCurrent(context, '/'),
                 child: const Text('home'),
               ),
-              const SizedBox(height: 24),
 
+              const SizedBox(height: 24),
               TextButton(
                 onPressed: () => _pushIfNotCurrent(context, '/dash'),
                 child: const Text('painel de usuário'),
@@ -55,7 +55,7 @@ class DrawerMenu extends StatelessWidget {
               const SizedBox(height: 24),
 
               TextButton(
-                onPressed: () {},
+                onPressed: () => _pushIfNotCurrent(context, '/store'),
                 child: const Text('loja'),
               ),
               const SizedBox(height: 24),
@@ -78,8 +78,7 @@ class DrawerMenu extends StatelessWidget {
               ),
             ],
           ),
-        )
-    ),
+        )),
   );
 }
 
