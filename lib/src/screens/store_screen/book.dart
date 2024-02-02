@@ -45,7 +45,7 @@ List<Book> bookCardList = [
       title: 'Água viva',
       author: 'Clarice Lispector',
       genres: [Genre.romance],
-      picture: '/books/agua-viva.jpg',
+      picture: 'assets/books/agua-viva.jpg',
       price: '49.99',
       evaluation: '4.0',
       resume:
@@ -55,7 +55,7 @@ List<Book> bookCardList = [
       title: 'A cabana',
       author: 'William P. Young',
       genres: [Genre.romance, Genre.thriller],
-      picture: '/books/cabana.jpg',
+      picture: 'assets/books/cabana.jpg',
       price: '45.99',
       evaluation: '4.5',
       resume:
@@ -65,7 +65,7 @@ List<Book> bookCardList = [
       title: 'Diário de um banana',
       author: 'Jeff Kiney',
       genres: [Genre.comedy],
-      picture: '/books/diario-banana.jpg',
+      picture: 'assets/books/diario-banana.jpg',
       price: '20.00',
       evaluation: '3.7',
       resume:
@@ -75,7 +75,7 @@ List<Book> bookCardList = [
       title: 'Dom Casmurro',
       author: 'Machado de Assis',
       genres: [Genre.romance],
-      picture: '/books/dom-casmurro.jpg',
+      picture: 'assets/books/dom-casmurro.jpg',
       price: '60.00',
       evaluation: '4.1',
       resume:
@@ -85,7 +85,7 @@ List<Book> bookCardList = [
       title: 'Doutor Sono',
       author: 'Stephen King',
       genres: [Genre.horror, Genre.fantasy, Genre.mystery, Genre.thriller],
-      picture: '/books/doutor-sono.jpg',
+      picture: 'assets/books/doutor-sono.jpg',
       price: '74.99',
       evaluation: '4.2',
       resume:
@@ -95,7 +95,7 @@ List<Book> bookCardList = [
       title: 'Fogo e sangue',
       author: 'George R. R. Martin',
       genres: [Genre.fantasy],
-      picture: '/books/fogo-sangue.jpg',
+      picture: 'assets/books/fogo-sangue.jpg',
       price: '64.99',
       evaluation: '4.8',
       resume:
@@ -105,7 +105,7 @@ List<Book> bookCardList = [
       title: 'A garota do lago',
       author: 'Charlie Donlea',
       genres: [Genre.thriller, Genre.mystery],
-      picture: '/books/garota-lago.jpg',
+      picture: 'assets/books/garota-lago.jpg',
       price: '29.99',
       evaluation: '3.9',
       resume:
@@ -115,7 +115,7 @@ List<Book> bookCardList = [
       title: 'O hobbit',
       author: 'J. R. R. Tolkien',
       genres: [Genre.fantasy, Genre.romance, Genre.adventure],
-      picture: '/books/hobbit.jpg',
+      picture: 'assets/books/hobbit.jpg',
       price: '52.00',
       evaluation: '4.4',
       resume:
@@ -125,7 +125,7 @@ List<Book> bookCardList = [
       title: 'O homem de giz',
       author: 'C. J. Tudor',
       genres: [Genre.thriller, Genre.romance, Genre.mystery],
-      picture: '/books/homem-giz.jpg',
+      picture: 'assets/books/homem-giz.jpg',
       price: '57.99',
       evaluation: '4.0',
       resume:
@@ -135,7 +135,7 @@ List<Book> bookCardList = [
       title: 'O iluminado',
       author: 'Stephen King',
       genres: [Genre.action, Genre.thriller, Genre.mystery, Genre.horror],
-      picture: '/books/iluminado.jpg',
+      picture: 'assets/books/iluminado.jpg',
       price: '59.99',
       evaluation: '4.9',
       resume:
@@ -145,7 +145,7 @@ List<Book> bookCardList = [
       title: 'Jogos vorazes',
       author: 'Suzanne Collins',
       genres: [Genre.action, Genre.romance, Genre.thriller],
-      picture: '/books/jogos-vorazes.jpg',
+      picture: 'assets/books/jogos-vorazes.jpg',
       price: '32.99',
       evaluation: '4.3',
       resume:
@@ -155,7 +155,7 @@ List<Book> bookCardList = [
       title: 'O pequeno principe',
       author: 'Antoine de Saint-Exupéry',
       genres: [Genre.children],
-      picture: '/books/pequeno-principe.jpg',
+      picture: 'assets/books/pequeno-principe.jpg',
       price: '30.00',
       evaluation: '5.0',
       resume:
@@ -165,7 +165,7 @@ List<Book> bookCardList = [
       title: 'O senhor dos anéis',
       author: 'J. R. R. Tolkien',
       genres: [Genre.fantasy, Genre.romance, Genre.adventure],
-      picture: '/books/lord-rings.jpg',
+      picture: 'assets/books/lord-rings.jpg',
       price: '62.00',
       evaluation: '4.7',
       resume:
@@ -175,7 +175,7 @@ List<Book> bookCardList = [
       title: 'Ted Bundy: Um Estranho ao Meu Lado',
       author: 'Ann Rule',
       genres: [Genre.crime],
-      picture: '/books/ted-bundy.jpg',
+      picture: 'assets/books/ted-bundy.jpg',
       price: '74.99',
       evaluation: '4.2',
       resume:
@@ -185,7 +185,7 @@ List<Book> bookCardList = [
       title: 'Sapiens - Uma Breve História da Humanidade',
       author: 'Yuval Noah Harari',
       genres: [Genre.history],
-      picture: '/books/sapiens.jpg',
+      picture: 'assets/books/sapiens.jpg',
       price: '44.70',
       evaluation: '4.9',
       resume:
@@ -195,7 +195,7 @@ List<Book> bookCardList = [
       title: 'Einstein: Biografia de um gênio imperfeito',
       author: 'David Bodanis',
       genres: [Genre.biography],
-      picture: '/books/einstein.jpg',
+      picture: 'assets/books/einstein.jpg',
       price: '73.45',
       evaluation: '4.7',
       resume:
@@ -205,7 +205,7 @@ List<Book> bookCardList = [
       title: 'Interestelar',
       author: 'Christopher Nolan',
       genres: [Genre.scifi],
-      picture: '/books/interestelar.jpg',
+      picture: 'assets/books/interestelar.jpg',
       price: '44.90',
       evaluation: '4.6',
       resume:
@@ -215,7 +215,7 @@ List<Book> bookCardList = [
       title: 'Harry Potter e a pedra filosofal',
       author: 'J. K. Rowling',
       genres: [Genre.action, Genre.adventure, Genre.fantasy, Genre.children],
-      picture: '/books/harry-potter.jpg',
+      picture: 'assets/books/harry-potter.jpg',
       price: '34.99',
       evaluation: '4.9',
       resume:
