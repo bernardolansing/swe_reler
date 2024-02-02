@@ -13,6 +13,7 @@ class HelloUser extends StatelessWidget {
     children: [
       HighlightedText('olá, $_userFirstName'),
       const SizedBox(height: 16),
+
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 550, maxHeight: 210),
         child: Stack(
@@ -29,7 +30,11 @@ class HelloUser extends StatelessWidget {
               ),
               child: const Padding(
                 padding: EdgeInsets.only(
-                    left: 32, top: 32, right: 64, bottom: 48),
+                    left: 32,
+                    top: 32,
+                    right: 64,
+                    bottom: 48
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,6 +50,7 @@ class HelloUser extends StatelessWidget {
                 ),
               ),
             ),
+
             const Align(
               alignment: Alignment.bottomCenter,
               child: Row(
@@ -54,6 +60,7 @@ class HelloUser extends StatelessWidget {
                 ],
               ),
             ),
+
             const Align(
               alignment: Alignment.bottomRight,
               child:
