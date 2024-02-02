@@ -69,3 +69,6 @@ flutter:
     - assets/books/pequeno-principe.jpg
     - assets/books/sapiens.jpg
     - assets/books/ted-bundy.jpg
+    - assets/admin/lady-killers.png
+    - assets/admin/edit.png
+    - assets/admin/delete.png
