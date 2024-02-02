@@ -44,7 +44,6 @@ class _StoreScreenState extends State<StoreScreen> {
                       selectedGenres: filterGenres,
                       onGenresChanged: (updated) =>
                           setState(() => filterGenres = updated),
-                      author: author,
                       onAuthorChanged: (updated) =>
                           setState(() => author = updated),
                     ),
@@ -81,13 +80,11 @@ class _StoreScreenState extends State<StoreScreen> {
 class _LeftSection extends StatelessWidget {
   final List<Genre> selectedGenres;
   final void Function(List<Genre>) onGenresChanged;
-  final String author;
   final void Function(String) onAuthorChanged;
 
   const _LeftSection({
     required this.selectedGenres,
     required this.onGenresChanged,
-    required this.author,
     required this.onAuthorChanged,
   });
 
