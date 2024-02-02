@@ -15,6 +15,7 @@ class StoreScreen extends StatefulWidget {
 
 class _StoreScreenState extends State<StoreScreen> {
   List<Genre> filterGenres = [];
+  String author = '';
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -41,8 +42,11 @@ class _StoreScreenState extends State<StoreScreen> {
                   children: [
                     _LeftSection(
                       selectedGenres: filterGenres,
-                      onChanged: (updated) =>
+                      onGenresChanged: (updated) =>
                           setState(() => filterGenres = updated),
+                      author: author,
+                      onAuthorChanged: (updated) =>
+                          setState(() => author = updated),
                     ),
                     const SizedBox(width: 40),
 
@@ -73,20 +77,28 @@ class _StoreScreenState extends State<StoreScreen> {
 
 class _LeftSection extends StatelessWidget {
   final List<Genre> selectedGenres;
-  final void Function(List<Genre>) onChanged;
+  final void Function(List<Genre>) onGenresChanged;
+  final String author;
+  final void Function(String) onAuthorChanged;
 
-  const _LeftSection({required this.selectedGenres, required this.onChanged});
+  const _LeftSection({
+    required this.selectedGenres,
+    required this.onGenresChanged,
+    required this.author,
+    required this.onAuthorChanged,
+  });
+
 
   void switchGenre(Genre genre) {
     if (selectedGenres.contains(genre)) {
       final newList = selectedGenres.where((selected) => selected != genre)
-        .toList();
-      onChanged(newList);
+          .toList();
+      onGenresChanged(newList);
     }
     else {
       final newList = List<Genre>.from(selectedGenres)
-          ..add(genre);
-      onChanged(newList);
+        ..add(genre);
+      onGenresChanged(newList);
     }
   }
 
@@ -127,6 +139,15 @@ class _LeftSection extends StatelessWidget {
             ],
           ),
         ),
+        const SizedBox(height: 24),
+
+        const Text('Autores', style: _importantTextStyle),
+        const SizedBox(height: 8),
+
+        TextField(
+          onChanged: onAuthorChanged,
+          decoration: const InputDecoration(hintText: 'Filtre por autor'),
+        )
       ],
     ),
   );
