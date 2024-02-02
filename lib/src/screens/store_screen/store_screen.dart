@@ -3,132 +3,155 @@ import 'package:swe_reler/src/screens/store_screen/cart_button.dart';
 import 'package:swe_reler/src/screens/store_screen/search_bar.dart';
 import 'package:swe_reler/src/widgets/drawer_menu.dart';
 import 'package:swe_reler/src/widgets/highlighted_text.dart';
-import 'package:swe_reler/src/screens/store_screen/drop_down.dart';
 import 'package:swe_reler/src/screens/store_screen/book_list.dart';
+import 'book.dart';
 
-class StoreScreen extends StatelessWidget {
+class StoreScreen extends StatefulWidget {
   const StoreScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => const Scaffold(
-      endDrawer: DrawerMenu(),
-      body: SingleChildScrollView(
-        child: IntrinsicHeight(
-          child: Padding(
-              padding: EdgeInsets.only(top: 40, right: 40, left: 40),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child:
-                            SizedBox(),
-                          ),
-                          Align(
-                              alignment: Alignment.centerRight,
-                              child: Row(children: [
-                                CartButton(),
-                                SizedBox(width: 20),
-                                DrawerMenuButton()
-                              ])),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 30),
-                    HighlightedText('loja'),
-                    SizedBox(height: 16),
-                    Expanded(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                                width: 320,
-                                height: double.infinity,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Gêneros', style: _textStyle),
-                                    SizedBox(height: 16),
-                                    SizedBox(
-                                        width: 320,
-                                        height: 50,
-                                        child: Dropdown(
-                                            hint: 'Selecione gênero(s)',
-                                            options: _genreOptions)),
-                                    SizedBox(height: 16),
-                                    Text('Autores', style: _textStyle),
-                                    SizedBox(height: 16),
-                                    SizedBox(
-                                        width: 320,
-                                        height: 50,
-                                        child: Dropdown(
-                                            options: _authorOptions,
-                                            hint: 'Selecione autor(es)')),
-                                    SizedBox(height: 16),
-                                  ],
-                                )),
-                            SizedBox(width: 32),
-                            Padding(
-                                padding: EdgeInsets.only(bottom: 15),
-                                child: SizedBox(
-                                    width: 2,
-                                    height: double.infinity,
-                                    child: ColoredBox(
-                                        color: Color.fromARGB(101, 155, 105, 59)))),
-                            SizedBox(width: 32),
-                            Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [StoreSearchBar(), BookList()],
-                                ))
-                          ],
-                        ))
-                  ])),
-        ),
-      ));
+  State<StoreScreen> createState() => _StoreScreenState();
 }
 
-const List<String> _genreOptions = [
-  'Ação',
-  'Comédia',
-  'Fantasia',
-  'Horror',
-  'Romance',
-  'Aventura',
-  'Biografia',
-  'Crime',
-  'História',
-  'Mistério',
-  'Suspense',
-  'Sci-fi',
-  'Infantil'
-];
+class _StoreScreenState extends State<StoreScreen> {
+  List<Genre> filterGenres = [];
 
-const List<String> _authorOptions = [
-  'Machado de Assis',
-  'Clarice Lispector',
-  'William P. Young',
-  'Jeff Kiney',
-  'Stephen King',
-  'George R. R. Martin',
-  'Charlie Donlea',
-  'J. R. R. Tolkien',
-  'C. J. Tudor',
-  'Suzanne Collins',
-  'Antoine de Saint-Exupéry',
-  'Ann Rule',
-  'Yuval Noah Harari',
-  'David Bodanis',
-  'Christopher Nolan',
-  'J. K. Rowling',
-];
+  @override
+  Widget build(BuildContext context) => Scaffold(
+      endDrawer: const DrawerMenu(),
+      body: Padding(
+        padding: const EdgeInsets.all(40),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
 
-const _textStyle = TextStyle(
-    fontFamily: 'Poppins',
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-    color: Color(0xFF9B693B)
-);
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CartButton(),
+                  SizedBox(width: 20),
+                  DrawerMenuButton()
+                ],
+              ),
+              const SizedBox(height: 30),
+
+              Expanded(child: IntrinsicHeight(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _LeftSection(
+                      selectedGenres: filterGenres,
+                      onChanged: (updated) =>
+                          setState(() => filterGenres = updated),
+                    ),
+                    const SizedBox(width: 40),
+
+                    const VerticalDivider(
+                        width: 1,
+                        thickness: 1,
+                        color: _borderColor
+                    ),
+                    const SizedBox(width: 40),
+
+                    const Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            StoreSearchBar(),
+                            BookList(),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )),
+            ]),
+      )
+  );
+}
+
+class _LeftSection extends StatelessWidget {
+  final List<Genre> selectedGenres;
+  final void Function(List<Genre>) onChanged;
+
+  const _LeftSection({required this.selectedGenres, required this.onChanged});
+
+  void switchGenre(Genre genre) {
+    if (selectedGenres.contains(genre)) {
+      final newList = selectedGenres.where((selected) => selected != genre)
+        .toList();
+      onChanged(newList);
+    }
+    else {
+      final newList = List<Genre>.from(selectedGenres)
+          ..add(genre);
+      onChanged(newList);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    width: 300,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const HighlightedText('loja'),
+        const SizedBox(height: 24),
+
+        const Text('Gêneros', style: _importantTextStyle),
+        const SizedBox(height: 8),
+
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(width: 1, color: _borderColor),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: _firstHalfOfGenres.map(_buildCheckbox).toList(),
+                ),
+              ),
+
+              Flexible(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: _secondHalfOfGenres.map(_buildCheckbox).toList(),
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+
+  List<Genre> get _firstHalfOfGenres => Genre.values
+      .sublist(0, (Genre.values.length / 2).ceil());
+
+  List<Genre> get _secondHalfOfGenres => Genre.values
+      .sublist((Genre.values.length / 2).ceil());
+
+  Widget _buildCheckbox(Genre genre) => CheckboxListTile(
+    value: selectedGenres.contains(genre),
+    title: Text(genre.title),
+    onChanged: (checked) => switchGenre(genre),
+    dense: true,
+    visualDensity: VisualDensity.compact,
+    controlAffinity: ListTileControlAffinity.leading,
+  );
+
+  static const _importantTextStyle = TextStyle(
+      fontFamily: 'Poppins',
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      color: Color(0xFF9B693B)
+  );
+}
+
+const _borderColor = Color.fromARGB(101, 155, 105, 59);
