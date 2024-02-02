@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/screens/store_screen/cart_button.dart';
-import 'package:swe_reler/src/screens/store_screen/search_bar.dart';
 import 'package:swe_reler/src/widgets/drawer_menu.dart';
 import 'package:swe_reler/src/widgets/highlighted_text.dart';
 import 'package:swe_reler/src/screens/store_screen/book_list.dart';
@@ -16,6 +15,7 @@ class StoreScreen extends StatefulWidget {
 class _StoreScreenState extends State<StoreScreen> {
   List<Genre> filterGenres = [];
   String author = '';
+  String search = '';
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -60,10 +60,14 @@ class _StoreScreenState extends State<StoreScreen> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            const StoreSearchBar(),
+                            StoreSearchBar(
+                              onTextChanged: (updated) =>
+                                  setState(() => search = updated),
+                            ),
                             BookList(
                               authorFilter: author,
                               selectedGenres: filterGenres,
+                              titleFilter: search,
                             ),
                           ],
                         ),
@@ -172,6 +176,29 @@ class _LeftSection extends StatelessWidget {
       fontSize: 18,
       fontWeight: FontWeight.w600,
       color: Color(0xFF9B693B)
+  );
+}
+
+class StoreSearchBar extends StatelessWidget {
+  final void Function(String) onTextChanged;
+
+  const StoreSearchBar({super.key, required this.onTextChanged});
+
+  @override
+  Widget build(BuildContext context) => TextField(
+    onChanged: onTextChanged,
+    decoration: const InputDecoration(
+      filled: false,
+      isDense: true,
+      hintText: 'busque por obra ou brinde',
+      enabledBorder: _inputBorder,
+      focusedBorder: _inputBorder,
+      suffixIcon: Icon(Icons.search, color: Color.fromARGB(255, 206, 191, 146)),
+    ),
+  );
+
+  static const _inputBorder = OutlineInputBorder(
+      borderSide: BorderSide(color: Color(0xFFD6CAA7), width: 2)
   );
 }
 

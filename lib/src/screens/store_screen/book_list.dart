@@ -5,11 +5,13 @@ import 'package:swe_reler/src/widgets/app_dialog.dart';
 class BookList extends StatelessWidget {
   final List<Genre> selectedGenres;
   final String authorFilter;
+  final String titleFilter;
   
   const BookList({
     super.key,
     required this.selectedGenres,
-    required this.authorFilter
+    required this.authorFilter,
+    required this.titleFilter,
   });
   
   bool _bookMatchesFilter(Book book) {
@@ -17,6 +19,12 @@ class BookList extends StatelessWidget {
       final authorMatches = book.author.toLowerCase()
           .contains(authorFilter.toLowerCase());
       if (! authorMatches) { return false; }
+    }
+
+    if (titleFilter.isNotEmpty) {
+      final titleMatches = book.title.toLowerCase()
+          .contains(titleFilter.toLowerCase());
+      if (! titleMatches) { return false; }
     }
     
     return selectedGenres.every((genre) => book.genres.contains(genre));
