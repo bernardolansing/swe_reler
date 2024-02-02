@@ -57,12 +57,15 @@ class _StoreScreenState extends State<StoreScreen> {
                     ),
                     const SizedBox(width: 40),
 
-                    const Expanded(
+                    Expanded(
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            StoreSearchBar(),
-                            BookList(),
+                            const StoreSearchBar(),
+                            BookList(
+                              authorFilter: author,
+                              selectedGenres: filterGenres,
+                            ),
                           ],
                         ),
                       ),

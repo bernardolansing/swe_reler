@@ -3,12 +3,30 @@ import 'package:swe_reler/src/screens/store_screen/book.dart';
 import 'package:swe_reler/src/widgets/app_dialog.dart';
 
 class BookList extends StatelessWidget {
-  const BookList({super.key});
+  final List<Genre> selectedGenres;
+  final String authorFilter;
+  
+  const BookList({
+    super.key,
+    required this.selectedGenres,
+    required this.authorFilter
+  });
+  
+  bool _bookMatchesFilter(Book book) {
+    if (authorFilter.isNotEmpty) {
+      final authorMatches = book.author.toLowerCase()
+          .contains(authorFilter.toLowerCase());
+      if (! authorMatches) { return false; }
+    }
+    
+    return selectedGenres.every((genre) => book.genres.contains(genre));
+  }
 
   @override
   Widget build(BuildContext context) => Wrap(
     spacing: 40,
     children: bookCardList
+        .where(_bookMatchesFilter)
         .map((book) => BookCard(book))
         .toList(growable: false),
   );
