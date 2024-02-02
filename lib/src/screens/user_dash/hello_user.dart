@@ -44,7 +44,6 @@ class HelloUser extends StatelessWidget {
                       style: _boxArrivalTextStyle,
                     ),
                     SizedBox(height: 16),
-
                     Text('03/01 e 07/01', style: _datesTextStyle),
                     SizedBox(height: 16),
                   ],
@@ -64,7 +63,8 @@ class HelloUser extends StatelessWidget {
 
             const Align(
               alignment: Alignment.bottomRight,
-              child: Image(image: AssetImage('assets/user-dash/bicycle.png')),
+              child:
+              Image(image: AssetImage('assets/user-dash/bicycle.png')),
             ),
           ],
         ),

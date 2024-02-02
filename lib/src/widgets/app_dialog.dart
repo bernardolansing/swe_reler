@@ -13,22 +13,35 @@ class AppDialog extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => AlertDialog(
-    content: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _buildCloseDialogButton(context),
-        const SizedBox(height: 32),
-
-        if (title != null)
-          _buildTitle(context),
-
-        Flexible(child: SingleChildScrollView(child: content)),
-      ],
+  Widget build(BuildContext context) => Theme(
+    data: Theme.of(context).copyWith(
+        textButtonTheme: const TextButtonThemeData(
+            style: ButtonStyle(
+                foregroundColor: MaterialStatePropertyAll(Color(0xFF4F493D)),
+                textStyle: MaterialStatePropertyAll(TextStyle(
+                  fontSize: 24,
+                  fontFamily: 'Poppins',
+                ))
+            )
+        )
     ),
-    actionsAlignment: MainAxisAlignment.spaceAround,
-    actions: actions ?? _buildDefaultActions(context),
+    child: AlertDialog(
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _buildCloseDialogButton(context),
+          const SizedBox(height: 32),
+
+          if (title != null)
+            _buildTitle(context),
+
+          Flexible(child: SingleChildScrollView(child: content)),
+        ],
+      ),
+      actionsAlignment: MainAxisAlignment.spaceAround,
+      actions: actions ?? _buildDefaultActions(context),
+    ),
   );
 
   Widget _buildCloseDialogButton(BuildContext context) => Align(
