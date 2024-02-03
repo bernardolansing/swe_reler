@@ -38,7 +38,7 @@ class _CartScreentate extends State<CartScreen> {
         book: b,
         callbck: _refreshScreen,
       ));
-      totalValue += double.parse(b.price) * b.listQuantity;
+      totalValue += b.price * b.listQuantity;
       totalItens += b.listQuantity;
     }
     return Scaffold(

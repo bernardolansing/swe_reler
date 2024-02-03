@@ -17,7 +17,7 @@ class BookList extends StatelessWidget {
   bool _bookMatchesFilter(Book book) {
     if (authorFilter.isNotEmpty) {
       final authorMatches =
-          book.author.toLowerCase().contains(authorFilter.toLowerCase());
+      book.author.toLowerCase().contains(authorFilter.toLowerCase());
       if (!authorMatches) {
         return false;
       }
@@ -25,7 +25,7 @@ class BookList extends StatelessWidget {
 
     if (titleFilter.isNotEmpty) {
       final titleMatches =
-          book.title.toLowerCase().contains(titleFilter.toLowerCase());
+      book.title.toLowerCase().contains(titleFilter.toLowerCase());
       if (!titleMatches) {
         return false;
       }
@@ -36,12 +36,12 @@ class BookList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Wrap(
-        spacing: 40,
-        children: bookList
-            .where(_bookMatchesFilter)
-            .map((book) => BookCard(book))
-            .toList(growable: false),
-      );
+    spacing: 40,
+    children: bookList
+        .where(_bookMatchesFilter)
+        .map((book) => BookCard(book))
+        .toList(growable: false),
+  );
 }
 
 class BookCard extends StatelessWidget {
@@ -51,32 +51,32 @@ class BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => InkWell(
-        onTap: () => showDialog(
-            context: context, builder: (context) => _BookDialog(book)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 120),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 10),
-                Image(image: AssetImage(book.picture)),
-                const SizedBox(height: 7),
-                Text(book.title, style: _titleTextStyle),
-                const SizedBox(height: 7),
-                Row(mainAxisSize: MainAxisSize.min, children: [
-                  const Icon(Icons.star, size: 20, color: Color(0xFF718E76)),
-                  Text(book.evaluation, style: _bookDetailsTextStyle),
-                  const SizedBox(width: 10),
-                  Text('R\$${book.price}', style: _bookDetailsTextStyle)
-                ]),
-              ],
-            ),
-          ),
+    onTap: () => showDialog(
+        context: context, builder: (context) => _BookDialog(book)),
+    child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 120),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 10),
+            Image(image: AssetImage(book.picture)),
+            const SizedBox(height: 7),
+            Text(book.title, style: _titleTextStyle),
+            const SizedBox(height: 7),
+            Row(mainAxisSize: MainAxisSize.min, children: [
+              const Icon(Icons.star, size: 20, color: Color(0xFF718E76)),
+              Text(book.evaluation, style: _bookDetailsTextStyle),
+              const SizedBox(width: 10),
+              Text('R\$${book.price}', style: _bookDetailsTextStyle)
+            ]),
+          ],
         ),
-      );
+      ),
+    ),
+  );
 
   static const _titleTextStyle = TextStyle(
       fontFamily: 'Poppins',
@@ -85,7 +85,7 @@ class BookCard extends StatelessWidget {
       color: Color(0xFF9B693B));
 
   static const _bookDetailsTextStyle =
-      TextStyle(fontFamily: 'Poppins', fontSize: 10, color: Colors.black);
+  TextStyle(fontFamily: 'Poppins', fontSize: 10, color: Colors.black);
 }
 
 class _BookDialog extends StatelessWidget {
