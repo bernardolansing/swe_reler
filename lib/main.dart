@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:universal_html/html.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'src/screens/cart_screen/cart_screen.dart';
 import 'package:swe_reler/src/screens/purchase_report_screen.dart';
 import 'package:swe_reler/src/screens/redirection_screen.dart';
 import 'src/screens/landing_page/landing_page_screen.dart';
 import 'src/screens/admin/admin_screen.dart';
 import 'src/screens/login_screen.dart';
 import 'src/screens/sign_up_screen.dart';
+import 'src/screens/store_screen/book.dart';
 import 'src/screens/user_dash/user_dash_screen.dart';
 import 'src/screens/store_screen/store_screen.dart';
 import 'src/theme.dart';
 import 'src/user.dart';
 import 'firebase_options.dart';
+
+List<Book> selectedBooks = [];
+List<Widget> bookCartList = [];
 
 void main() async {
   usePathUrlStrategy(); // Select "path" URL strategy. By default, the strategy
@@ -41,6 +46,9 @@ class ReLerApp extends StatelessWidget {
       '/': (context) => LandingPageScreen(),
       '/store': (context) => AppUser.signedIn
           ? const StoreScreen()
+          : LandingPageScreen(),
+      '/cart': (context) => AppUser.signedIn
+          ? const CartScreen()
           : LandingPageScreen(),
       '/login': (context) => const LoginScreen(),
       '/signup': (context) => const SignUpScreen(),
