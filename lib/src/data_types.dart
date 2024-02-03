@@ -39,13 +39,12 @@ class Purchase {
         books = (entry['books'] as List)
             .map((entry) => PurchasedBook.fromEntry(entry))
             .toList(growable: false),
-        date = (entry['lastUpdate'] as Timestamp).toDate(),
+        date = (entry['date'] as Timestamp).toDate(),
         totalPrice = entry['totalPrice'];
 
   static String get _generateId {
     const idLength = 6;
-    const chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567'
-        '890';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     final random = Random();
     final charCodes = Iterable.generate(
         idLength, (index) => chars.codeUnitAt(random.nextInt(chars.length))
