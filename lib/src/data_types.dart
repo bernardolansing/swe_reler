@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Donation {
@@ -22,21 +23,35 @@ enum DonationStatus {
 }
 
 class Purchase {
+  final String id;
   final List<PurchasedBook> books;
   final DateTime date;
   final double totalPrice;
 
   Purchase(this.books) :
-      date = DateTime.now(),
-      totalPrice = books
-          .fold(0, (acc, elem) => acc + elem.unitPrice * elem.amount);
+        id = _generateId,
+        date = DateTime.now(),
+        totalPrice = books
+            .fold(0, (acc, elem) => acc + elem.unitPrice * elem.amount);
 
   Purchase.fromEntry(Map entry) :
-      books = (entry['books'] as List)
-          .map((entry) => PurchasedBook.fromEntry(entry))
-          .toList(growable: false),
-      date = (entry['lastUpdate'] as Timestamp).toDate(),
-      totalPrice = entry['totalPrice'];
+        id = entry['id'],
+        books = (entry['books'] as List)
+            .map((entry) => PurchasedBook.fromEntry(entry))
+            .toList(growable: false),
+        date = (entry['lastUpdate'] as Timestamp).toDate(),
+        totalPrice = entry['totalPrice'];
+
+  static String get _generateId {
+    const idLength = 6;
+    const chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567'
+        '890';
+    final random = Random();
+    final charCodes = Iterable.generate(
+        idLength, (index) => chars.codeUnitAt(random.nextInt(chars.length))
+    );
+    return String.fromCharCodes(charCodes);
+  }
 }
 
 class PurchasedBook {
@@ -51,7 +66,7 @@ class PurchasedBook {
   });
 
   PurchasedBook.fromEntry(Map entry) :
-      title = entry['title'],
-      amount = entry['amount'],
-      unitPrice = entry['unitPrice'];
+        title = entry['title'],
+        amount = entry['amount'],
+        unitPrice = entry['unitPrice'];
 }
