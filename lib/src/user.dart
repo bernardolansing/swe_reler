@@ -11,6 +11,7 @@ class AppUser {
   static int? _lispectors;
   static int? _points;
   static List<Donation>? _donations;
+  static List<Purchase>? _purchases;
 
   static bool get signedIn => _id != null;
 
@@ -23,20 +24,25 @@ class AppUser {
     assert (signedIn);
     return _displayName!;
   }
-  
+
   static int get lispectors {
     assert(signedIn);
     return _lispectors!;
   }
-  
+
   static int get points {
     assert (signedIn);
     return _points!;
   }
 
   static List<Donation> get donations {
-    assert(signedIn);
+    assert (signedIn);
     return _donations!;
+  }
+
+  static List<Purchase> get purchases {
+    assert (signedIn);
+    return _purchases!;
   }
 
   static DocumentReference get _userDoc => FirebaseFirestore.instance
@@ -51,7 +57,7 @@ class AppUser {
     // Increase id token persistence.
     await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
   }
-  
+
   /// Authenticate with email and password. May throw [InvalidEmail],
   /// [WrongCredentials], and [DeletedAccount].
   static Future<void> loginWithEmail(String email, String password) async {
@@ -73,6 +79,9 @@ class AppUser {
       _donations = (data['donations'] as List)
           .map((entry) => Donation(entry as Map))
           .toList(growable: false);
+      _purchases = (data['purchases'] as List)
+          .map((entry) => Purchase.fromEntry(entry))
+          .toList();
     }
 
     on FirebaseAuthException catch (error) {
@@ -114,6 +123,7 @@ class AppUser {
         'lispectors': 0,
         'points': 0,
         'donations': [],
+        'purchases': [],
       };
       _userDoc.set(entry);
       _lispectors = 0;
