@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:swe_reler/src/screens/purchase_report_screen.dart';
 import 'src/screens/landing_page/landing_page_screen.dart';
 import 'src/screens/login_screen.dart';
 import 'src/screens/sign_up_screen.dart';
@@ -43,6 +44,16 @@ class ReLerApp extends StatelessWidget {
       '/dash': (context) => AppUser.signedIn
           ? const UserDashScreen()
           : LandingPageScreen(),
+      '/purchase-report': (context) => AppUser.signedIn
+          ? const PurchaseReportScreen()
+          : LandingPageScreen(),
     },
   );
+}
+
+extension PriceFormatter on double {
+  String get asPrice {
+    final cents = ((this - toInt()) * 100).toInt();
+    return 'R\$ ${toInt()},$cents';
+  }
 }
