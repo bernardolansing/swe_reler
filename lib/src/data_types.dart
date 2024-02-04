@@ -86,9 +86,12 @@ class Gift {
   });
 
   Gift.fromEntry(Map entry) :
-      title = entry['title'],
-      brand = entry['brand'],
-      category = entry['category'],
-      price = entry['price'],
-      amount = entry['amount'];
+        title = entry['title'],
+        brand = entry['brand'],
+        category = entry['category'],
+        price = entry['price'],
+        amount = entry['amount'];
+
+  Map<String, dynamic> get toMap => {'title': title, 'brand': brand,
+    'category': category, 'price': price, 'amount': amount};
 }
