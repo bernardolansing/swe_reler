@@ -1,11 +1,17 @@
 import 'dart:developer';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'data_types.dart';
 
 class AppUser {
   static String? _id;
   static String? _email;
   static String? _displayName;
+  static int? _lispectors;
+  static int? _points;
+  static List<Donation>? _donations;
+  static List<Purchase>? _purchases;
 
   static bool get signedIn => _id != null;
 
@@ -19,26 +25,63 @@ class AppUser {
     return _displayName!;
   }
 
+  static int get lispectors {
+    assert(signedIn);
+    return _lispectors!;
+  }
+
+  static int get points {
+    assert (signedIn);
+    return _points!;
+  }
+
+  static List<Donation> get donations {
+    assert (signedIn);
+    return _donations!;
+  }
+
+  static List<Purchase> get purchases {
+    assert (signedIn);
+    return _purchases!;
+  }
+
+  static DocumentReference get _userDoc => FirebaseFirestore.instance
+      .collection('users').doc(_id);
+
   static Future<void> initialize() async {
     // Listen to auth state changes.
     FirebaseAuth.instance.authStateChanges().listen((user) {
-      if (user != null) { _updateUser(user); }
+      if (user != null) { _updateUserId(user); }
     });
 
     // Increase id token persistence.
     await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
   }
-  
+
   /// Authenticate with email and password. May throw [InvalidEmail],
   /// [WrongCredentials], and [DeletedAccount].
   static Future<void> loginWithEmail(String email, String password) async {
-    log('Trying to login with email: $email');
     try {
       final result = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      _updateUser(result.user!);
+      final user = result.user!;
+      _id = user.uid;
+      _email = user.email;
+      _displayName = user.displayName;
       log('Successful login with email: $email');
+
+      // Fetch further user data from database:
+      final snapshot = await _userDoc.get();
+      final data = snapshot.data() as Map;
+      _lispectors = data['lispectors'];
+      _points = data['points'];
+      _donations = (data['donations'] as List)
+          .map((entry) => Donation(entry as Map))
+          .toList(growable: false);
+      _purchases = (data['purchases'] as List)
+          .map((entry) => Purchase.fromEntry(entry))
+          .toList();
     }
 
     on FirebaseAuthException catch (error) {
@@ -68,12 +111,23 @@ class AppUser {
       final result = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      _updateUser(result.user!); // Won't take in account the provided display
-      // name, so we have to set it manually later.
+      _id = result.user!.uid;
+      _email = result.user!.email;
       _displayName = name;
       result.user!.updateDisplayName(name); // As the user's display name can't
       // be set straight at its creation time, we have to order the change in
       // this another request.
+
+      // Upload user entry to the database:
+      final entry = {
+        'lispectors': 0,
+        'points': 0,
+        'donations': [],
+        'purchases': [],
+      };
+      _userDoc.set(entry);
+      _lispectors = 0;
+      _points = 0;
     }
 
     on FirebaseAuthException catch (error) {
@@ -93,13 +147,15 @@ class AppUser {
     _id = null;
     _email = null;
     _displayName = null;
+    _lispectors = null;
+    _points = null;
     Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
     log('Successful logout.');
   }
 
   /// Takes the result of a login/signup operation and updates the [AppUser]
   /// class fields accordingly.
-  static void _updateUser(User user) {
+  static void _updateUserId(User user) {
     _id = user.uid;
     _email = user.email;
     _displayName = user.displayName;

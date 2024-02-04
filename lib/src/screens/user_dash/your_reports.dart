@@ -23,7 +23,7 @@ class YourReports extends StatelessWidget {
         _spacing,
 
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () => Navigator.of(context).pushNamed('/purchase-report'),
           style: _buttonStyle,
           child: const Text('relatório de transações'),
         ),
