@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:universal_html/html.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:swe_reler/src/screens/purchase_report_screen.dart';
+import 'package:swe_reler/src/screens/redirection_screen.dart';
 import 'src/screens/landing_page/landing_page_screen.dart';
 import 'src/screens/admin/admin_screen.dart';
 import 'src/screens/login_screen.dart';
@@ -48,9 +50,17 @@ class ReLerApp extends StatelessWidget {
       '/purchase-report': (context) => AppUser.signedIn
           ? const PurchaseReportScreen()
           : LandingPageScreen(),
-      '/admin': (context) => const AdminScreen(),
+      '/admin': (context) => _authorizeAdminRoute(const AdminScreen()),
     },
   );
+}
+
+Widget _authorizeAdminRoute(Widget screen) {
+  if (AppUser.signedIn && AppUser.isAdmin) { return screen; }
+  else {
+    window.location.href = '/';
+    return const RedirectionScreen();
+  }
 }
 
 extension PriceFormatter on double {
