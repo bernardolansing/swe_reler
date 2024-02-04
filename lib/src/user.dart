@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:swe_reler/src/admin.dart';
 import 'data_types.dart';
 
 class AppUser {
@@ -12,6 +13,7 @@ class AppUser {
   static int? _points;
   static List<Donation>? _donations;
   static List<Purchase>? _purchases;
+  static bool? _isAdmin;
 
   static bool get signedIn => _id != null;
 
@@ -45,6 +47,11 @@ class AppUser {
     return _purchases!;
   }
 
+  static bool get isAdmin {
+    assert (signedIn);
+    return _isAdmin!;
+  }
+
   static DocumentReference get _userDoc => FirebaseFirestore.instance
       .collection('users').doc(_id);
 
@@ -71,6 +78,12 @@ class AppUser {
       _displayName = user.displayName;
       log('Successful login with email: $email');
 
+      if (email == 'admin@reler.com') {
+        _isAdmin = true;
+        await Admin.initialize();
+        return;
+      }
+
       // Fetch further user data from database:
       final snapshot = await _userDoc.get();
       final data = snapshot.data() as Map;
@@ -82,6 +95,7 @@ class AppUser {
       _purchases = (data['purchases'] as List)
           .map((entry) => Purchase.fromEntry(entry))
           .toList();
+      _isAdmin = false;
     }
 
     on FirebaseAuthException catch (error) {
