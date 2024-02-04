@@ -2,21 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:swe_reler/main.dart';
 import 'package:swe_reler/src/data_types.dart';
 import 'package:swe_reler/src/widgets/drawer_menu.dart';
-
-final _purchases = [
-  Purchase([
-    const PurchasedBook(title: 'Dom Casmurro', amount: 2, unitPrice: 22.5),
-    const PurchasedBook(title: 'Anjos e Demônios', amount: 1, unitPrice: 56.7),
-  ]),
-  Purchase([
-    const PurchasedBook(title: 'Dom Casmurro', amount: 2, unitPrice: 22.5),
-    const PurchasedBook(title: 'Anjos e Demônios', amount: 1, unitPrice: 56.7),
-  ]),
-  Purchase([
-    const PurchasedBook(title: 'Dom Casmurro', amount: 2, unitPrice: 22.5),
-    const PurchasedBook(title: 'Anjos e Demônios', amount: 1, unitPrice: 56.7),
-  ]),
-];
+import '../user.dart';
 
 class PurchaseReportScreen extends StatelessWidget {
   const PurchaseReportScreen({super.key});
@@ -41,7 +27,8 @@ class PurchaseReportScreen extends StatelessWidget {
           SizedBox(
             width: 650,
             child: Column(
-              children: _purchases.map((purchase) => _PurchaseCard(purchase))
+              children: AppUser.purchases
+                  .map((purchase) => _PurchaseCard(purchase))
                   .toList(),
             ),
           ),
