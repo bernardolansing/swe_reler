@@ -6,8 +6,37 @@ import 'package:swe_reler/src/screens/admin/table.dart';
 import 'package:swe_reler/src/widgets/app_dialog.dart';
 import 'package:swe_reler/src/widgets/input.dart';
 
-class AdminGifts extends StatelessWidget {
+class AdminGifts extends StatefulWidget {
   const AdminGifts({super.key});
+
+  @override
+  State<AdminGifts> createState() => _AdminGiftsState();
+}
+
+class _AdminGiftsState extends State<AdminGifts> {
+  void _openCreateGiftDialog() async {
+    await showDialog(
+        context: context,
+        builder: (context) => const _GiftDialog()
+    );
+    setState(() {});
+  }
+
+  void _openEditGiftDialog(int index) async {
+    await showDialog(
+        context: context,
+        builder: (context) => _GiftDialog(giftToEdit: Admin.gifts[index])
+    );
+    setState(() {});
+  }
+
+  void _openDeleteGiftDialog(int index) async {
+    await showDialog(
+      context: context,
+      builder: (context) => _GiftDeletionDialog(Admin.gifts[index])
+    );
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) => Column(
@@ -15,10 +44,7 @@ class AdminGifts extends StatelessWidget {
       Align(
         alignment: Alignment.centerRight,
         child: ElevatedButton(
-          onPressed: () => showDialog(
-              context: context,
-              builder: (context) => const _GiftDialog()
-          ),
+          onPressed: _openCreateGiftDialog,
           child: const Text('Cadastrar brinde'),
         ),
       ),
@@ -27,11 +53,8 @@ class AdminGifts extends StatelessWidget {
       AdminTable(
         headers: const ['nome', 'marca', 'categoria', 'preço', 'qtd'],
         rows: Admin.gifts.map(_rowFromGift).toList(),
-        editAction: (index) => showDialog(
-            context: context,
-            builder: (context) => _GiftDialog(giftToEdit: Admin.gifts[index])
-        ),
-        deleteAction: (index) {},
+        editAction: _openEditGiftDialog,
+        deleteAction: _openDeleteGiftDialog,
       ),
     ],
   );
@@ -221,4 +244,41 @@ class _GiftDialogState extends State<_GiftDialog> {
   }
 
   static const _spacing = SizedBox(height: 8);
+}
+
+class _GiftDeletionDialog extends StatelessWidget {
+  final Gift _gift;
+
+  const _GiftDeletionDialog(this._gift);
+
+  @override
+  Widget build(BuildContext context) => AppDialog(
+    content: Column(
+      children: [
+        Text(
+            'deletar brinde',
+            style: Theme.of(context).textTheme.headlineSmall
+        ),
+
+        Text(_dialogText),
+      ],
+    ),
+    actions: [
+      TextButton(
+        onPressed: Navigator.of(context).pop,
+        child: const Text('cancelar'),
+      ),
+
+      ElevatedButton(
+        onPressed: () {
+          Admin.deleteGift(_gift);
+          Navigator.of(context).pop();
+        },
+        child: const Text('deletar'),
+      )
+    ],
+  );
+
+  String get _dialogText => 'Você tem certeza que deseja deletar o brinde '
+      '"${_gift.title}"? Essa ação não pode ser revertida.';
 }

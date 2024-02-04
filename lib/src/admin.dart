@@ -22,9 +22,16 @@ class Admin {
         .toList();
   }
 
-  static Future<void> registerGift(Gift gift) =>
-      _giftsCollection.doc().set(gift.toMap);
+  static void registerGift(Gift gift) {
+    _gifts!.add(gift);
+    _giftsCollection.doc().set(gift.toMap);
+  }
 
   static Future<void> editGift(Gift newGift) =>
       _giftsCollection.doc(newGift.code).update(newGift.toMap);
+
+  static void deleteGift(Gift gift) {
+    _giftsCollection.doc(gift.code).delete();
+    _gifts!.remove(gift);
+  }
 }
