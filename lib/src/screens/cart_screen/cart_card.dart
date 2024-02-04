@@ -81,7 +81,7 @@ class _CartCardState extends State<CartCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text('R\$${widget.book.price}'),
+                Text('Valor unitário: R\$${widget.book.price}'),
                 Text(
                     'Total produto: R\$${(double.parse(widget.book.price) * widget.book.listQuantity).toStringAsFixed(2)}'),
               ]),

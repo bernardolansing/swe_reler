@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/screens/cart_screen/cart_card.dart';
 import 'package:swe_reler/src/screens/store_screen/book.dart';
-import 'package:swe_reler/src/screens/store_screen/cart_button.dart';
 import 'package:swe_reler/src/widgets/drawer_menu.dart';
 import 'package:swe_reler/src/widgets/highlighted_text.dart';
 import 'package:swe_reler/main.dart';
@@ -50,7 +49,7 @@ class _CartScreentate extends State<CartScreen> {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const Row(
               mainAxisAlignment: MainAxisAlignment.end,
-              children: [CartButton(), SizedBox(width: 20), DrawerMenuButton()],
+              children: [DrawerMenuButton()],
             ),
             const SizedBox(height: 30),
             const HighlightedText('carrinho de compras'),
@@ -162,8 +161,20 @@ class _CartScreentate extends State<CartScreen> {
                       const SizedBox(height: 50),
                       ElevatedButton(
                         onPressed: () {
-                          selectedBooks.clear();
-                          _pushIfNotCurrent(context, '/');
+                          if (totalItens > 0) {
+                            SnackBar snackBar = const SnackBar(
+                              content: Text('Compra realizada'),
+                              duration: Duration(seconds: 3),
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                            for (Book b in bookList) {
+                              b.quantity -= b.listQuantity;
+                              b.listQuantity = 0;
+                            }
+                            selectedBooks.clear();
+                            _pushIfNotCurrent(context, '/');
+                          }
                         },
                         child: const Text(
                           'finalizar compra',

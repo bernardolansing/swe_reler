@@ -45,20 +45,15 @@ class BookList extends StatelessWidget {
       );
 }
 
-class BookCard extends StatefulWidget {
+class BookCard extends StatelessWidget {
   final Book book;
 
   const BookCard(this.book, {super.key});
 
   @override
-  State<BookCard> createState() => _BookCardState();
-}
-
-class _BookCardState extends State<BookCard> {
-  @override
   Widget build(BuildContext context) => InkWell(
         onTap: () => showDialog(
-            context: context, builder: (context) => _BookDialog(widget.book)),
+            context: context, builder: (context) => _BookDialog(book)),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: ConstrainedBox(
@@ -68,15 +63,15 @@ class _BookCardState extends State<BookCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                Image(image: AssetImage(widget.book.picture)),
+                Image(image: AssetImage(book.picture)),
                 const SizedBox(height: 7),
-                Text(widget.book.title, style: _titleTextStyle),
+                Text(book.title, style: _titleTextStyle),
                 const SizedBox(height: 7),
                 Row(mainAxisSize: MainAxisSize.min, children: [
                   const Icon(Icons.star, size: 20, color: Color(0xFF718E76)),
-                  Text(widget.book.evaluation, style: _bookDetailsTextStyle),
+                  Text(book.evaluation, style: _bookDetailsTextStyle),
                   const SizedBox(width: 10),
-                  Text('R\$${widget.book.price}', style: _bookDetailsTextStyle)
+                  Text('R\$${book.price}', style: _bookDetailsTextStyle)
                 ]),
               ],
             ),
@@ -94,16 +89,11 @@ class _BookCardState extends State<BookCard> {
       TextStyle(fontFamily: 'Poppins', fontSize: 10, color: Colors.black);
 }
 
-class _BookDialog extends StatefulWidget {
+class _BookDialog extends StatelessWidget {
   final Book _book;
 
   const _BookDialog(this._book);
 
-  @override
-  State<_BookDialog> createState() => __BookDialogState();
-}
-
-class __BookDialogState extends State<_BookDialog> {
   @override
   Widget build(BuildContext context) => AppDialog(
         content: ConstrainedBox(
@@ -111,13 +101,13 @@ class __BookDialogState extends State<_BookDialog> {
           child: Column(
             children: [
               Image(
-                image: AssetImage(widget._book.picture),
+                image: AssetImage(_book.picture),
                 width: 250,
                 height: 400,
               ),
               _summary,
               const Divider(),
-              Text(widget._book.resume, textAlign: TextAlign.justify),
+              Text(_book.resume, textAlign: TextAlign.justify),
               const Divider(),
               _purchaseInfo,
             ],
@@ -128,20 +118,29 @@ class __BookDialogState extends State<_BookDialog> {
             onPressed: Navigator.of(context).pop,
             child: const Text('Fechar'),
           ),
-          IgnorePointer(
-              ignoring: (widget._book.quantity == 0 ||
-                  widget._book.listQuantity >= widget._book.quantity),
-              child: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    widget._book.listQuantity++;
-                    if (!selectedBooks.contains(widget._book)) {
-                      selectedBooks.add(widget._book);
-                    }
-                  });
-                },
-                child: const Text('Adicionar ao carrinho'),
-              )),
+          ElevatedButton(
+            onPressed: () {
+              SnackBar snackBar;
+              String snackbarText = '';
+              if (_book.quantity == 0) {
+                snackbarText = 'Livro indisponível';
+              } else if (_book.listQuantity >= _book.quantity) {
+                snackbarText = 'Quantidade excedida';
+              } else {
+                snackbarText = 'Livro adicionado no carrinho';
+                _book.listQuantity++;
+                if (!selectedBooks.contains(_book)) {
+                  selectedBooks.add(_book);
+                }
+              }
+              snackBar = SnackBar(
+                content: Text(snackbarText),
+                duration: const Duration(seconds: 1),
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            },
+            child: const Text('Adicionar ao carrinho'),
+          ),
         ],
       );
 
@@ -151,19 +150,19 @@ class __BookDialogState extends State<_BookDialog> {
           Row(
             children: [
               const Text('Título: ', style: _highlightedTextStyle),
-              Text(widget._book.title)
+              Text(_book.title)
             ],
           ),
           Row(
             children: [
               const Text('Autor: ', style: _highlightedTextStyle),
-              Text(widget._book.author)
+              Text(_book.author)
             ],
           ),
           Row(
             children: [
               const Text('Gênero: ', style: _highlightedTextStyle),
-              Text(widget._book.genres.map((g) => g.title).join(', '))
+              Text(_book.genres.map((g) => g.title).join(', '))
             ],
           ),
         ],
@@ -176,13 +175,13 @@ class __BookDialogState extends State<_BookDialog> {
             children: [
               const Text('Exemplares disponíveis: ',
                   style: _highlightedTextStyle),
-              Text(widget._book.quantity.toString())
+              Text(_book.quantity.toString())
             ],
           ),
           Row(
             children: [
               const Icon(Icons.star, size: 30, color: Color(0xFF718E76)),
-              Text('${widget._book.evaluation} - R\$ ${widget._book.price}')
+              Text('${_book.evaluation} - R\$ ${_book.price}')
             ],
           )
         ],
