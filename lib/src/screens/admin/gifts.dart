@@ -17,7 +17,7 @@ class AdminGifts extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () => showDialog(
               context: context,
-              builder: (context) => _RegisterGiftDialog()
+              builder: (context) => const _GiftDialog()
           ),
           child: const Text('Cadastrar brinde'),
         ),
@@ -27,7 +27,10 @@ class AdminGifts extends StatelessWidget {
       AdminTable(
         headers: const ['nome', 'marca', 'categoria', 'preço', 'qtd'],
         rows: _mockGifts.map(_rowFromGift).toList(),
-        editAction: (index) {},
+        editAction: (index) => showDialog(
+            context: context,
+            builder: (context) => _GiftDialog(giftToEdit: _mockGifts[index])
+        ),
         deleteAction: (index) {},
       ),
     ],
@@ -37,12 +40,16 @@ class AdminGifts extends StatelessWidget {
     g.price.asPrice, g.amount.toString()];
 }
 
-class _RegisterGiftDialog extends StatefulWidget {
+class _GiftDialog extends StatefulWidget {
+  final Gift? giftToEdit;
+
+  const _GiftDialog({this.giftToEdit});
+
   @override
-  State<_RegisterGiftDialog> createState() => _RegisterGiftDialogState();
+  State<_GiftDialog> createState() => _GiftDialogState();
 }
 
-class _RegisterGiftDialogState extends State<_RegisterGiftDialog> {
+class _GiftDialogState extends State<_GiftDialog> {
   final _nameController = TextEditingController();
   final _brandController = TextEditingController();
   final _categoryController = TextEditingController();
@@ -56,6 +63,8 @@ class _RegisterGiftDialogState extends State<_RegisterGiftDialog> {
   bool _invalidPriceError = false;
   bool _emptyAmountError = false;
   bool _invalidAmountError = false;
+
+  bool get _editing => widget.giftToEdit != null;
 
   void submit() {
     setState(() {
@@ -82,16 +91,43 @@ class _RegisterGiftDialogState extends State<_RegisterGiftDialog> {
 
     if (_invalidPriceError || _invalidAmountError) { return; }
 
-    final newGift = Gift(
-        title: _nameController.text,
-        brand: _brandController.text,
-        category: _categoryController.text,
-        price: price,
-        amount: amount
-    );
+    if (_editing) {
+      final gift = widget.giftToEdit!;
+      gift.title = _nameController.text;
+      gift.brand = _brandController.text;
+      gift.category = _categoryController.text;
+      gift.price = price;
+      gift.amount = amount;
 
-    Admin.registerGift(newGift);
+      Admin.editGift(gift);
+    }
+
+    else {
+      final newGift = Gift(
+          title: _nameController.text,
+          brand: _brandController.text,
+          category: _categoryController.text,
+          price: price,
+          amount: amount
+      );
+
+      Admin.registerGift(newGift);
+    }
+
     Navigator.of(context).pop();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (_editing) {
+      final gift = widget.giftToEdit!;
+      _nameController.text = gift.title;
+      _brandController.text = gift.brand;
+      _categoryController.text = gift.category;
+      _priceController.text = gift.price.toString();
+      _amountController.text = gift.amount.toString();
+    }
   }
 
   @override
@@ -104,7 +140,7 @@ class _RegisterGiftDialogState extends State<_RegisterGiftDialog> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('adicionar brinde', style: textTheme.headlineSmall),
+            Text(_dialogTitle, style: textTheme.headlineSmall),
             _spacing,
 
             Input(
@@ -162,11 +198,15 @@ class _RegisterGiftDialogState extends State<_RegisterGiftDialog> {
 
         ElevatedButton(
           onPressed: submit,
-          child: const Text('adicionar'),
+          child: Text(_buttonText),
         ),
       ],
     );
   }
+
+  String get _dialogTitle => _editing ? 'editar brinde' : 'adicionar brinde';
+
+  String get _buttonText => _editing ? 'editar': 'adicionar';
 
   String? get _priceErrorMessage {
     if (_emptyPriceError) { return 'O preço é obrigatório'; }
@@ -183,7 +223,7 @@ class _RegisterGiftDialogState extends State<_RegisterGiftDialog> {
   static const _spacing = SizedBox(height: 8);
 }
 
-const _mockGifts = [
+final _mockGifts = [
   Gift(
       title: 'Pincel marca-texto mini',
       brand: 'Oval',

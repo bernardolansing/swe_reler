@@ -47,18 +47,18 @@ class AdminTable extends StatelessWidget {
     const buttonColor = Color(0xFF9B693B);
 
     if (editAction != null) {
-      for (final row in rows) {
+      for (final (index, row) in rows.indexed) {
         row.cells.add(DataCell(IconButton(
-          onPressed: () {},
+          onPressed: () => editAction!(index),
           icon: const Icon(Icons.edit, color: buttonColor),
         )));
       }
     }
 
     if (deleteAction != null) {
-      for (final row in rows) {
+      for (final (index, row) in rows.indexed) {
         row.cells.add(DataCell(IconButton(
-          onPressed: () {},
+          onPressed: () => deleteAction!(index),
           icon: const Icon(Icons.delete, color: buttonColor),
         )));
       }

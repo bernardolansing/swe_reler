@@ -29,7 +29,7 @@ class Purchase {
   final double totalPrice;
 
   Purchase(this.books) :
-        id = _generateId,
+        id = _generateRandomId(6),
         date = DateTime.now(),
         totalPrice = books
             .fold(0, (acc, elem) => acc + elem.unitPrice * elem.amount);
@@ -41,16 +41,6 @@ class Purchase {
             .toList(growable: false),
         date = (entry['date'] as Timestamp).toDate(),
         totalPrice = entry['totalPrice'];
-
-  static String get _generateId {
-    const idLength = 6;
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-    final random = Random();
-    final charCodes = Iterable.generate(
-        idLength, (index) => chars.codeUnitAt(random.nextInt(chars.length))
-    );
-    return String.fromCharCodes(charCodes);
-  }
 }
 
 class PurchasedBook {
@@ -71,21 +61,23 @@ class PurchasedBook {
 }
 
 class Gift {
-  final String title;
-  final String brand;
-  final String category;
-  final double price;
-  final int amount;
+  final String code;
+  String title;
+  String brand;
+  String category;
+  double price;
+  int amount;
 
-  const Gift({
+  Gift({
     required this.title,
     required this.brand,
     required this.category,
     required this.price,
     required this.amount,
-  });
+  }) :
+        code = _generateRandomId(20);
 
-  Gift.fromEntry(Map entry) :
+  Gift.fromEntry(this.code, Map entry) :
         title = entry['title'],
         brand = entry['brand'],
         category = entry['category'],
@@ -94,4 +86,13 @@ class Gift {
 
   Map<String, dynamic> get toMap => {'title': title, 'brand': brand,
     'category': category, 'price': price, 'amount': amount};
+}
+
+String _generateRandomId(int length) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+  final random = Random();
+  final charCodes = Iterable.generate(
+      length, (index) => chars.codeUnitAt(random.nextInt(chars.length))
+  );
+  return String.fromCharCodes(charCodes);
 }
