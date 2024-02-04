@@ -17,7 +17,6 @@ import 'src/user.dart';
 import 'firebase_options.dart';
 
 List<Book> selectedBooks = [];
-List<Widget> bookCartList = [];
 
 void main() async {
   usePathUrlStrategy(); // Select "path" URL strategy. By default, the strategy

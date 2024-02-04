@@ -19,10 +19,6 @@ class Book {
       required this.resume,
       required this.quantity,
       required this.listQuantity});
-
-  setQuantity(int value) {
-    quantity = value;
-  }
 }
 
 enum Genre {

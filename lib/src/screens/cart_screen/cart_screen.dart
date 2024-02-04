@@ -30,9 +30,9 @@ class _CartScreentate extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> bookCartList = [];
     double totalValue = 0;
     int totalItens = 0;
-    bookCartList.clear();
     for (Book b in selectedBooks) {
       bookCartList.add(CartCard(
         book: b,
@@ -173,7 +173,7 @@ class _CartScreentate extends State<CartScreen> {
                               b.listQuantity = 0;
                             }
                             selectedBooks.clear();
-                            _pushIfNotCurrent(context, '/');
+                            _pushIfNotCurrent(context, '/dash');
                           }
                         },
                         child: const Text(
