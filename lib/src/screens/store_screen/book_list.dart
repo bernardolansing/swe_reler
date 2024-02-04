@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:swe_reler/main.dart';
 import 'package:swe_reler/src/screens/store_screen/book.dart';
 import 'package:swe_reler/src/widgets/app_dialog.dart';
 
@@ -193,3 +192,5 @@ class _BookDialog extends StatelessWidget {
       fontWeight: FontWeight.w600,
       color: Color(0xFF9B693B));
 }
+
+List<Book> selectedBooks = [];

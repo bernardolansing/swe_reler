@@ -9,14 +9,11 @@ import 'src/screens/landing_page/landing_page_screen.dart';
 import 'src/screens/admin/admin_screen.dart';
 import 'src/screens/login_screen.dart';
 import 'src/screens/sign_up_screen.dart';
-import 'src/screens/store_screen/book.dart';
 import 'src/screens/user_dash/user_dash_screen.dart';
 import 'src/screens/store_screen/store_screen.dart';
 import 'src/theme.dart';
 import 'src/user.dart';
 import 'firebase_options.dart';
-
-List<Book> selectedBooks = [];
 
 void main() async {
   usePathUrlStrategy(); // Select "path" URL strategy. By default, the strategy

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/screens/store_screen/book.dart';
+import 'package:swe_reler/src/screens/store_screen/book_list.dart';
 import 'package:swe_reler/src/widgets/text_with_link_portion.dart';
-import 'package:swe_reler/main.dart';
 
 class CartCard extends StatefulWidget {
   final Book book;

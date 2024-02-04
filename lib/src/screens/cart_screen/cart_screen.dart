@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/screens/cart_screen/cart_card.dart';
 import 'package:swe_reler/src/screens/store_screen/book.dart';
+import 'package:swe_reler/src/screens/store_screen/book_list.dart';
 import 'package:swe_reler/src/widgets/drawer_menu.dart';
 import 'package:swe_reler/src/widgets/highlighted_text.dart';
-import 'package:swe_reler/main.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
