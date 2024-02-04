@@ -99,7 +99,8 @@ class _LoginFormState extends State<_LoginForm> {
       // After the login is succeeded, we want to remove the previous screens
       // from the navigation history and put the user dash screen.
       if (! context.mounted) { return; }
-      Navigator.of(context).pushNamedAndRemoveUntil('/dash', (route) => false);
+      final route = AppUser.isAdmin ? '/admin' : '/dash';
+      Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => false);
     }
 
     on InvalidEmail { setState(() => _invalidEmailError = true); }

@@ -26,10 +26,10 @@ class AdminGifts extends StatelessWidget {
 
       AdminTable(
         headers: const ['nome', 'marca', 'categoria', 'preço', 'qtd'],
-        rows: _mockGifts.map(_rowFromGift).toList(),
+        rows: Admin.gifts.map(_rowFromGift).toList(),
         editAction: (index) => showDialog(
             context: context,
-            builder: (context) => _GiftDialog(giftToEdit: _mockGifts[index])
+            builder: (context) => _GiftDialog(giftToEdit: Admin.gifts[index])
         ),
         deleteAction: (index) {},
       ),
@@ -222,27 +222,3 @@ class _GiftDialogState extends State<_GiftDialog> {
 
   static const _spacing = SizedBox(height: 8);
 }
-
-final _mockGifts = [
-  Gift(
-      title: 'Pincel marca-texto mini',
-      brand: 'Oval',
-      category: 'papelaria',
-      price: 21.90,
-      amount: 15
-  ),
-  Gift(
-      title: 'Pincel marca-texto mini',
-      brand: 'Oval',
-      category: 'papelaria',
-      price: 21.90,
-      amount: 15
-  ),
-  Gift(
-      title: 'Pincel marca-texto mini',
-      brand: 'Oval',
-      category: 'papelaria',
-      price: 21.90,
-      amount: 15
-  ),
-];
