@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/screens/admin/books.dart';
+import 'package:swe_reler/src/screens/admin/gifts.dart';
 import 'package:swe_reler/src/widgets/drawer_menu.dart';
 import 'package:swe_reler/src/widgets/highlighted_text.dart';
 
 enum _AdminMenu {
   books('livros', AdminBooks()),
-  gifts('brindes', null),
+  gifts('brindes', AdminGifts()),
   boks('BOKS', null),
   users('usuários', null),
   reports('relatórios', null);
@@ -57,27 +58,6 @@ class _AdminScreenState extends State<AdminScreen> {
                       const SizedBox(height: 16),
 
                       ..._AdminMenu.values.map(_buildMenuListTile),
-                      // ListTile(
-                      //   title: const Text('livros'),
-                      //   dense: true,
-                      //   onTap: () {},
-                      // ),
-                      // ListTile(
-                      //   title: const Text('brindes'),
-                      //   onTap: () {},
-                      // ),
-                      // ListTile(
-                      //   title: const Text('BOKS'),
-                      //   onTap: () {},
-                      // ),
-                      // ListTile(
-                      //   title: const Text('usuários'),
-                      //   onTap: () {},
-                      // ),
-                      // ListTile(
-                      //   title: const Text('relatórios'),
-                      //   onTap: () {},
-                      // )
                     ],
                   ),
                 ),

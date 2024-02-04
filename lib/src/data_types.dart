@@ -69,3 +69,26 @@ class PurchasedBook {
         amount = entry['amount'],
         unitPrice = entry['unitPrice'];
 }
+
+class Gift {
+  final String title;
+  final String brand;
+  final String category;
+  final double price;
+  final int amount;
+
+  const Gift({
+    required this.title,
+    required this.brand,
+    required this.category,
+    required this.price,
+    required this.amount,
+  });
+
+  Gift.fromEntry(Map entry) :
+      title = entry['title'],
+      brand = entry['brand'],
+      category = entry['category'],
+      price = entry['price'],
+      amount = entry['amount'];
+}
