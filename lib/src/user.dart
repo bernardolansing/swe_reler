@@ -1,9 +1,13 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'package:universal_html/html.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/admin.dart';
 import 'data_types.dart';
+
+bool _moduleAlive = false;
 
 class AppUser {
   static String? _id;
@@ -15,7 +19,14 @@ class AppUser {
   static List<Purchase>? _purchases;
   static bool? _isAdmin;
 
-  static bool get signedIn => _id != null;
+  static bool get signedIn {
+    if (! _moduleAlive) {
+      _restoreFromSessionStorage();
+      _moduleAlive = true;
+    }
+
+    return _id != null;
+  }
 
   static String get email {
     assert (signedIn);
@@ -65,6 +76,39 @@ class AppUser {
     await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
   }
 
+  /// Saves AppUser's state to the session storage, so it may be restored in
+  /// case of a page refresh.
+  static void _saveToSessionStorage() {
+    if (signedIn) {
+      log('Saving user information to the session storage');
+      final ss = window.sessionStorage;
+      ss['userIsCached'] = 'true';
+      ss['lispectors'] = _lispectors.toString();
+      ss['points'] = _points.toString();
+      ss['donations'] = json.encode(_donations!.map((d) => d.toMap).toList());
+      ss['purchases'] = json
+          .encode(_purchases!.map((p) => p.toSessionStorage).toList());
+      ss['isAdmin'] = _isAdmin.toString();
+    }
+
+  }
+
+  /// Restores AppUser's state from session storage.
+  static void _restoreFromSessionStorage() {
+    final ss = window.sessionStorage;
+    if (ss['userIsCached'] != 'true') { return; }
+    log('Restoring user information from the session storage');
+    _lispectors = int.parse(ss['lispectors']!);
+    _points = int.parse(ss['points']!);
+    _donations = (json.decode(ss['donations']!) as List)
+        .map((entry) => Donation.fromSessionStorageEntry(entry))
+        .toList();
+    _purchases = (json.decode(ss['purchases']!) as List)
+        .map((entry) => Purchase.fromSessionStorage(entry))
+        .toList();
+    _isAdmin = ss['isAdmin'] == 'true';
+  }
+
   /// Authenticate with email and password. May throw [InvalidEmail],
   /// [WrongCredentials], and [DeletedAccount].
   static Future<void> loginWithEmail(String email, String password) async {
@@ -96,6 +140,8 @@ class AppUser {
           .map((entry) => Purchase.fromEntry(entry))
           .toList();
       _isAdmin = false;
+
+      _saveToSessionStorage();
     }
 
     on FirebaseAuthException catch (error) {
@@ -142,6 +188,8 @@ class AppUser {
       _userDoc.set(entry);
       _lispectors = 0;
       _points = 0;
+
+      _saveToSessionStorage();
     }
 
     on FirebaseAuthException catch (error) {
@@ -163,6 +211,7 @@ class AppUser {
     _displayName = null;
     _lispectors = null;
     _points = null;
+    window.sessionStorage.clear();
     Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
     log('Successful logout.');
   }

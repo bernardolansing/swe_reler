@@ -14,6 +14,16 @@ class Donation {
         books = (entry['books'] as List)
             .map((book) => book as String)
             .toList(growable: false);
+
+  Donation.fromSessionStorageEntry(Map entry):
+        code = entry['code'],
+        status = DonationStatus.values.byName(entry['status']),
+        lastUpdate = DateTime
+            .fromMillisecondsSinceEpoch(entry['lastUpdated'] as int),
+        books = (entry['books'] as List).map((b) => b.toString()).toList();
+
+  Map<String, dynamic> get toMap => {'code': code, 'status': status.name,
+    'lastUpdated': lastUpdate.millisecondsSinceEpoch, 'books': books};
 }
 
 enum DonationStatus {
@@ -37,10 +47,22 @@ class Purchase {
   Purchase.fromEntry(Map entry) :
         id = entry['id'],
         books = (entry['books'] as List)
-            .map((entry) => PurchasedBook.fromEntry(entry))
+            .map((entry) => PurchasedBook.fromEntry(entry as Map))
             .toList(growable: false),
         date = (entry['date'] as Timestamp).toDate(),
         totalPrice = entry['totalPrice'];
+
+  Purchase.fromSessionStorage(Map entry) :
+      id = entry['id'],
+      books = (entry['books'] as List)
+          .map((b) => PurchasedBook.fromEntry(b as Map))
+          .toList(),
+      date = DateTime.fromMillisecondsSinceEpoch(entry['date'] as int),
+      totalPrice = entry['totalPrice'];
+
+  Map<String, dynamic> get toSessionStorage => {'id': id,
+    'totalPrice': totalPrice, 'date': date.millisecondsSinceEpoch,
+    'books': books.map((b) => b.toMap).toList()};
 }
 
 class PurchasedBook {
@@ -58,6 +80,9 @@ class PurchasedBook {
         title = entry['title'],
         amount = entry['amount'],
         unitPrice = entry['unitPrice'];
+
+  Map<String, dynamic> get toMap => {'title': title, 'amount': amount,
+    'unitPrice': unitPrice};
 }
 
 class Gift {
