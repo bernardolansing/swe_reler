@@ -109,8 +109,19 @@ class Gift {
         price = entry['price'],
         amount = entry['amount'];
 
+  Gift.fromSessionStorage(Map entry) :
+      code = entry['code'],
+      title = entry['title'],
+      brand = entry['brand'],
+      category = entry['category'],
+      price = entry['price'] as double,
+      amount = entry['amount'] as int;
+
   Map<String, dynamic> get toMap => {'title': title, 'brand': brand,
     'category': category, 'price': price, 'amount': amount};
+
+  Map<String, dynamic> get toSessionStorage => {'title': title, 'brand': brand,
+    'category': category, 'price': price, 'amount': amount, 'code': code};
 }
 
 String _generateRandomId(int length) {

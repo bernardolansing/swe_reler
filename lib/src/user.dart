@@ -20,46 +20,49 @@ class AppUser {
   static bool? _isAdmin;
 
   static bool get signedIn {
-    if (! _moduleAlive) {
-      _restoreFromSessionStorage();
-      _moduleAlive = true;
-    }
-
+    _ensureLoaded();
     return _id != null;
   }
 
   static String get email {
     assert (signedIn);
+    _ensureLoaded();
     return _email!;
   }
 
   static String get displayName {
     assert (signedIn);
+    _ensureLoaded();
     return _displayName!;
   }
 
   static int get lispectors {
     assert(signedIn);
+    _ensureLoaded();
     return _lispectors!;
   }
 
   static int get points {
     assert (signedIn);
+    _ensureLoaded();
     return _points!;
   }
 
   static List<Donation> get donations {
     assert (signedIn);
+    _ensureLoaded();
     return _donations!;
   }
 
   static List<Purchase> get purchases {
     assert (signedIn);
+    _ensureLoaded();
     return _purchases!;
   }
 
   static bool get isAdmin {
     assert (signedIn);
+    _ensureLoaded();
     return _isAdmin!;
   }
 
@@ -76,6 +79,13 @@ class AppUser {
     await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
   }
 
+  static void _ensureLoaded() {
+    if (! _moduleAlive) {
+      _restoreFromSessionStorage();
+      _moduleAlive = true;
+    }
+  }
+
   /// Saves AppUser's state to the session storage, so it may be restored in
   /// case of a page refresh.
   static void _saveToSessionStorage() {
@@ -83,11 +93,13 @@ class AppUser {
       log('Saving user information to the session storage');
       final ss = window.sessionStorage;
       ss['userIsCached'] = 'true';
-      ss['lispectors'] = _lispectors.toString();
-      ss['points'] = _points.toString();
-      ss['donations'] = json.encode(_donations!.map((d) => d.toMap).toList());
-      ss['purchases'] = json
-          .encode(_purchases!.map((p) => p.toSessionStorage).toList());
+      if (_isAdmin != true) {
+        ss['lispectors'] = _lispectors.toString();
+        ss['points'] = _points.toString();
+        ss['donations'] = json.encode(_donations!.map((d) => d.toMap).toList());
+        ss['purchases'] = json
+            .encode(_purchases!.map((p) => p.toSessionStorage).toList());
+      }
       ss['isAdmin'] = _isAdmin.toString();
     }
 
@@ -98,15 +110,17 @@ class AppUser {
     final ss = window.sessionStorage;
     if (ss['userIsCached'] != 'true') { return; }
     log('Restoring user information from the session storage');
-    _lispectors = int.parse(ss['lispectors']!);
-    _points = int.parse(ss['points']!);
-    _donations = (json.decode(ss['donations']!) as List)
-        .map((entry) => Donation.fromSessionStorageEntry(entry))
-        .toList();
-    _purchases = (json.decode(ss['purchases']!) as List)
-        .map((entry) => Purchase.fromSessionStorage(entry))
-        .toList();
     _isAdmin = ss['isAdmin'] == 'true';
+    if (! _isAdmin!) {
+      _lispectors = int.parse(ss['lispectors']!);
+      _points = int.parse(ss['points']!);
+      _donations = (json.decode(ss['donations']!) as List)
+          .map((entry) => Donation.fromSessionStorageEntry(entry))
+          .toList();
+      _purchases = (json.decode(ss['purchases']!) as List)
+          .map((entry) => Purchase.fromSessionStorage(entry))
+          .toList();
+    }
   }
 
   /// Authenticate with email and password. May throw [InvalidEmail],
@@ -125,21 +139,22 @@ class AppUser {
       if (email == 'admin@reler.com') {
         _isAdmin = true;
         await Admin.initialize();
-        return;
       }
 
-      // Fetch further user data from database:
-      final snapshot = await _userDoc.get();
-      final data = snapshot.data() as Map;
-      _lispectors = data['lispectors'];
-      _points = data['points'];
-      _donations = (data['donations'] as List)
-          .map((entry) => Donation(entry as Map))
-          .toList(growable: false);
-      _purchases = (data['purchases'] as List)
-          .map((entry) => Purchase.fromEntry(entry))
-          .toList();
-      _isAdmin = false;
+      else {
+        // Fetch further user data from database:
+        final snapshot = await _userDoc.get();
+        final data = snapshot.data() as Map;
+        _lispectors = data['lispectors'];
+        _points = data['points'];
+        _donations = (data['donations'] as List)
+            .map((entry) => Donation(entry as Map))
+            .toList(growable: false);
+        _purchases = (data['purchases'] as List)
+            .map((entry) => Purchase.fromEntry(entry))
+            .toList();
+        _isAdmin = false;
+      }
 
       _saveToSessionStorage();
     }
