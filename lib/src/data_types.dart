@@ -41,8 +41,7 @@ class Purchase {
   Purchase(this.books) :
         id = _generateRandomId(6),
         date = DateTime.now(),
-        totalPrice = books
-            .fold(0, (acc, elem) => acc + elem.unitPrice * elem.amount);
+        totalPrice = books.fold(0, (acc, elem) => acc + elem.unitPrice);
 
   Purchase.fromEntry(Map entry) :
         id = entry['id'],
@@ -67,22 +66,18 @@ class Purchase {
 
 class PurchasedBook {
   final String title;
-  final int amount;
   final double unitPrice;
 
   const PurchasedBook({
     required this.title,
-    required this.amount,
     required this.unitPrice,
   });
 
   PurchasedBook.fromEntry(Map entry) :
         title = entry['title'],
-        amount = entry['amount'],
         unitPrice = entry['unitPrice'];
 
-  Map<String, dynamic> get toMap => {'title': title, 'amount': amount,
-    'unitPrice': unitPrice};
+  Map<String, dynamic> get toMap => {'title': title, 'unitPrice': unitPrice};
 }
 
 class Gift {
