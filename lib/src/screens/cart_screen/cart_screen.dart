@@ -13,17 +13,6 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreentate extends State<CartScreen> {
-  /// Pushes the given route to the Navigator if it isn't already the
-  /// current route.
-  void _pushIfNotCurrent(BuildContext context, String route) {
-    final currentRoute = ModalRoute.of(context)?.settings.name;
-
-    // User requested to navigate to a route other than the current.
-    if (currentRoute != null && !currentRoute.endsWith(route)) {
-      Navigator.of(context).pushNamed(route);
-    }
-  }
-
   void _refreshScreen() {
     setState(() {});
   }
@@ -45,7 +34,7 @@ class _CartScreentate extends State<CartScreen> {
         body: Padding(
           padding: const EdgeInsets.all(40),
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             const Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [DrawerMenuButton()],
@@ -57,131 +46,121 @@ class _CartScreentate extends State<CartScreen> {
                 child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                  SingleChildScrollView(
-                      child: SizedBox(
-                    width: 700,
-                    child: Column(children: bookCartList),
-                  )),
-                  const Expanded(child: SizedBox()),
-                  IntrinsicHeight(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 204, 189, 142),
-                          borderRadius: BorderRadius.circular(
-                              10), // Raio dos cantos arredondados
-                        ),
-                        width: 305,
-                        height: 305,
-                        child: Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'resumo do pedido:',
-                                    style: _resumoTextStyle,
-                                  ),
-                                  const SizedBox(height: 20),
-                                  Expanded(
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFFE1DBC9),
-                                          borderRadius: BorderRadius.circular(
-                                              10), // Raio dos cantos arredondados
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(20),
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  '${totalItens.toString()} produtos',
-                                                  style: _importantTextStyle,
+                      SingleChildScrollView(
+                          child: SizedBox(
+                            width: 700,
+                            child: Column(children: bookCartList),
+                          )),
+                      const Expanded(child: SizedBox()),
+                      IntrinsicHeight(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: const Color.fromARGB(255, 204, 189, 142),
+                                  borderRadius: BorderRadius.circular(
+                                      10), // Raio dos cantos arredondados
+                                ),
+                                width: 305,
+                                height: 305,
+                                child: Padding(
+                                    padding: const EdgeInsets.all(20),
+                                    child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          const Text(
+                                            'resumo do pedido:',
+                                            style: _resumoTextStyle,
+                                          ),
+                                          const SizedBox(height: 20),
+                                          Expanded(
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: const Color(0xFFE1DBC9),
+                                                  borderRadius: BorderRadius.circular(
+                                                      10), // Raio dos cantos arredondados
                                                 ),
-                                                const SizedBox(height: 20),
-                                                const SizedBox(
-                                                    width: double.infinity,
-                                                    height: 2,
-                                                    child: ColoredBox(
-                                                        color:
-                                                            Color(0xFFD6CAA7))),
-                                                const SizedBox(height: 20),
-                                                const Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'entrega',
-                                                        style:
-                                                            _importantTextStyle,
-                                                      ),
-                                                      Text(
-                                                        'R\$0.00',
-                                                      )
-                                                    ]),
-                                                const SizedBox(height: 20),
-                                                const SizedBox(
-                                                    width: double.infinity,
-                                                    height: 2,
-                                                    child: ColoredBox(
-                                                        color:
-                                                            Color(0xFFD6CAA7))),
-                                                const SizedBox(height: 20),
-                                                Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        'total',
-                                                        style:
-                                                            _importantTextStyle,
-                                                      ),
-                                                      Text(
-                                                        'R\$${totalValue.toStringAsFixed(2)}',
-                                                      )
-                                                    ]),
-                                              ]),
-                                        )),
-                                  )
-                                ])),
-                      ),
-                      const SizedBox(height: 50),
-                      ElevatedButton(
-                        // TODO: transfer to AppUser:
-                        onPressed: () {
-                          if (totalItens > 0) {
-                            SnackBar snackBar = const SnackBar(
-                              content: Text('Compra realizada'),
-                              duration: Duration(seconds: 3),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                            for (Book b in bookList) {
-                              b.quantity--;
-                            }
-                            _pushIfNotCurrent(context, '/dash');
-                          }
-                        },
-                        child: const Text(
-                          'finalizar compra',
-                          style: _buttonTextStyle,
-                        ),
-                      ),
-                    ],
-                  ))
-                ])),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(20),
+                                                  child: Column(
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          '${totalItens.toString()} produtos',
+                                                          style: _importantTextStyle,
+                                                        ),
+                                                        const SizedBox(height: 20),
+                                                        const SizedBox(
+                                                            width: double.infinity,
+                                                            height: 2,
+                                                            child: ColoredBox(
+                                                                color:
+                                                                Color(0xFFD6CAA7))),
+                                                        const SizedBox(height: 20),
+                                                        const Row(
+                                                            mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                            crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                            children: [
+                                                              Text(
+                                                                'entrega',
+                                                                style:
+                                                                _importantTextStyle,
+                                                              ),
+                                                              Text(
+                                                                'R\$0.00',
+                                                              )
+                                                            ]),
+                                                        const SizedBox(height: 20),
+                                                        const SizedBox(
+                                                            width: double.infinity,
+                                                            height: 2,
+                                                            child: ColoredBox(
+                                                                color:
+                                                                Color(0xFFD6CAA7))),
+                                                        const SizedBox(height: 20),
+                                                        Row(
+                                                            mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                            crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                            children: [
+                                                              const Text(
+                                                                'total',
+                                                                style:
+                                                                _importantTextStyle,
+                                                              ),
+                                                              Text(
+                                                                'R\$${totalValue.toStringAsFixed(2)}',
+                                                              )
+                                                            ]),
+                                                      ]),
+                                                )),
+                                          )
+                                        ])),
+                              ),
+                              const SizedBox(height: 50),
+                              ElevatedButton(
+                                onPressed: () {
+                                  if (AppUser.cartItems.isEmpty) { return; }
+                                  AppUser.purchaseBooks();
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text(
+                                  'finalizar compra',
+                                  style: _buttonTextStyle,
+                                ),
+                              ),
+                            ],
+                          ))
+                    ])),
           ]),
         ));
   }

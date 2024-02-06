@@ -52,12 +52,15 @@ class Purchase {
         totalPrice = entry['totalPrice'];
 
   Purchase.fromSessionStorage(Map entry) :
-      id = entry['id'],
-      books = (entry['books'] as List)
-          .map((b) => PurchasedBook.fromEntry(b as Map))
-          .toList(),
-      date = DateTime.fromMillisecondsSinceEpoch(entry['date'] as int),
-      totalPrice = entry['totalPrice'];
+        id = entry['id'],
+        books = (entry['books'] as List)
+            .map((b) => PurchasedBook.fromEntry(b as Map))
+            .toList(),
+        date = DateTime.fromMillisecondsSinceEpoch(entry['date'] as int),
+        totalPrice = entry['totalPrice'];
+
+  Map<String, dynamic> get toDatabase => {'id': id, 'totalPrice': totalPrice,
+    'date': Timestamp.now(), 'books': books.map((b) => b.toMap).toList()};
 
   Map<String, dynamic> get toSessionStorage => {'id': id,
     'totalPrice': totalPrice, 'date': date.millisecondsSinceEpoch,
@@ -105,12 +108,12 @@ class Gift {
         amount = entry['amount'];
 
   Gift.fromSessionStorage(Map entry) :
-      code = entry['code'],
-      title = entry['title'],
-      brand = entry['brand'],
-      category = entry['category'],
-      price = entry['price'] as double,
-      amount = entry['amount'] as int;
+        code = entry['code'],
+        title = entry['title'],
+        brand = entry['brand'],
+        category = entry['category'],
+        price = entry['price'] as double,
+        amount = entry['amount'] as int;
 
   Map<String, dynamic> get toMap => {'title': title, 'brand': brand,
     'category': category, 'price': price, 'amount': amount};

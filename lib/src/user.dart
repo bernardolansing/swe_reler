@@ -267,6 +267,22 @@ class AppUser {
     _email = user.email;
     _displayName = user.displayName;
   }
+
+  /// Concludes the purchase of the books that are in the shopping cart.
+  static void purchaseBooks() {
+    if (cartItems.isEmpty) { return; }
+    final purchasedBooks = cartItems.map((cartItem) => PurchasedBook(
+        title: cartItem.title,
+        unitPrice: cartItem.price
+    )).toList();
+    final newPurchase = Purchase(purchasedBooks);
+    purchases.add(newPurchase);
+    cartItems.clear();
+    _saveToSessionStorage();
+    _userDoc.update(
+        {'purchases': FieldValue.arrayUnion([newPurchase.toDatabase])}
+    );
+  }
 }
 
 /// Related to a misformatted email address.
