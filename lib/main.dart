@@ -69,7 +69,10 @@ Widget _authorizeAdminRoute(Widget screen) {
 
 extension PriceFormatter on double {
   String get asPrice {
-    final cents = ((this - toInt()) * 100).toInt();
+    final cents = ((this - toInt()) * 100)
+        .toInt()
+        .toString()
+        .padRight(2, '0');
     return 'R\$ ${toInt()},$cents';
   }
 }
