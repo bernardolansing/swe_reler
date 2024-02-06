@@ -2,72 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:swe_reler/main.dart';
 import 'package:swe_reler/src/screens/store_screen/book.dart';
 import 'package:swe_reler/src/user.dart';
-import 'package:swe_reler/src/widgets/text_with_link_portion.dart';
 
-class CartCard extends StatefulWidget {
+class CartCard extends StatelessWidget {
   final Book book;
   final VoidCallback callbck;
   const CartCard({super.key, required this.book, required this.callbck});
 
   @override
-  State<CartCard> createState() => _CartCardState();
+  Widget build(BuildContext context) => Column(children: [
+    SizedBox(
+      height: 125,
+      child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image(image: AssetImage(book.picture)),
+            const SizedBox(width: 30),
+
+            Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(book.title, style: _importantTextStyle),
+
+                  Text('Valor unitário: ${book.price.asPrice}'),
+
+                  TextButton.icon(
+                    onPressed: () {
+                      AppUser.removeFromCart(book);
+                      callbck();
+                    },
+                    style: const ButtonStyle(
+                      foregroundColor: MaterialStatePropertyAll(Colors.black),
+                      padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                    ),
+                    icon: const Icon(Icons.delete_forever_outlined),
+                    label: const Text('excluir'),
+                  )
+                ]
+            ),
+          ]),
+    ),
+
+    const SizedBox(height: 30)
+  ]);
 }
 
-class _CartCardState extends State<CartCard> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      SizedBox(
-        height: 125,
-        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-            width: 90,
-            height: 125,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(widget.book.picture),
-                fit: BoxFit.fill,
-              ),
-              borderRadius:
-              BorderRadius.circular(5), // Raio dos cantos arredondados
-            ),
-          ),
-          const SizedBox(width: 30),
-          Expanded(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.book.title,
-                      style: _importantTextStyle,
-                    ),
-                    Row(children: [
-                      const Icon(Icons.delete_forever_outlined,
-                          size: 25, color: Colors.black),
-                      TextWithLinkPortion(
-                        nonLinkPortion: '',
-                        linkPortion: 'excluir',
-                        onTap: () {
-                          AppUser.removeFromCart(widget.book);
-                          widget.callbck();
-                        },
-                      ),
-                    ])
-                  ])),
-          Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text('Valor unitário: ${widget.book.price.asPrice}'),
-              ]),
-          const SizedBox(width: 20)
-        ]),
-      ),
-      const SizedBox(height: 30)
-    ]);
-  }
-}
 
 const _importantTextStyle = TextStyle(
     fontFamily: 'Poppins',
