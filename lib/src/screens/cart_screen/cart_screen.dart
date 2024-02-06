@@ -38,8 +38,7 @@ class _CartScreentate extends State<CartScreen> {
         book: b,
         callbck: _refreshScreen,
       ));
-      totalValue += b.price * b.listQuantity;
-      totalItens += b.listQuantity;
+      totalValue += b.price;
     }
     return Scaffold(
         endDrawer: const DrawerMenu(),
@@ -169,8 +168,7 @@ class _CartScreentate extends State<CartScreen> {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                             for (Book b in bookList) {
-                              b.quantity -= b.listQuantity;
-                              b.listQuantity = 0;
+                              b.quantity--;
                             }
                             selectedBooks.clear();
                             _pushIfNotCurrent(context, '/dash');

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:swe_reler/src/screens/store_screen/book.dart';
 import 'package:universal_html/html.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,6 +18,7 @@ class AppUser {
   static int? _points;
   static List<Donation>? _donations;
   static List<Purchase>? _purchases;
+  static List<Book>? _cartItems = [];
   static bool? _isAdmin;
 
   static bool get signedIn {
@@ -60,6 +62,12 @@ class AppUser {
     return _purchases!;
   }
 
+  static List<Book> get cartItems {
+    assert (signedIn);
+    _ensureLoaded();
+    return _cartItems!;
+  }
+
   static bool get isAdmin {
     assert (signedIn);
     _ensureLoaded();
@@ -99,6 +107,8 @@ class AppUser {
         ss['donations'] = json.encode(_donations!.map((d) => d.toMap).toList());
         ss['purchases'] = json
             .encode(_purchases!.map((p) => p.toSessionStorage).toList());
+        ss['cartItems'] = json
+            .encode(_cartItems!.map((i) => i.toSessionStorage).toList());
       }
       ss['isAdmin'] = _isAdmin.toString();
     }
@@ -119,6 +129,9 @@ class AppUser {
           .toList();
       _purchases = (json.decode(ss['purchases']!) as List)
           .map((entry) => Purchase.fromSessionStorage(entry))
+          .toList();
+      _cartItems = (json.decode(ss['cartItems']!) as List)
+          .map((entry) => Book.fromSessionStorage(entry))
           .toList();
     }
   }

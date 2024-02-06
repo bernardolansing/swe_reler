@@ -95,97 +95,96 @@ class _BookDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AppDialog(
-        content: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 700),
-          child: Column(
-            children: [
-              Image(
-                image: AssetImage(_book.picture),
-                width: 250,
-                height: 400,
-              ),
-              _summary,
-              const Divider(),
-              Text(_book.resume, textAlign: TextAlign.justify),
-              const Divider(),
-              _purchaseInfo,
-            ],
+    content: ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 700),
+      child: Column(
+        children: [
+          Image(
+            image: AssetImage(_book.picture),
+            width: 250,
+            height: 400,
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: Navigator.of(context).pop,
-            child: const Text('Fechar'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              SnackBar snackBar;
-              String snackbarText = '';
-              if (_book.quantity == 0) {
-                snackbarText = 'Livro indisponível';
-              } else if (_book.listQuantity >= _book.quantity) {
-                snackbarText = 'Quantidade excedida';
-              } else {
-                snackbarText = 'Livro adicionado no carrinho';
-                _book.listQuantity++;
-                if (!selectedBooks.contains(_book)) {
-                  selectedBooks.add(_book);
-                }
-              }
-              snackBar = SnackBar(
-                content: Text(snackbarText),
-                duration: const Duration(seconds: 1),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              Navigator.of(context).pop();
-            },
-            child: const Text('Adicionar ao carrinho'),
-          ),
+          _summary,
+          const Divider(),
+          Text(_book.resume, textAlign: TextAlign.justify),
+          const Divider(),
+          _purchaseInfo,
         ],
-      );
+      ),
+    ),
+    actions: [
+      TextButton(
+        onPressed: Navigator.of(context).pop,
+        child: const Text('Fechar'),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          SnackBar snackBar;
+          String snackbarText = '';
+          if (_book.quantity == 0) {
+            snackbarText = 'Livro indisponível';
+          }
+
+          else {
+            snackbarText = 'Livro adicionado no carrinho';
+            if (!selectedBooks.contains(_book)) {
+              selectedBooks.add(_book);
+            }
+          }
+          snackBar = SnackBar(
+            content: Text(snackbarText),
+            duration: const Duration(seconds: 1),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          Navigator.of(context).pop();
+        },
+        child: const Text('Adicionar ao carrinho'),
+      ),
+    ],
+  );
 
   Widget get _summary => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
         children: [
-          Row(
-            children: [
-              const Text('Título: ', style: _highlightedTextStyle),
-              Text(_book.title)
-            ],
-          ),
-          Row(
-            children: [
-              const Text('Autor: ', style: _highlightedTextStyle),
-              Text(_book.author)
-            ],
-          ),
-          Row(
-            children: [
-              const Text('Gênero: ', style: _highlightedTextStyle),
-              Text(_book.genres.map((g) => g.title).join(', '))
-            ],
-          ),
+          const Text('Título: ', style: _highlightedTextStyle),
+          Text(_book.title)
         ],
-      );
+      ),
+      Row(
+        children: [
+          const Text('Autor: ', style: _highlightedTextStyle),
+          Text(_book.author)
+        ],
+      ),
+      Row(
+        children: [
+          const Text('Gênero: ', style: _highlightedTextStyle),
+          Text(_book.genres.map((g) => g.title).join(', '))
+        ],
+      ),
+    ],
+  );
 
   Widget get _purchaseInfo => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Row(
         children: [
-          Row(
-            children: [
-              const Text('Exemplares disponíveis: ',
-                  style: _highlightedTextStyle),
-              Text(_book.quantity.toString())
-            ],
-          ),
-          Row(
-            children: [
-              const Icon(Icons.star, size: 30, color: Color(0xFF718E76)),
-              Text('${_book.evaluation} - R\$ ${_book.price}')
-            ],
-          )
+          const Text('Exemplares disponíveis: ',
+              style: _highlightedTextStyle),
+          Text(_book.quantity.toString())
         ],
-      );
+      ),
+      Row(
+        children: [
+          const Icon(Icons.star, size: 30, color: Color(0xFF718E76)),
+          Text('${_book.evaluation} - R\$ ${_book.price}')
+        ],
+      )
+    ],
+  );
 
   static const _highlightedTextStyle = TextStyle(
       fontFamily: 'Poppins',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:swe_reler/main.dart';
 import 'package:swe_reler/src/screens/store_screen/book.dart';
 import 'package:swe_reler/src/screens/store_screen/book_list.dart';
 import 'package:swe_reler/src/widgets/text_with_link_portion.dart';
@@ -28,7 +29,7 @@ class _CartCardState extends State<CartCard> {
                 fit: BoxFit.fill,
               ),
               borderRadius:
-                  BorderRadius.circular(5), // Raio dos cantos arredondados
+              BorderRadius.circular(5), // Raio dos cantos arredondados
             ),
           ),
           const SizedBox(width: 30),
@@ -37,53 +38,28 @@ class _CartCardState extends State<CartCard> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                Text(
-                  widget.book.title,
-                  style: _importantTextStyle,
-                ),
-                Row(children: [
-                  IconButton(
-                      onPressed: () => setState(() {
-                            if (widget.book.listQuantity > 1) {
-                              widget.book.listQuantity--;
-                              widget.callbck();
-                            }
-                          }),
-                      icon: const Icon(Icons.remove_outlined,
-                          size: 25, color: Colors.black)),
-                  Text(
-                    '${widget.book.listQuantity}',
-                  ),
-                  IconButton(
-                      onPressed: () => setState(() {
-                            if (widget.book.listQuantity <
-                                widget.book.quantity) {
-                              widget.book.listQuantity++;
-                              widget.callbck();
-                            }
-                          }),
-                      icon: const Icon(Icons.add_outlined,
-                          size: 25, color: Colors.black)),
-                  const Icon(Icons.delete_forever_outlined,
-                      size: 25, color: Colors.black),
-                  TextWithLinkPortion(
-                    nonLinkPortion: '',
-                    linkPortion: 'excluir',
-                    onTap: () {
-                      widget.book.listQuantity = 0;
-                      selectedBooks.remove(widget.book);
-                      widget.callbck();
-                    },
-                  ),
-                ])
-              ])),
+                    Text(
+                      widget.book.title,
+                      style: _importantTextStyle,
+                    ),
+                    Row(children: [
+                      const Icon(Icons.delete_forever_outlined,
+                          size: 25, color: Colors.black),
+                      TextWithLinkPortion(
+                        nonLinkPortion: '',
+                        linkPortion: 'excluir',
+                        onTap: () {
+                          selectedBooks.remove(widget.book);
+                          widget.callbck();
+                        },
+                      ),
+                    ])
+                  ])),
           Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text('Valor unitário: R\$${widget.book.formattedPrice}'),
-                Text(
-                    'Total produto: R\$${(widget.book.price * widget.book.listQuantity).toStringAsFixed(2)}'),
+                Text('Valor unitário: ${widget.book.price.asPrice}'),
               ]),
           const SizedBox(width: 20)
         ]),
