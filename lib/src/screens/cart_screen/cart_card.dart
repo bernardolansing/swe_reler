@@ -13,6 +13,7 @@ class CartCard extends StatelessWidget {
     SizedBox(
       height: 125,
       child: Row(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image(image: AssetImage(book.picture)),
