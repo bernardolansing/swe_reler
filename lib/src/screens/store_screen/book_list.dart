@@ -137,6 +137,7 @@ class _BookDialog extends StatelessWidget {
                 duration: const Duration(seconds: 1),
               );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              Navigator.of(context).pop();
             },
             child: const Text('Adicionar ao carrinho'),
           ),
