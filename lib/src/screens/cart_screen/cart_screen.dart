@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/screens/cart_screen/cart_card.dart';
 import 'package:swe_reler/src/screens/store_screen/book.dart';
-import 'package:swe_reler/src/screens/store_screen/book_list.dart';
+import 'package:swe_reler/src/user.dart';
 import 'package:swe_reler/src/widgets/drawer_menu.dart';
 import 'package:swe_reler/src/widgets/highlighted_text.dart';
 
@@ -33,7 +33,7 @@ class _CartScreentate extends State<CartScreen> {
     List<Widget> bookCartList = [];
     double totalValue = 0;
     int totalItens = 0;
-    for (Book b in selectedBooks) {
+    for (Book b in AppUser.cartItems) {
       bookCartList.add(CartCard(
         book: b,
         callbck: _refreshScreen,
@@ -159,6 +159,7 @@ class _CartScreentate extends State<CartScreen> {
                       ),
                       const SizedBox(height: 50),
                       ElevatedButton(
+                        // TODO: transfer to AppUser:
                         onPressed: () {
                           if (totalItens > 0) {
                             SnackBar snackBar = const SnackBar(
@@ -170,7 +171,6 @@ class _CartScreentate extends State<CartScreen> {
                             for (Book b in bookList) {
                               b.quantity--;
                             }
-                            selectedBooks.clear();
                             _pushIfNotCurrent(context, '/dash');
                           }
                         },

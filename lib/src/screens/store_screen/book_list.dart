@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/src/screens/store_screen/book.dart';
+import 'package:swe_reler/src/user.dart';
 import 'package:swe_reler/src/widgets/app_dialog.dart';
 
 class BookList extends StatelessWidget {
@@ -119,19 +120,19 @@ class _BookDialog extends StatelessWidget {
       ),
       ElevatedButton(
         onPressed: () {
-          SnackBar snackBar;
           String snackbarText = '';
           if (_book.quantity == 0) {
             snackbarText = 'Livro indisponível';
           }
 
           else {
-            snackbarText = 'Livro adicionado no carrinho';
-            if (!selectedBooks.contains(_book)) {
-              selectedBooks.add(_book);
-            }
+            final successfullyAdded = AppUser.addToCart(_book);
+            snackbarText = successfullyAdded
+                ? 'Livro adicionado no carrinho'
+                : 'O livro já está no seu carrinho!';
           }
-          snackBar = SnackBar(
+
+          final snackBar = SnackBar(
             content: Text(snackbarText),
             duration: const Duration(seconds: 1),
           );
@@ -192,5 +193,3 @@ class _BookDialog extends StatelessWidget {
       fontWeight: FontWeight.w600,
       color: Color(0xFF9B693B));
 }
-
-List<Book> selectedBooks = [];

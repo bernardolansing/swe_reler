@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:swe_reler/main.dart';
 import 'package:swe_reler/src/screens/store_screen/book.dart';
-import 'package:swe_reler/src/screens/store_screen/book_list.dart';
+import 'package:swe_reler/src/user.dart';
 import 'package:swe_reler/src/widgets/text_with_link_portion.dart';
 
 class CartCard extends StatefulWidget {
@@ -49,7 +49,7 @@ class _CartCardState extends State<CartCard> {
                         nonLinkPortion: '',
                         linkPortion: 'excluir',
                         onTap: () {
-                          selectedBooks.remove(widget.book);
+                          AppUser.removeFromCart(widget.book);
                           widget.callbck();
                         },
                       ),

@@ -244,6 +244,22 @@ class AppUser {
     log('Successful logout.');
   }
 
+  /// Adds the given book to the user's shopping cart. Returns true if the book
+  /// is successfully added, and false if it was already added (therefore not
+  /// added again).
+  static bool addToCart(Book book) {
+    if (cartItems.contains(book)) { return false; }
+    cartItems.add(book);
+    _saveToSessionStorage();
+    return true;
+  }
+
+  /// Removes the given book from the user's shopping cart.
+  static void removeFromCart(Book book) {
+    cartItems.remove(book);
+    _saveToSessionStorage();
+  }
+
   /// Takes the result of a login/signup operation and updates the [AppUser]
   /// class fields accordingly.
   static void _updateUserId(User user) {
