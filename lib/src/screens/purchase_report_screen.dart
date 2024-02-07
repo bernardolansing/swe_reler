@@ -24,14 +24,19 @@ class PurchaseReportScreen extends StatelessWidget {
             ),
           ),
 
-          SizedBox(
-            width: 650,
-            child: Column(
-              children: AppUser.purchases
-                  .map((purchase) => _PurchaseCard(purchase))
-                  .toList(),
+          if (AppUser.purchases.isNotEmpty)
+            SizedBox(
+              width: 650,
+              child: Column(
+                children: AppUser.purchases
+                    .map((purchase) => _PurchaseCard(purchase))
+                    .toList(),
+              ),
+            )
+          else
+            const Text(
+                'Nenhuma compra por enquanto. Estamos ansiosos pela primeira!'
             ),
-          ),
 
           const DrawerMenuButton(),
         ],
