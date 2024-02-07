@@ -12,14 +12,20 @@ class PendingDonationsDialog extends StatelessWidget {
         .where((donation) => donation.status != DonationStatus.finished)
         .toList(growable: false);
 
-    return AppDialog(
-        content: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: pendingDonations
-              .map((d) => _PendingDonation(d))
-              .toList(growable: false),
-        )
-    );
+    late final Widget content;
+    if (pendingDonations.isEmpty) {
+      content = const Text('Nenhuma doação pendente!');
+    }
+    else {
+      content = Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: pendingDonations
+            .map((d) => _PendingDonation(d))
+            .toList(growable: false),
+      );
+    }
+
+    return AppDialog(content: content);
   }
 }
 
