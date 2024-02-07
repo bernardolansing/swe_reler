@@ -53,6 +53,7 @@ flutter:
     - assets/user-dash/clouds.png
     - assets/partner-stores/amazon.png
     - assets/books/agua-viva.jpg
+    - assets/books/bandeira-negra.jpg
     - assets/books/cabana.jpg
     - assets/books/diario-banana.jpg
     - assets/books/dom-casmurro.jpg
@@ -67,6 +68,7 @@ flutter:
     - assets/books/interestelar.jpg
     - assets/books/jogos-vorazes.jpg
     - assets/books/lord-rings.jpg
+    - assets/books/menina-roubava.jpg
     - assets/books/pequeno-principe.jpg
     - assets/books/sapiens.jpg
     - assets/books/ted-bundy.jpg

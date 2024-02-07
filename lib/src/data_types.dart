@@ -41,8 +41,7 @@ class Purchase {
   Purchase(this.books) :
         id = _generateRandomId(6),
         date = DateTime.now(),
-        totalPrice = books
-            .fold(0, (acc, elem) => acc + elem.unitPrice * elem.amount);
+        totalPrice = books.fold(0, (acc, elem) => acc + elem.unitPrice);
 
   Purchase.fromEntry(Map entry) :
         id = entry['id'],
@@ -53,12 +52,15 @@ class Purchase {
         totalPrice = entry['totalPrice'];
 
   Purchase.fromSessionStorage(Map entry) :
-      id = entry['id'],
-      books = (entry['books'] as List)
-          .map((b) => PurchasedBook.fromEntry(b as Map))
-          .toList(),
-      date = DateTime.fromMillisecondsSinceEpoch(entry['date'] as int),
-      totalPrice = entry['totalPrice'];
+        id = entry['id'],
+        books = (entry['books'] as List)
+            .map((b) => PurchasedBook.fromEntry(b as Map))
+            .toList(),
+        date = DateTime.fromMillisecondsSinceEpoch(entry['date'] as int),
+        totalPrice = entry['totalPrice'];
+
+  Map<String, dynamic> get toDatabase => {'id': id, 'totalPrice': totalPrice,
+    'date': Timestamp.now(), 'books': books.map((b) => b.toMap).toList()};
 
   Map<String, dynamic> get toSessionStorage => {'id': id,
     'totalPrice': totalPrice, 'date': date.millisecondsSinceEpoch,
@@ -67,22 +69,18 @@ class Purchase {
 
 class PurchasedBook {
   final String title;
-  final int amount;
   final double unitPrice;
 
   const PurchasedBook({
     required this.title,
-    required this.amount,
     required this.unitPrice,
   });
 
   PurchasedBook.fromEntry(Map entry) :
         title = entry['title'],
-        amount = entry['amount'],
         unitPrice = entry['unitPrice'];
 
-  Map<String, dynamic> get toMap => {'title': title, 'amount': amount,
-    'unitPrice': unitPrice};
+  Map<String, dynamic> get toMap => {'title': title, 'unitPrice': unitPrice};
 }
 
 class Gift {
@@ -110,12 +108,12 @@ class Gift {
         amount = entry['amount'];
 
   Gift.fromSessionStorage(Map entry) :
-      code = entry['code'],
-      title = entry['title'],
-      brand = entry['brand'],
-      category = entry['category'],
-      price = entry['price'] as double,
-      amount = entry['amount'] as int;
+        code = entry['code'],
+        title = entry['title'],
+        brand = entry['brand'],
+        category = entry['category'],
+        price = entry['price'] as double,
+        amount = entry['amount'] as int;
 
   Map<String, dynamic> get toMap => {'title': title, 'brand': brand,
     'category': category, 'price': price, 'amount': amount};

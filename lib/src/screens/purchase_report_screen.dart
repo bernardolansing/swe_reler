@@ -67,14 +67,6 @@ class _PurchaseCard extends StatelessWidget {
                 Row(
                   children: [
                     const SizedBox(width: 24),
-
-                    if (book.amount == 1)
-                      const Text('uma unidade')
-                    else
-                      Text('${book.amount} unidades'),
-
-                    const SizedBox(width: 24),
-
                     Text('valor unitário: ${book.unitPrice.asPrice}'),
                   ],
                 )

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:swe_reler/src/screens/store_screen/cart_button.dart';
 import 'package:swe_reler/src/widgets/drawer_menu.dart';
 import 'package:swe_reler/src/widgets/highlighted_text.dart';
 import 'package:swe_reler/src/screens/store_screen/book_list.dart';
@@ -26,12 +25,22 @@ class _StoreScreenState extends State<StoreScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  CartButton(),
-                  SizedBox(width: 20),
-                  DrawerMenuButton()
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pushNamed('/cart'),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            Colors.white.withAlpha(76)
+                        )
+                    ),
+                    icon: const Icon(Icons.shopping_cart_outlined, size: 36),
+                  ),
+
+                  const SizedBox(width: 20),
+
+                  const DrawerMenuButton()
                 ],
               ),
               const SizedBox(height: 30),
