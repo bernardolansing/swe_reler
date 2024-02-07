@@ -216,6 +216,10 @@ class AppUser {
       _userDoc.set(entry);
       _lispectors = 0;
       _points = 0;
+      _donations = [];
+      _purchases = [];
+      _cartItems = [];
+      _isAdmin = false;
 
       _saveToSessionStorage();
     }
@@ -239,6 +243,10 @@ class AppUser {
     _displayName = null;
     _lispectors = null;
     _points = null;
+    _donations = null;
+    _purchases = null;
+    _cartItems = [];
+    _isAdmin = null;
     window.sessionStorage.clear();
     Navigator.of(context).pushNamedAndRemoveUntil('/', (route) => false);
     log('Successful logout.');
