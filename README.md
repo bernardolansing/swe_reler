@@ -22,4 +22,5 @@ designed to work in PC screens that are at least 1300 pixels wide.
 The infrastructure is provided by Firebase. Thanks to its plenty resources, we managed to
 avoid creating a back-end for our application.
 
-This assignment was presented on February 7th, so now this repository will be archived.
+This assignment was presented on February 7th, so now this repository will be archived. Not
+all expected use cases and functionalities were in fact implemented.
